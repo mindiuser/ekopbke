@@ -50,13 +50,19 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 <div class="collapse" id="pagesExamples">
                     <ul class="nav">
                         <li>
-                            <a href="<?php echo site_url('setting/user/bagian');?>">Daftar Bagian User</a>
+                            <a href="<?php echo site_url('user/bagian');?>">Daftar Bagian User</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('setting/user/jabatan');?>">Daftar Jabatan User</a>
+                            <a href="<?php echo site_url('user/jabatan');?>">Daftar Jabatan User</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('setting/user/profile');?>">User Profile Manager</a>
+                            <a href="<?php echo site_url('user/profile');?>">User Profile Manager</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('user/slide_web');?>">Slide Web</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo site_url('user/slide_mobile');?>">Slide Mobile</a>
                         </li>
                     </ul>
                 </div>

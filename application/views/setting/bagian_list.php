@@ -1,9 +1,8 @@
 <link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
 <link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/editor.dataTables.min.css" rel="stylesheet">
 
-<div class="row">
+<div class="row" id="bagian">
 <div class="col-md-12">
 <div class="card">
 <div class="card-header card-header-icon" data-background-color="purple">
@@ -20,31 +19,10 @@
 <tr>
     <th>URUT</th>
     <th>BAGIAN</th>
-    <th class="disabled-sorting text-right">Actions</th>
+    <th class="disabled-sorting">Actions</th>
 </tr>
 </thead>
 <tbody>
-<?php
-if(!empty($data)) {
-    foreach($data as $row){
-    ?>
-        <tr>
-            <td><?php echo isset($row->URUT)?$row->URUT:'';?></td>
-            <td><?php echo isset($row->BAGIAN)?$row->BAGIAN:'';?></td>
-            <td class="text-right">
-                <button type="button" rel="tooltip" class="btn btn-xs btn-success btn-round">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
-        </tr>
-
-<?php
-    }
-}
-?>
 </tbody>
 </table>
 </div>
@@ -55,13 +33,15 @@ if(!empty($data)) {
 </div>
 <!-- end col-md-12 -->
 </div>
-
+<?php
+$this->load->view('setting/bagian_add_modal');
+$this->load->view('setting/bagian_edit_modal');
+?>
 
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.editor.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
@@ -69,47 +49,185 @@ if(!empty($data)) {
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatables').DataTable({
-            "pagingType": "full_numbers",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
+        var reloadTable = function(){
+            $.ajax({
+                url: "<?php echo my_url();?>/user/bagian/data",
+                type: 'POST',
+                dataType:'json',
+                data: {},
+                success: function(newData) {
+                    var xtable = $('#datatables').DataTable();
+                    xtable.clear();
+                    xtable.rows.add(newData.data).draw();
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        }
+        var initBar = function(){
+            var actionbutton = '';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '';
+            $(".dt-actionbutton").html(actionbutton);
+        }
+        var table = $('#datatables').DataTable({
             "responsive": true,
-            "language": {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records"
-            },
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": [ 'excel', 'pdf', 'print']
+            "buttons": ['excel'],
+            "ajax": "<?php echo my_url();?>/user/bagian/data",
+            "columnDefs":[
+                {
+                    "render": function ( data, type, row ) {
+                        //console.log(row);
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-success" urut="'+row[0]+'" bagian="'+row[1]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" urut="'+row[0]+'" bagian="'+row[1]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                    },
+                    "targets": 2
+                }
+            ]
+        });
+        initBar();
+
+        $("#bagian").on('click', '#add', function() {
+            $(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("#add-bagian-modal").modal("show");
+            return false;
+        });
+
+        $("#add-bagian-modal").on('click', '#bagian-submit', function() {
+            var urut = $("input[name='urut']","#add-bagian-modal").val();
+            var bagian = $("input[name='bagian']","#add-bagian-modal").val();
+            if(urut.trim() == ''){
+                $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
+                return false;
+            }
+            if(bagian.trim() == ''){
+                $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nama bagian masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/user/bagian/add';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    urut : urut, bagian:bagian
+                },
+                success: function(data) {
+                    $("[name='urut']",$("#add-bagian-modal")).val('');
+                    $("[name='bagian']",$("#add-bagian-modal")).val('');
+                    $(".modal-alert","#add-bagian-modal").removeClass("alert-warning").addClass("hide").text("");
+                    $("#add-bagian-modal").modal("hide");
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
 
         });
 
-        var actionbutton = '<a class="btn btn-sm btn-success" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
-        $(".dt-actionbutton").html(actionbutton);
-
-        //var table = $('#datatables').DataTable();
+        $("#add-bagian-modal").on('click', '#bagian-submit-cancel', function(){
+            $(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("[name='urut']",$("#add-bagian-modal")).val('');
+            $("[name='bagian']",$("#add-bagian-modal")).val('');
+            $("#add-bagian-modal").modal("hide");
+        });
 
         // Edit record
         table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
+            $("[name='edit-urut']",$("#edit-bagian-modal")).val($(this).attr('urut'));
+            $("[name='edit-bagian']",$("#edit-bagian-modal")).val($(this).attr('bagian'));
+            $("[name='edit-urut-old']",$("#edit-bagian-modal")).val($(this).attr('urut'));
+            $("[name='edit-bagian-old']",$("#edit-bagian-modal")).val($(this).attr('bagian'));
+            $("#edit-bagian-modal").modal("show");
+            return false;
+        });
 
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        $("#edit-bagian-modal").on('click', '#bagian-edit-submit', function() {
+            var urut = $("input[name='edit-urut']","#edit-bagian-modal").val();
+            var bagian = $("input[name='edit-bagian']","#edit-bagian-modal").val();
+            var urut_old = $("input[name='edit-urut-old']","#edit-bagian-modal").val();
+            var bagian_old = $("input[name='edit-bagian-old']","#edit-bagian-modal").val();
+            if(urut.trim() == ''){
+                $(".modal-alert","#edit-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
+                return false;
+            }
+            if(bagian.trim() == ''){
+                $(".modal-alert","#edit-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nama bagian masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/user/bagian/edit';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    urut : urut, bagian:bagian, urut_old:urut_old, bagian_old:bagian_old
+                },
+                success: function(data) {
+                    console.log(data);
+                    $("[name='edit-urut']",$("#edit-bagian-modal")).val('');
+                    $("[name='edit-bagian']",$("#edit-bagian-modal")).val('');
+                    $("[name='edit-urut-old']",$("#edit-bagian-modal")).val('');
+                    $("[name='edit-bagian-old']",$("#edit-bagian-modal")).val('');
+                    $("#edit-bagian-modal").modal("hide");
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+        });
+
+        $("#edit-bagian-modal").on('click', '#bagian-edit-cancel', function(){
+            $(".modal-alert","#edit-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("[name='urut']",$("#edit-bagian-modal")).val('');
+            $("[name='bagian']",$("#edit-bagian-modal")).val('');
+            $("#edit-bagian-modal").modal("hide");
         });
 
         // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
+        table.on('click', '.delete', function(e) {
+            var urut = $(this).attr('urut');
+            var bagian = $(this).attr('bagian');
+            console.log(urut);
+            console.log(bagian);
+            $.ajax({
+                url: "<?php echo my_url().'/user/bagian/delete';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    urut : urut, bagian:bagian
+                },
+                success: function(status) {
+                    console.log(status);
+                    if(status == true){
+                        showAlerts('success','Data telah didelete');
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error','Silahkan ulangi lagi');
+                    }
+
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
         });
 
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
 
-        $('.card .material-datatables label').addClass('form-group');
     });
 </script>

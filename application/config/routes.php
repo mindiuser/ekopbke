@@ -49,14 +49,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
-$route['setting/user/bagian'] = 'setting/bagian';
-$route['setting/user/jabatan'] = 'setting/jabatan';
-$route['setting/user/profile'] = 'setting/profile';
-$route['setting/user/log'] = 'setting/log';
+$route['default_controller']            = 'welcome';
+$route['user/bagian']                   = 'setting/bagian';
+$route['user/bagian/data']              = 'setting/bagian_data';
+$route['user/bagian/add']               = 'setting/bagian_add';
+$route['user/bagian/edit']              = 'setting/bagian_edit';
+$route['user/bagian/detail']            = 'setting/bagian_detail';
+$route['user/bagian/delete']            = 'setting/bagian_delete';
 
-$route['parameter/wilayah/propinsi'] = 'wilayah/propinsi';
-$route['parameter/wilayah/kabupaten'] = 'wilayah/kabupaten';
+$route['user/jabatan']                  = 'setting/jabatan';
+$route['user/jabatan/add']              = 'setting/jabatan_add';
+$route['user/jabatan/detail/(:num)']    = 'setting/jabatan_detail/$1';
+$route['user/jabatan/delete/(:num)']    = 'setting/jabatan_delete/$1';
+$route['user/profile']                  = 'setting/profile';
+$route['user/profile/add']              = 'setting/profile_add';
+$route['user/profile/detail/(:num)']    = 'setting/profile_detail/$1';
+$route['user/profile/delete/(:num)']    = 'setting/profile_delete/$1';
+$route['user/log']                      = 'setting/log';
+$route['user/log/add']                  = 'setting/log/add';
+$route['user/log/detail/(:num)']        = 'setting/log_detail/$1';
+$route['user/log/delete/(:num)']        = 'setting/log_delete$1';
+
+$route['parameter/wilayah/propinsi']    = 'wilayah/propinsi';
+$route['parameter/wilayah/kabupaten']   = 'wilayah/kabupaten';
 $route['parameter/wilayah/ajax_kabupaten'] = 'wilayah/ajax_kabupaten';
 $route['parameter/wilayah/ajax_kecamatan'] = 'wilayah/ajax_kecamatan';
 $route['parameter/wilayah/ajax_kelurahan'] = 'wilayah/ajax_kelurahan';

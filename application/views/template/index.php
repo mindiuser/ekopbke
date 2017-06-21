@@ -19,7 +19,15 @@
 <?php $this->load->view('template/main_menu_top');?>
 <div class="content">
 <div class="container-fluid">
-<div class="alert hide" id="main-alert"></div>
+    <div id="main-alert" class="hide">
+        <?php if ($this->session->flashdata('flash_success')) { ?>
+            <div class="alert alert-success"> <?php echo $this->session->flashdata('flash_success') ?> </div>
+        <?php } ?>
+        <?php if ($this->session->flashdata('flash_error')) { ?>
+            <div class="alert alert-error"> <?php echo $this->session->flashdata('flash_error') ?> </div>
+        <?php } ?>
+        <div class="alert"></div>
+    </div>
 <?php echo isset($content)?$content:'';?>
 </div>
 </div>
@@ -35,7 +43,7 @@
 <!--  Plugin for Date Time Picker and Full Calendar Plugin-->
 <script src="<?php echo base_url();?>public/assets/js/moment.min.js"></script>
 <!--  Charts Plugin -->
-<script src="<?php echo base_url();?>public/assets/js/chartist.min.js"></script>
+<?php /*<script src="<?php echo base_url();?>public/assets/js/chartist.min.js"></script>*/?>
 <!--  Plugin for the Wizard -->
 <script src="<?php echo base_url();?>public/assets/js/jquery.bootstrap-wizard.js"></script>
 <!--  Notifications Plugin    -->
@@ -43,11 +51,11 @@
 <!-- DateTimePicker Plugin -->
 <script src="<?php echo base_url();?>public/assets/js/bootstrap-datetimepicker.js"></script>
 <!-- Vector Map plugin -->
-<script src="<?php echo base_url();?>public/assets/js/jquery-jvectormap.js"></script>
+<?php /*<script src="<?php echo base_url();?>public/assets/js/jquery-jvectormap.js"></script>*/?>
 <!-- Sliders Plugin -->
 <script src="<?php echo base_url();?>public/assets/js/nouislider.min.js"></script>
 <!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<?php /*<script src="https://maps.googleapis.com/maps/api/js"></script>*/?>
 <!-- Select Plugin -->
 <script src="<?php echo base_url();?>public/assets/js/jquery.select-bootstrap.js"></script>
 <!--  DataTables.net Plugin    -->
@@ -63,7 +71,7 @@
 <!-- Material Dashboard javascript methods -->
 <script src="<?php echo base_url();?>public/assets/js/material-dashboard.js"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
-<script src="<?php echo base_url();?>public/assets/js/demo.js"></script>
+<?php /*<script src="<?php echo base_url();?>public/assets/js/demo.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -72,6 +80,6 @@
 
         demo.initVectorMap();
     });
-</script>
+</script>*/?>
 
 </html>
