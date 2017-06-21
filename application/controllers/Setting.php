@@ -123,9 +123,62 @@ class Setting extends CI_Controller
     public function profile()
     {
         $data = [];
-        $data['data'] = $this->setting_model->getUsers();
-        $this->load->templated_view('setting/user_list', $data);
+        foreach(array('bagian','jabatan','level','regional','cabang') as $key){
+            $data[$key] = $this->setting_model->getMaster($key);
+        }
+        $this->load->templated_view('setting/user_list', ['params'=>$data]);
     }
+
+    public function profile_data()
+    {
+        $dt = $this->setting_model->getUsers();
+        if(!empty($dt)){
+            foreach($dt as $row){
+                $array [] = array(
+                    $row->UID,
+                    $row->NAMA,
+                    $row->LVL,
+                    $row->BAGIAN,
+                    $row->JABATAN,
+                    $row->ADMINISTRATOR,
+                    $row->SETTING,
+                    $row->MIF_REGISTRASI,
+                    $row->MIF,
+                    $row->MIF_APPROVAL,
+                    $row->MONITORING,
+                    $row->REGULASI,
+                    $row->IDREG,
+                    $row->IDCAB,
+                    $row->ST,
+                    ''
+                );
+            }
+            $data = array('data'=>$array);
+        }
+        else {
+            $data=array('data'=>[]);
+        }
+        echo json_encode($data);
+
+    }
+
+    public function profile_add(){
+       $params =  array("uid","nama","password","level","bagian","jabatan","administrator",
+                    "setting","registrasi_mitra","master","approval","dashboard","regulasi","regional","cabang","status");
+        $post = [];
+        foreach($params as $key){
+            $post[$key] = $this->input->post($key);
+        }
+        list($status,$message) = $this->setting_model->addUser($post);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
+    public function profile_delete(){
+        $uid = $this->input->post('uid');
+        $status = $this->setting_model->deleteUser($uid);
+        echo $status;
+    }
+
 
     public function log()
     {

@@ -63,9 +63,10 @@ $route['user/jabatan/edit']             = 'setting/jabatan_edit';
 $route['user/jabatan/delete']           = 'setting/jabatan_delete';
 
 $route['user/profile']                  = 'setting/profile';
-$route['user/profile/add']              = 'setting/profile_add';
-$route['user/profile/detail/(:num)']    = 'setting/profile_detail/$1';
-$route['user/profile/delete/(:num)']    = 'setting/profile_delete/$1';
+$route['user/profile/data']             = 'setting/profile_data';
+$route['user/profile/add']              = 'setting/profile_add';;
+$route['user/profile/delete']    = 'setting/profile_delete';
+
 $route['user/log']                      = 'setting/log';
 $route['user/log/add']                  = 'setting/log/add';
 $route['user/log/detail/(:num)']        = 'setting/log_detail/$1';

@@ -119,6 +119,78 @@ class Setting_model extends CI_Model {
         return $q->result();
     }
 
+    function getMaster($type) {
+        switch($type){
+            case 'bagian':
+                $sql = 'SELECT * FROM dt_uid_bagian ';
+                $sql .= 'ORDER BY BAGIAN ASC';
+                $q = $this->db->query($sql);
+                return $q->result();
+                break;
+            case 'jabatan':
+                $sql = 'SELECT * FROM dt_uid_jabatan ';
+                $sql .= 'ORDER BY JABATAN ASC';
+                $q = $this->db->query($sql);
+                return $q->result();
+                break;
+            case 'level':
+                return  json_decode(json_encode(array(
+                   array('ID'=>1,'LEVEL'=> 'OPERATOR'),
+                    array('ID'=>2,'LEVEL'=> 'SUPERVISI'),
+                        array('ID'=>3,'LEVEL'=> 'MANAGER'),
+                            array('ID'=>9,'LEVEL'=> 'ADMINISTRATOR')
+                )));
+            break;
+            case 'regional':
+                $sql = 'SELECT * FROM dt_regional ';
+                $sql .= 'ORDER BY NAMA_REGIONAL ASC';
+                $q = $this->db->query($sql);
+                return $q->result();
+            break;
+            case 'cabang':
+                $sql = 'SELECT * FROM dt_cabang ';
+                $sql .= 'ORDER BY NAMA_CABANG ASC';
+                $q = $this->db->query($sql);
+                return $q->result();
+
+        }
+
+    }
+
+    function addUser($post)
+    {
+        $sql_get = 'SELECT * FROM uid WHERE uid = ? ';
+        $q = $this->db->query($sql_get,array($post['uid']));
+        $dt = $q->result();
+        if(!empty($dt)){
+            return array(false,'UID sudah terpakai ');
+        }
+        $parr =  array("uid","nama","password","level","bagian","jabatan","administrator",
+            "setting","registrasi_mitra","master","approval","dashboard","regulasi","regional","cabang","status");
+
+        $rrr = 'UID,NAMA,PASSWORD,LVL,BAGIAN,JABATAN,ADMINISTRATOR,SETTING,MIF_REGISTRASI,MIF,MIF_APPROVAL,MONITORING,REGULASI,IDREG,IDCAB,ST';
+        $params = [];
+        foreach($parr as $key){
+            $params[] = $post[$key];
+        }
+        $sql = "INSERT INTO uid (".$rrr.") VALUES (?,?,?,?,? ,?,?,?,?,? ,?,?,?,?,?, ?)";
+        $status = $this->db->query($sql,$params);
+        if($status){
+            return array($status,'Data telah ditambahkan');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+    function deleteUser($uid)
+    {
+        $sql = "DELETE FROM uid WHERE UID = ?";
+        return $this->db->query($sql,array($uid));
+    }
+
+
     function getLogs() {
         $sql = 'SELECT * FROM transaksi ';
         $sql .= 'ORDER BY IDE DESC';

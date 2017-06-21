@@ -1,9 +1,5 @@
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/editor.dataTables.min.css" rel="stylesheet">
-
-<div class="row">
+<?php $this->load->view('shared/css_content');?>
+<div class="row" id="user">
 <div class="col-md-12">
 <div class="card">
 <div class="card-header card-header-icon" data-background-color="purple">
@@ -37,40 +33,6 @@
 </tr>
 </thead>
 <tbody>
-<?php
-if(!empty($data)) {
-    foreach($data as $row){
-    ?>
-        <tr>
-            <td><?php echo isset($row->UID)?$row->UID:'';?></td>
-            <td><?php echo isset($row->NAMA)?$row->NAMA:'';?></td>
-            <td><?php echo isset($row->LVL)?$row->LVL:'';?></td>
-            <td><?php echo isset($row->BAGIAN)?$row->BAGIAN:'';?></td>
-            <td><?php echo isset($row->JABATAN)?$row->JABATAN:'';?></td>
-            <td><?php echo isset($row->ADMINISTRATOR)?$row->ADMINISTRATOR:'';?></td>
-            <td><?php echo isset($row->SETTING)?$row->SETTING:'';?></td>
-            <td><?php echo isset($row->MIF_REGISTRATSI)?$row->MIF_REGISTRASI:'';?></td>
-            <td><?php echo isset($row->MIF)?$row->MIF:'';?></td>
-            <td><?php echo isset($row->MIF_APPROVAL)?$row->MIF_APPROVAL:'';?></td>
-            <td><?php echo isset($row->MONITORING)?$row->MONITORING:'';?></td>
-            <td><?php echo isset($row->REGULASI)?$row->REGULASI:'';?></td>
-            <td><?php echo isset($row->IDREG)?$row->IDREG:'';?></td>
-            <td><?php echo isset($row->IDCAB)?$row->IDCAB:'';?></td>
-            <td><?php echo isset($row->ST)?$row->ST:'';?></td>
-            <td class="text-right">
-                <button type="button" rel="tooltip" class="btn btn-xs btn-success btn-round">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
-        </tr>
-
-<?php
-    }
-}
-?>
 </tbody>
 </table>
 </div>
@@ -81,61 +43,207 @@ if(!empty($data)) {
 </div>
 <!-- end col-md-12 -->
 </div>
-
-
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.editor.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
+<?php
+$this->load->view('setting/user_add_modal',$params);
+$this->load->view('setting/user_edit_modal',$params);
+$this->load->view('shared/js_content');
+?>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatables').DataTable({
-            "pagingType": "full_numbers",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            "responsive": true,
-            "language": {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records"
-            },
-            "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": [ 'excel', 'pdf', 'print']
+        var reloadTable = function(){
+            $.ajax({
+                url: "<?php echo my_url();?>/user/profile/data",
+                type: 'POST',
+                dataType:'json',
+                data: {},
+                success: function(newData) {
+                    var xtable = $('#datatables').DataTable();
+                    xtable.clear();
+                    xtable.rows.add(newData.data).draw();
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        }
 
+        var initBar = function(){
+            var actionbutton = '';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '';
+            $(".dt-actionbutton").html(actionbutton);
+        }
+
+        var table = $('#datatables').DataTable({
+            "responsive": true,
+            "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
+            "buttons": [ 'excel', 'pdf', 'print'],
+            "ajax": "<?php echo my_url();?>/user/profile/data",
+            "columnDefs":[
+                {
+                    "render": function ( data, type, row ) {
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-success" uid="'+row[0]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" uid="'+row[0]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                    },
+                    "targets": 15
+                }
+            ]
+        });
+        initBar();
+
+        $("#user").on('click', '#add', function() {
+            var that = $(this);
+            $("input[type='text']",$("#add-user-modal")).each(function(){
+                $(this).val('');
+            });
+            $("input[type='password']",$("#add-user-modal")).each(function(){
+                $(this).val('');
+            });
+            $("input[type='checkbox']",$("#add-user-modal")).each(function(){
+                $(this).removeAttr("checked");
+            });
+            $("select",$("#add-user-modal")).each(function(){
+                $("option:selected",$(this)).removeAttr("selected");
+            });
+            $(".modal-alert","#add-user-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("#add-user-modal").modal("show");
+            return false;
         });
 
-        var actionbutton = '<a class="btn btn-sm btn-success" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
-        $(".dt-actionbutton").html(actionbutton);
+        $("#add-user-modal").on('click', '#user-submit', function() {
+            var uid = $("input[name='uid']",$("#add-user-modal")).val();
+            var nama = $("input[name='nama']",$("#add-user-modal")).val();
+            var password = $("input[name='password']",$("#add-user-modal")).val();
+            var sel1 = $("select[name='level']",$("#add-user-modal"));
+            var level= $("option:selected",sel1).val();
+            var sel2 = $("select[name='bagian']",$("#add-user-modal"));
+            var bagian= $("option:selected",sel2).val();
+            var sel3 = $("select[name='jabatan']",$("#add-user-modal"));
+            var jabatan= $("option:selected",sel3).val();
+            var sel4 = $("select[name='regional']",$("#add-user-modal"));
+            var regional= $("option:selected",sel4).val();
+            var sel5 = $("select[name='cabang']",$("#add-user-modal"));
+            var cabang= $("option:selected",sel5).val();
+            if(uid.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("UID masih kosong");
+                return false;
+            }
+            if(nama.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Nama masih kosong");
+                return false;
+            }
+            if(password.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Password masih kosong");
+                return false;
+            }
+            if(level.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Level masih kosong");
+                return false;
+            }
+            if(bagian.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Bagian masih kosong");
+                return false;
+            }
+            if(jabatan.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Jabatan masih kosong");
+                return false;
+            }
+            if(regional.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Regional masih kosong");
+                return false;
+            }
+            if(cabang.trim() == ''){
+                $(".modal-alert",$("#add-user-modal")).addClass("alert-danger").removeClass("hide").text("Cabang masih kosong");
+                return false;
+            }
+            var administrator = ($("[name='administrator']",$("#add-user-modal")).is(":checked"))?1:0;
+            var setting = ($("[name='setting']",$("#add-user-modal")).is(":checked"))?1:0;
+            var registrasi_mitra = ($("[name='registrasi_mitra']",$("#add-user-modal")).is(":checked"))?1:0;
+            var master = ($("[name='master']",$("#add-user-modal")).is(":checked"))?1:0;
+            var approval = ($("[name='approval']",$("#add-user-modal")).is(":checked"))?1:0;
+            var dashboard = ($("[name='dashboard']",$("#add-user-modal")).is(":checked"))?1:0;
+            var regulasi = ($("[name='regulasi']",$("#add-user-modal")).is(":checked"))?1:0;
+            var status = $("[name='status']:checked",$("#add-user-modal")).val();
+            $.ajax({
+                url: "<?php echo my_url().'/user/profile/add';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    uid:uid,nama:nama,password:password,level:level,bagian:bagian,jabatan:jabatan,administrator:administrator,
+                    setting:setting,registrasi_mitra:registrasi_mitra,master:master,approval:approval,
+                    dashboard:dashboard,regulasi:regulasi,regional:regional,cabang:cabang,status:status
+                },
+                success: function(data) {
+                    $("input[type='text']",$("#add-user-modal")).each(function(){
+                        $(this).val('');
+                    });
+                    $("input[type='checkbox']",$("#add-user-modal")).each(function(){
+                        $(this).removeAttr("checked");
+                    });
+                    $("select",$("#add-user-modal")).each(function(){
+                        $("option:selected",$(this)).removeAttr("selected");
+                    });
+                    $(".modal-alert","#add-user-modal").removeClass("alert-warning").addClass("hide").text("");
+                    $("#add-user-modal").modal("hide");
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
 
-        //var table = $('#datatables').DataTable();
-
-        // Edit record
         table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            var that = $(this);
+            $("input[type='text']",$("#add-user-modal")).each(function(){
+                $(this).val('');
+            });
+            $("input[type='password']",$("#add-user-modal")).each(function(){
+                $(this).val('');
+            });
+            $("input[type='checkbox']",$("#add-user-modal")).each(function(){
+                $(this).removeAttr("checked");
+            });
+            $("select",$("#add-user-modal")).each(function(){
+                $("option:selected",$(this)).removeAttr("selected");
+            });
+            $(".modal-alert","#add-user-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("#edit-user-modal").modal("show");
+            return false;
         });
 
         // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
+        table.on('click', '.delete', function(e) {
+            var uid = $(this).attr('uid');
+            $.ajax({
+                url: "<?php echo my_url().'/user/profile/delete';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    uid:uid
+                },
+                success: function(status) {
+                    console.log(status);
+                    if(status == true){
+                        showAlerts('success','Data telah didelete');
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error','Silahkan ulangi lagi');
+                    }
+
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
         });
 
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
 
-        $('.card .material-datatables label').addClass('form-group');
     });
 </script>
