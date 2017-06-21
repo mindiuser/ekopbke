@@ -1,7 +1,4 @@
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-
+<?php $this->load->view('shared/css_content');?>
 <div class="row" id="bagian">
 <div class="col-md-12">
 <div class="card">
@@ -36,17 +33,8 @@
 <?php
 $this->load->view('setting/bagian_add_modal');
 $this->load->view('setting/bagian_edit_modal');
+$this->load->view('shared/js_content');
 ?>
-
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         var reloadTable = function(){
@@ -129,7 +117,6 @@ $this->load->view('setting/bagian_edit_modal');
                     showAlerts('error',textStatus);
                 }
             });
-
         });
 
         $("#add-bagian-modal").on('click', '#bagian-submit-cancel', function(){

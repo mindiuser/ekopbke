@@ -11,8 +11,8 @@
                         Nomor Urut
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="edit-urut" class="form-control" maxlength="2" required data-validation="required">
-                        <input type="hidden" name="edit-urut-old" class="form-control" data-validation="required">
+                        <input type="text" name="edit-urut" class="form-control" maxlength="2" required >
+                        <input type="hidden" name="edit-urut-old" class="form-control">
                     </div>
                 </div>
                 <div class="row small-list-margin">
@@ -20,8 +20,8 @@
                         Nama Bagian
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="edit-bagian" class="form-control" maxlength="20" required data-validation="required">
-                        <input type="hidden" name="edit-bagian-old" class="form-control" data-validation="required">
+                        <input type="text" name="edit-bagian" class="form-control" maxlength="20" required >
+                        <input type="hidden" name="edit-bagian-old" class="form-control" >
                     </div>
 
                 </div>

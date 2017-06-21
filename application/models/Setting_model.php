@@ -39,7 +39,7 @@ class Setting_model extends CI_Model {
         $sql_del = "DELETE FROM dt_uid_bagian WHERE URUT = ? AND BAGIAN = ?";
         $status_del = $this->db->query($sql_del,array($urut_old,$bagian_old));
         if(!$status_del){
-            return array(false,'Update gagal');
+            return array(false,'Data tidak ditemukan');
         }
         $sql = "INSERT INTO dt_uid_bagian (URUT,BAGIAN) VALUES (?,?)";
         $status = $this->db->query($sql, array($urut,$bagian));
@@ -60,12 +60,56 @@ class Setting_model extends CI_Model {
 
     function getJabatan($bagian = '') {
         $sql = 'SELECT * FROM dt_uid_jabatan ';
-        //if($bagian != ''){
-            $sql .= 'WHERE jabatan = "'.$bagian.'" ';
-        //}
+        if($bagian != ''){
+            $sql .= 'WHERE BAGIAN = ? ';
+        }
         $sql .= 'ORDER BY URUT ASC';
-        $q = $this->db->query($sql);
+        $q = $this->db->query($sql,array($bagian));
         return $q->result();
+    }
+
+    function addJabatan($bagian,$urut,$jabatan)
+    {
+        $sql_get = 'SELECT * FROM dt_uid_jabatan WHERE BAGIAN = ? AND URUT = ? ';
+        $q = $this->db->query($sql_get,array($bagian,$urut));
+        $dt = $q->result();
+        if(!empty($dt)){
+            return array(false,'Nomor urut sudah terpakai ');
+        }
+        $sql = "INSERT INTO dt_uid_jabatan (URUT,JABATAN,BAGIAN) VALUES (?,?,?)";
+        $status = $this->db->query($sql, array($urut,$jabatan,$bagian));
+        if($status){
+            return array($status,'Data telah ditambahkan');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+    function editJabatan($bagian,$urut,$jabatan,$urut_old,$jabatan_old)
+    {
+        $sql_sel = "SELECT * FROM dt_uid_jabatan WHERE URUT = ? AND BAGIAN = ? AND JABATAN = ?";
+        $status_sel = $this->db->query($sql_sel,array($urut_old,$bagian,$jabatan_old));
+        $dt = $status_sel->result();
+        if(empty($dt)){
+            return array(false,'Data tidak ditemukan');
+        }
+        $sql = "UPDATE dt_uid_jabatan SET URUT = ?, JABATAN = ? WHERE URUT = ? AND BAGIAN = ? AND JABATAN = ?";
+        $status = $this->db->query($sql, array($urut,$jabatan,$urut_old,$bagian,$jabatan_old));
+        if($status){
+            return array($status,'Data telah diedit');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+    function deleteJabatan($urut,$bagian,$jabatan)
+    {
+        $sql = "DELETE FROM dt_uid_jabatan WHERE URUT = ? AND BAGIAN = ? AND JABATAN = ?";
+        return $this->db->query($sql,array($urut,$bagian,$jabatan));
     }
 
     function getUsers() {

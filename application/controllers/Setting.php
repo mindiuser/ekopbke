@@ -14,9 +14,7 @@ class Setting extends CI_Controller
 
     public function bagian()
     {
-        $data = [];
-        $data['data'] = $this->setting_model->getBagian();
-        $this->load->templated_view('setting/bagian_list', $data);
+        $this->load->templated_view('setting/bagian_list');
     }
 
     public function bagian_data()
@@ -65,8 +63,61 @@ class Setting extends CI_Controller
     public function jabatan()
     {
         $data = [];
-        $data['data'] = $this->setting_model->getJabatan();
+        $data['bagian'] = $this->setting_model->getBagian();
         $this->load->templated_view('setting/jabatan_list', $data);
+    }
+
+    public function jabatan_data()
+    {
+        if($this->input->post('bagian')){
+            $bagian = trim($this->input->post('bagian'));
+            $dt = $this->setting_model->getJabatan($bagian);
+            if(!empty($dt)){
+                foreach($dt as $row){
+                    $array [] = array(
+                        $row->URUT,
+                        $row->JABATAN,
+                        $row->BAGIAN,
+                    );
+                }
+                $data = array('data'=>$array);
+            }
+            else {
+                $data=array('data'=>[]);
+            }
+            echo json_encode($data);
+        }
+        else {
+            $data=array('data'=>[]);
+            echo json_encode($data);
+        }
+
+    }
+
+    public function jabatan_add(){
+        $bagian = trim($this->input->post('bagian'));
+        $urut = trim($this->input->post('urut'));
+        $jabatan = trim($this->input->post('jabatan'));
+        list($status,$message) = $this->setting_model->addJabatan($bagian,$urut,$jabatan);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
+    public function jabatan_edit(){
+        $bagian = trim($this->input->post('bagian'));
+        $urut = trim($this->input->post('urut'));
+        $jabatan = trim($this->input->post('jabatan'));
+        $urut_old = trim($this->input->post('urut_old'));
+        $jabatan_old = trim($this->input->post('jabatan_old'));
+        list($status,$message) = $this->setting_model->editJabatan($bagian,$urut,$jabatan,$urut_old,$jabatan_old);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
+    public function jabatan_delete(){
+        $urut = $this->input->post('urut');
+        $bagian = $this->input->post('bagian');
+        $jabatan = $this->input->post('jabatan');
+        $status = $this->setting_model->deleteJabatan($urut,$bagian,$jabatan);
+        echo $status;
     }
 
     public function profile()

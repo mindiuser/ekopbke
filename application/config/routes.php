@@ -54,13 +54,14 @@ $route['user/bagian']                   = 'setting/bagian';
 $route['user/bagian/data']              = 'setting/bagian_data';
 $route['user/bagian/add']               = 'setting/bagian_add';
 $route['user/bagian/edit']              = 'setting/bagian_edit';
-$route['user/bagian/detail']            = 'setting/bagian_detail';
 $route['user/bagian/delete']            = 'setting/bagian_delete';
 
 $route['user/jabatan']                  = 'setting/jabatan';
+$route['user/jabatan/data']             = 'setting/jabatan_data';
 $route['user/jabatan/add']              = 'setting/jabatan_add';
-$route['user/jabatan/detail/(:num)']    = 'setting/jabatan_detail/$1';
-$route['user/jabatan/delete/(:num)']    = 'setting/jabatan_delete/$1';
+$route['user/jabatan/edit']             = 'setting/jabatan_edit';
+$route['user/jabatan/delete']           = 'setting/jabatan_delete';
+
 $route['user/profile']                  = 'setting/profile';
 $route['user/profile/add']              = 'setting/profile_add';
 $route['user/profile/detail/(:num)']    = 'setting/profile_detail/$1';
