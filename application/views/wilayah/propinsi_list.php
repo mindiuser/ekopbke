@@ -61,7 +61,6 @@ if(!empty($data)) {
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.editor.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
@@ -69,7 +68,7 @@ if(!empty($data)) {
 <script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatables').DataTable({
+        var table = $('#datatables').DataTable({
             "pagingType": "full_numbers",
             "lengthMenu": [
                 [10, 25, 50, -1],

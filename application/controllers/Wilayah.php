@@ -7,6 +7,8 @@ class Wilayah extends CI_Controller
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->helper('general');
+        $this->load->library('session');
         $this->load->model('wilayah_model');
     }
 
@@ -14,6 +16,7 @@ class Wilayah extends CI_Controller
     {
         $data = [];
         $data['data'] = $this->wilayah_model->getPropinsi();
+       // print_r($data);die;
         $this->load->templated_view('wilayah/propinsi_list', $data);
     }
 
@@ -22,6 +25,7 @@ class Wilayah extends CI_Controller
         $data = [];
         $data['propinsi'] = $this->wilayah_model->getPropinsi();
         $data['kabupaten'] = $this->wilayah_model->getKabupaten();
+
         $this->load->templated_view('wilayah/kabupaten_list', $data);
     }
 
