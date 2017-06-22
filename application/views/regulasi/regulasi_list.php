@@ -30,6 +30,8 @@
     <!-- end col-md-12 -->
 </div>
 <?php
+$this->load->view('regulasi/regulasi_add_modal');
+$this->load->view('regulasi/regulasi_edit_modal');
 $this->load->view('shared/js_content');
 ?>
 <script type="text/javascript">
@@ -56,6 +58,15 @@ $this->load->view('shared/js_content');
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
+
+        var hideModal = function(){
+            $(".modal-alert","#add-regulasi-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("[name='tema']",$("#add-regulasi-modal")).val('');
+            $("[name='keterangan']",$("#add-regulasi-modal")).val('');
+            $("[name='file']",$("#add-regulasi-modal")).val('');
+            $("#add-regulasi-modal").modal("hide");
+        }
+
         var table = $('#datatables').DataTable({
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
@@ -64,8 +75,13 @@ $this->load->view('shared/js_content');
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                        //console.log(row);
-                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" ide="'+row[0]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" ide="'+row[0]+'" ><i class="fa fa-times" aria-hidden="true"></i></a>';
+                        return '<a target="_blank" href="<?php echo my_url().'public/uploads/regulasi/';?>'+row[3]+'" ide="'+row[0]+'">'+row[3]+'</a>';
+                    },
+                    "targets": 3
+                },
+                {
+                    "render": function ( data, type, row ) {
+                        return '<a href="javascript:void(0)" class="delete btn btn-xs btn-danger" ide="'+row[0]+'" ><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
                     "targets": 4
                 }
@@ -73,128 +89,97 @@ $this->load->view('shared/js_content');
         });
         initBar();
 
-        /*
         $("#regulasi").on('click', '#add', function() {
             $(".modal-alert","#add-regulasi-modal").removeClass("alert-danger").addClass("hide").text("");
             $("#add-regulasi-modal").modal("show");
             return false;
         });
 
-        $("#add-bagian-modal").on('click', '#bagian-submit', function() {
-            var urut = $("input[name='urut']","#add-bagian-modal").val();
-            var bagian = $("input[name='bagian']","#add-bagian-modal").val();
-            if(urut.trim() == ''){
-                $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
+        $("#add-regulasi-modal").on('click', '#regulasi-submit', function() {
+            var tema = $("input[name='tema']",$("#add-regulasi-modal")).val();
+            var keterangan = $("input[name='keterangan']",$("#add-regulasi-modal")).val();
+            var file = $("input[name='file']",$("#add-regulasi-modal")).val();
+            if(tema.trim() == ''){
+                $(".modal-alert","#add-regulasi-modal").addClass("alert-danger").removeClass("hide").text("Tema masih kosong");
                 return false;
             }
-            if(bagian.trim() == ''){
-                $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nama bagian masih kosong");
+            if(keterangan.trim() == ''){
+                $(".modal-alert","#add-regulasi-modal").addClass("alert-danger").removeClass("hide").text("Keterangan masih kosong");
                 return false;
             }
+            if(file.trim() == ''){
+                $(".modal-alert","#add-regulasi-modal").addClass("alert-danger").removeClass("hide").text("File wajib diisi");
+                return false;
+            }
+            var file_data = $('#file').prop('files')[0];
+            var form_data = new FormData();
+            form_data.append('file', file_data);
             $.ajax({
-                url: "<?php //echo my_url().'/user/bagian/add';?>",
-                type: 'POST',
-                dataType:'json',
-                data: {
-                    urut : urut, bagian:bagian
-                },
-                success: function(data) {
-                    $("[name='urut']",$("#add-bagian-modal")).val('');
-                    $("[name='bagian']",$("#add-bagian-modal")).val('');
-                    $(".modal-alert","#add-bagian-modal").removeClass("alert-warning").addClass("hide").text("");
-                    $("#add-bagian-modal").modal("hide");
-                    if(data.status == true){
-                        showAlerts('success',data.message);
-                        reloadTable();
+                url:"<?php echo my_url();?>/regulasi/upload_file",
+                dataType: 'json',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+                type: 'post',
+                success: function (response) {
+                    if(response.status){
+                        if(response.file_name && response.file_name != ''){
+                            file = response.file_name
+                        }
+                        $.ajax({
+                            url: "<?php echo my_url().'/regulasi/add';?>",
+                            type: 'POST',
+                            dataType:'json',
+                            data: {
+                                tema:tema,keterangan:keterangan,file:file
+                            },
+                            success: function(data) {
+                                hideModal();
+                                if(data.status == true){
+                                    showAlerts('success',data.message);
+                                    reloadTable();
+                                }
+                                else {
+                                    hideModal();
+                                    showAlerts('error',data.message);
+                                }
+                            },
+                            error: function(xhr, textStatus, ThrownException){
+                                hideModal();
+                                showAlerts('error',textStatus);
+                            }
+                        });
+
                     }
                     else {
-                        showAlerts('error',data.message);
+                        hideModal();
+                        showAlerts('error',response.message);
                     }
                 },
-                error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
+                error: function (response) {
+                    showAlerts('error',response);
                 }
             });
         });
 
-        $("#add-bagian-modal").on('click', '#bagian-submit-cancel', function(){
-            $(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
-            $("[name='urut']",$("#add-bagian-modal")).val('');
-            $("[name='bagian']",$("#add-bagian-modal")).val('');
-            $("#add-bagian-modal").modal("hide");
-        });
-
-        // Edit record
-        table.on('click', '.edit', function() {
-            $("[name='edit-urut']",$("#edit-bagian-modal")).val($(this).attr('urut'));
-            $("[name='edit-bagian']",$("#edit-bagian-modal")).val($(this).attr('bagian'));
-            $("[name='edit-urut-old']",$("#edit-bagian-modal")).val($(this).attr('urut'));
-            $("[name='edit-bagian-old']",$("#edit-bagian-modal")).val($(this).attr('bagian'));
-            $("#edit-bagian-modal").modal("show");
-            return false;
-        });
-
-        $("#edit-bagian-modal").on('click', '#bagian-edit-submit', function() {
-            var urut = $("input[name='edit-urut']","#edit-bagian-modal").val();
-            var bagian = $("input[name='edit-bagian']","#edit-bagian-modal").val();
-            var urut_old = $("input[name='edit-urut-old']","#edit-bagian-modal").val();
-            var bagian_old = $("input[name='edit-bagian-old']","#edit-bagian-modal").val();
-            if(urut.trim() == ''){
-                $(".modal-alert","#edit-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
-                return false;
-            }
-            if(bagian.trim() == ''){
-                $(".modal-alert","#edit-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nama bagian masih kosong");
-                return false;
-            }
-            $.ajax({
-                url: "<?php //echo my_url().'/user/bagian/edit';?>",
-                type: 'POST',
-                dataType:'json',
-                data: {
-                    urut : urut, bagian:bagian, urut_old:urut_old, bagian_old:bagian_old
-                },
-                success: function(data) {
-                    console.log(data);
-                    $("[name='edit-urut']",$("#edit-bagian-modal")).val('');
-                    $("[name='edit-bagian']",$("#edit-bagian-modal")).val('');
-                    $("[name='edit-urut-old']",$("#edit-bagian-modal")).val('');
-                    $("[name='edit-bagian-old']",$("#edit-bagian-modal")).val('');
-                    $("#edit-bagian-modal").modal("hide");
-                    if(data.status == true){
-                        showAlerts('success',data.message);
-                        reloadTable();
-                    }
-                    else {
-                        showAlerts('error',data.message);
-                    }
-                },
-                error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
-                }
-            });
-
-        });
-
-        $("#edit-bagian-modal").on('click', '#bagian-edit-cancel', function(){
-            $(".modal-alert","#edit-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
-            $("[name='urut']",$("#edit-bagian-modal")).val('');
-            $("[name='bagian']",$("#edit-bagian-modal")).val('');
-            $("#edit-bagian-modal").modal("hide");
+        $("#add-regulasi-modal").on('click', '#regulasi-submit-cancel', function(){
+            $(".modal-alert","#add-regulasi-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("[name='tema']",$("#add-regulasi-modal")).val('');
+            $("[name='keterangan']",$("#add-regulasi-modal")).val('');
+            $("[name='file']",$("#add-regulasi-modal")).val('');
+            $("#add-regulasi-modal").modal("hide");
         });
 
         // Delete a record
         table.on('click', '.delete', function(e) {
-            var urut = $(this).attr('urut');
-            var bagian = $(this).attr('bagian');
-            console.log(urut);
-            console.log(bagian);
+            var ide = $(this).attr('ide');
             $.ajax({
-                url: "<?php //echo my_url().'/user/bagian/delete';?>",
+                url: "<?php echo my_url().'/regulasi/delete';?>",
                 type: 'POST',
                 dataType:'json',
                 data: {
-                    urut : urut, bagian:bagian
+                    ide:ide
                 },
                 success: function(status) {
                     console.log(status);
@@ -212,7 +197,7 @@ $this->load->view('shared/js_content');
                 }
             });
         });
-        */
+
 
     });
 </script>

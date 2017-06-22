@@ -96,6 +96,9 @@ $route['rekening/filter_buku_besar']      = 'rekening/filter_buku_besar';
 
 $route['regulasi/acuan']        = 'regulasi/regulasi_acuan';
 $route['regulasi/acuan_data']   = 'regulasi/regulasi_acuan_data';
+$route['regulasi/upload_file']  = 'regulasi/upload_file';
+$route['regulasi/add']  = 'regulasi/add';
+$route['regulasi/delete']  = 'regulasi/delete';
 
 
 $route['penilaian/kesehatan']   = 'penilaian/penilaian_kesehatan';
