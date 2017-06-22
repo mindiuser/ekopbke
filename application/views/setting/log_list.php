@@ -1,16 +1,9 @@
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/editor.dataTables.min.css" rel="stylesheet">
-
+<?php $this->load->view('shared/css_content');?>
 <div class="row">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="red">
-    <i class="material-icons">assignment</i>
-</div>
 <div class="card-content">
-<h4 class="card-title">LOG TRANSAKSI</h4>
+<h3 class="card-title"><i class="fa fa-user-circle" aria-hidden="true"></i> LOG TRANSAKSI</h3>
 <div class="toolbar">
     <!--        Here you can write extra buttons/actions for the toolbar              -->
 </div>
@@ -26,7 +19,6 @@
     <th>IP ADDRESS</th>
     <th>COMPUTER NAME</th>
     <th>DATE TIME</th>
-    <th class="disabled-sorting text-right">Actions</th>
 </tr>
 </thead>
 <tbody>
@@ -35,16 +27,14 @@ if(!empty($data)) {
     foreach($data as $row){
     ?>
         <tr>
-            <td><?php echo isset($row->URUT)?$row->URUT:'';?></td>
-            <td><?php echo isset($row->BAGIAN)?$row->BAGIAN:'';?></td>
-            <td class="text-right">
-                <button type="button" rel="tooltip" class="btn btn-xs btn-primary btn-round">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
+            <td><?php echo isset($row->TGL)?$row->TGL:'';?></td>
+            <td><?php echo isset($row->UID)?$row->UID:'';?></td>
+            <td><?php echo isset($row->AKSI)?$row->AKSI:'';?></td>
+            <td><?php echo isset($row->APP_FORM)?$row->APP_FORM:'';?></td>
+            <td><?php echo isset($row->RESUME)?$row->RESUME:'';?></td>
+            <td><?php echo isset($row->IP_ADDRESS)?$row->IP_ADDRESS:'';?></td>
+            <td><?php echo isset($row->COMP_NAME)?$row->COMP_NAME:'';?></td>
+            <td><?php echo isset($row->TIME_STAMP)?$row->TIME_STAMP:'';?></td>
         </tr>
 
 <?php
@@ -61,21 +51,30 @@ if(!empty($data)) {
 </div>
 <!-- end col-md-12 -->
 </div>
-
-
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.editor.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
+<?php
+$this->load->view('shared/js_content');
+?>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#datatables').DataTable({
+
+        var initBar = function(){
+            var actionbutton = '';
+            actionbutton += '<div class="btn-group">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<span id="filter-user-label">FILTER USER</span> <span class="caret"></span></button>';
+            actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-user">';
+            actionbutton += '<li><a href="#" class="select-user" id="ALL" label="">SEMUA</a></li>';
+            <?php if(!empty($users)){ foreach($users as $row) { ?>
+            actionbutton += '<li><a href="#" class="select-user" id="<?php echo $row->NAMA;?>" label="<?php echo $row->NAMA;?>"><?php echo $row->NAMA;?></a></li>';
+            <?php }} ?>
+            actionbutton += '</ul>';
+            actionbutton += '</div>';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '';
+            $(".dt-actionbutton").html(actionbutton);
+        }
+
+        var table = $('#datatables').DataTable({
             "pagingType": "full_numbers",
             "lengthMenu": [
                 [10, 25, 50, -1],
@@ -91,31 +90,21 @@ if(!empty($data)) {
 
         });
 
-        var actionbutton = '<a class="btn btn-sm btn-primary" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
-        $(".dt-actionbutton").html(actionbutton);
+        initBar();
 
-        //var table = $('#datatables').DataTable();
+        $('#filter-user').on( 'click','.select-user', function () {
+            console.log($(this).attr("id"));
+            if($(this).attr("id") != 'ALL'){
+            table
+                .columns(1)
+                .search( $(this).attr("id") )
+                .draw();
+            }
+            else {
+                table.draw();
+            }
+        } );
 
-        // Edit record
-        table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
 
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        });
-
-        // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
-        });
-
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
-
-        $('.card .material-datatables label').addClass('form-group');
     });
 </script>

@@ -59,7 +59,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </div>
             </li>
             <li>
-                <a href="<?php echo site_url('setting/user/log');?>">
+                <a href="<?php echo site_url('user/log');?>">
                     <i class="fa fa-database" aria-hidden="true"></i>
                     <p>Log Transaksi</p>
                 </a>

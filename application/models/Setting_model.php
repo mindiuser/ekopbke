@@ -192,8 +192,15 @@ class Setting_model extends CI_Model {
 
 
     function getLogs() {
-        $sql = 'SELECT * FROM transaksi ';
-        $sql .= 'ORDER BY IDE DESC';
+        $sql = 'SELECT TGL,UID,AKSI,APP_FORM,RESUME,IP_ADDRESS,COMP_NAME,TIME_STAMP FROM log ';
+        $sql .= 'ORDER BY TIME_STAMP DESC';
+        $q = $this->db->query($sql);
+        return $q->result();
+    }
+
+    function getUsersForDdl() {
+        $sql = 'SELECT UID,NAMA FROM uid ';
+        $sql .= 'ORDER BY NAMA ASC';
         $q = $this->db->query($sql);
         return $q->result();
     }

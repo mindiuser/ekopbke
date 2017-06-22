@@ -180,10 +180,11 @@ class Setting extends CI_Controller
     }
 
 
-    public function log()
+    public function manage_log()
     {
         $data = [];
-        //$data['data'] = $this->setting_model->getLog();
+        $data['users'] = $this->setting_model->getUsersForDdl();
+        $data['data'] = $this->setting_model->getLogs();
         $this->load->templated_view('setting/log_list', $data);
     }
 

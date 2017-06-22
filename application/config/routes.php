@@ -67,7 +67,7 @@ $route['user/profile/data']             = 'setting/profile_data';
 $route['user/profile/add']              = 'setting/profile_add';;
 $route['user/profile/delete']    = 'setting/profile_delete';
 
-$route['user/log']                      = 'setting/log';
+$route['user/log']                      = 'setting/manage_log';
 
 $route['parameter/wilayah/propinsi']    = 'wilayah/propinsi';
 $route['parameter/wilayah/kabupaten']   = 'wilayah/kabupaten';
