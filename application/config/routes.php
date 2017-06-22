@@ -65,9 +65,13 @@ $route['user/jabatan/delete']           = 'setting/jabatan_delete';
 $route['user/profile']                  = 'setting/profile';
 $route['user/profile/data']             = 'setting/profile_data';
 $route['user/profile/add']              = 'setting/profile_add';;
-$route['user/profile/delete']    = 'setting/profile_delete';
+$route['user/profile/delete']           = 'setting/profile_delete';
 
 $route['user/log']                      = 'setting/manage_log';
+$route['user/upload_web']               = 'setting/upload_web';
+$route['user/upload_file_web']    = 'setting/upload_web';
+$route['user/upload_mobile']            = 'setting/upload_mobile';
+$route['user/upload_file_mobile']       = 'setting/upload_mobile';
 
 $route['parameter/wilayah/propinsi']    = 'wilayah/propinsi';
 $route['parameter/wilayah/kabupaten']   = 'wilayah/kabupaten';

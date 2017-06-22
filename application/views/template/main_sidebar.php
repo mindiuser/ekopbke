@@ -50,10 +50,10 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                             <a href="<?php echo site_url('user/profile');?>">User Profile Manager</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('user/slide_web');?>">Slide Web</a>
+                            <a href="<?php echo site_url('user/upload_web');?>">Slide Web</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('user/slide_mobile');?>">Slide Mobile</a>
+                            <a href="<?php echo site_url('user/upload_mobile');?>">Slide Mobile</a>
                         </li>
                     </ul>
                 </div>

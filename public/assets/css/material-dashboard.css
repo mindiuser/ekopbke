@@ -6738,7 +6738,7 @@ h2.title {
 .btn.btn-xs, .btn-group-xs .btn,
 .navbar .navbar-nav > li > a.btn.btn-xs, .btn-group-xs
 .navbar .navbar-nav > li > a.btn {
-  padding: 4px 5px;
+  padding: 2px 3px;
   font-size: 8px;
 }
 .btn.btn-just-icon,

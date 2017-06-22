@@ -188,4 +188,82 @@ class Setting extends CI_Controller
         $this->load->templated_view('setting/log_list', $data);
     }
 
+    public function upload_web(){
+        if(isset($_FILES['file'])){
+            $config['upload_path'] = 'public/uploads/web';
+            $config['allowed_types'] = '*';
+            $config['max_filename'] = '255';
+            $config['encrypt_name'] = FALSE;
+            $config['max_size'] = '3024'; //3 MB
+
+            $msg = '';
+            if (isset($_FILES['file']['name'])) {
+                if (0 < $_FILES['file']['error']) {
+                    $msg = 'Error during file upload' . $_FILES['file']['error'];
+                } else {
+                    if (file_exists('public/uploads/web/' .  $_FILES['file']['name'])) {
+                        $msg = 'File already exists : ' . $_FILES['file']['name'];
+                    } else {
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('file')) {
+                            $msg = $this->upload->display_errors();
+                        } else {
+                            $msg = '';
+                        }
+                    }
+                }
+            } else {
+                $msg = 'Please choose a file';
+            }
+            if($msg == ''){
+                echo json_encode(['status'=>true,'message'=>"Sukses"]);
+            }
+            else {
+                echo json_encode(['status'=>false,'message'=>$msg]);
+            }
+        }
+        else {
+            $this->load->templated_view('setting/upload_web');
+        }
+    }
+
+    public function upload_mobile(){
+        if(isset($_FILES['file'])){
+            $config['upload_path'] = 'public/uploads/mobile';
+            $config['allowed_types'] = '*';
+            $config['max_filename'] = '255';
+            $config['encrypt_name'] = FALSE;
+            $config['max_size'] = '3024'; //3 MB
+
+            $msg = '';
+            if (isset($_FILES['file']['name'])) {
+                if (0 < $_FILES['file']['error']) {
+                    $msg = 'Error during file upload' . $_FILES['file']['error'];
+                } else {
+                    if (file_exists('public/uploads/mobile/' .  $_FILES['file']['name'])) {
+                        $msg = 'File already exists : ' . $_FILES['file']['name'];
+                    } else {
+                        $this->load->library('upload', $config);
+                        if (!$this->upload->do_upload('file')) {
+                            $msg = $this->upload->display_errors();
+                        } else {
+                            $msg = '';
+                        }
+                    }
+                }
+            } else {
+                $msg = 'Please choose a file';
+            }
+            if($msg == ''){
+                echo json_encode(['status'=>true,'message'=>"Sukses"]);
+            }
+            else {
+                echo json_encode(['status'=>false,'message'=>$msg]);
+            }
+        }
+        else {
+        $this->load->templated_view('setting/upload_mobile');
+        }
+    }
+
 }
