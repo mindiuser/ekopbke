@@ -1,15 +1,10 @@
 <?php $this->load->view('shared/css_content');?>
 <div class="row" id="bagian">
 <div class="col-md-12">
-<div class="card">
-<div class="card-header card-header-icon" data-background-color="red">
-    <i class="material-icons">assignment</i>
-</div>
+<div class="card mt-20">
 <div class="card-content">
-<h4 class="card-title">DAFTAR BAGIAN</h4>
-<div class="toolbar">
-    <!--        Here you can write extra buttons/actions for the toolbar              -->
-</div>
+<h3 class="card-title"> <i class="fa fa-user-circle" aria-hidden="true"></i> DAFTAR BAGIAN</h3>
+<div class="toolbar"></div>
 <div class="material-datatables">
 <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
 <thead>

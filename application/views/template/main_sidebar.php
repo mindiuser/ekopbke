@@ -1,19 +1,10 @@
-<div class="sidebar" data-active-color="rose" data-background-color="#1580b9">
+<div class="sidebar" data-active-color="purple" data-background-color="#1580b9">
     <!--
 Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
 Tip 2: you can also add an image using data-image tag
 Tip 3: you can change the color of the sidebar with data-background-color="white | black"
 -->
-    <div class="logo">
-        <a href="<?php echo base_url();?>" class="simple-text">
-            BANK BKE
-        </a>
-    </div>
-    <div class="logo logo-mini">
-        <a href="<?php echo base_url();?>" class="simple-text">
-            BKE
-        </a>
-    </div>
+
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">

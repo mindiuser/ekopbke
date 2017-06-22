@@ -6,11 +6,8 @@
 <div class="row" id="kecamatan">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="red">
-    <i class="material-icons">assignment</i>
-</div>
 <div class="card-content">
-<h4 class="card-title">DAFTAR WILAYAH KECAMATAN</h4>
+<h3 class="card-title"> <i class="fa fa-map-marker mr-10" aria-hidden="true"></i>  DAFTAR WILAYAH KECAMATAN</h3>
 <div class="toolbar">
     <!--        Here you can write extra buttons/actions for the toolbar              -->
 </div>

@@ -9435,6 +9435,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   color: inherit;
   padding: 10px 15px;
 }
+
 .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
   color: inherit;
   background-color: transparent;
@@ -10247,8 +10248,8 @@ footer .btn {
   top: -65px;
 }
 .card .card-header {
-  padding: 15px 20px 0;
-  z-index: 3;
+  padding: 0px 0px 0;
+  z-index: 0;
 }
 .card .card-header .category {
   margin-bottom: 0;
@@ -10264,22 +10265,17 @@ footer .btn {
   float: left;
 }
 .card .card-header.card-header-icon i {
-  width: 33px;
-  height: 33px;
-  text-align: center;
-  line-height: 33px;
+
 }
 .card .card-header.card-header-tabs .nav-tabs {
   background: transparent;
   padding: 0;
 }
 .card .card-header.card-header-tabs .nav-tabs-title {
-  float: left;
-  padding: 10px 10px 10px 0;
-  line-height: 24px;
+
 }
 .card .card-header.card-header-icon + .card-content .card-title {
-  padding-bottom: 15px;
+
 }
 .card .social-line {
   margin-top: 15px;
@@ -10292,10 +10288,10 @@ footer .btn {
   margin-right: 5px;
 }
 .card [data-background-color] {
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
-  margin: -20px 15px 0;
+ /* box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);*/
+  margin: 5px 15px 0;
   border-radius: 3px;
-  padding: 15px;
+  padding: 5px;
   background-color: #999999;
   position: relative;
 }
@@ -10426,8 +10422,8 @@ footer .btn {
   margin-top: 20px;
 }
 .card [data-background-color="purple"] {
-  background: linear-gradient(60deg, #ab47bc, #8e24aa);
-  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+  background: linear-gradient(60deg, #0976b4, #0976b4);
+  /*box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);*/
 }
 .card [data-icon-bg-color="purple"] i {
   color: #0976b4;
@@ -11674,5 +11670,10 @@ textarea.form-control{
 /*-----------------------------------------------*/
 button.dt-button, div.dt-button, a.dt-button {
     padding: 0.2em 1em !important;
+}
+/***************************************/
+.toolbar {
+    border-bottom: 2px solid #333333;
+    margin-bottom:20px
 }
 

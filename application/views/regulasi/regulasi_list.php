@@ -2,11 +2,8 @@
 <div class="row" id="regulasi">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header card-header-icon" data-background-color="red">
-                <i class="material-icons">assignment</i>
-            </div>
             <div class="card-content">
-                <h4 class="card-title">ACUAN REGULASI</h4>
+                <h3 class="card-title"><i class="fa fa-gavel" aria-hidden="true"></i>  ACUAN REGULASI</h3>
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                 </div>

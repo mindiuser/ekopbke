@@ -2,11 +2,8 @@
 <div class="row" id="kelompok_rekening">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header card-header-icon" data-background-color="red">
-                <i class="material-icons">assignment</i>
-            </div>
             <div class="card-content">
-                <h4 class="card-title">DAFTAR KELOMPOK REKENING</h4>
+                <h3 class="card-title"><i class="fa fa-book" aria-hidden="true"></i> DAFTAR KELOMPOK REKENING</h3>
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                 </div>
