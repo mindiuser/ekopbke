@@ -84,10 +84,19 @@ $route['parameter/wilayah/filter_kecamatan'] = 'wilayah/filter_kecamatan';
 $route['parameter/wilayah/kelurahan'] = 'wilayah/kelurahan';
 $route['parameter/wilayah/kodepos'] = 'wilayah/kodepos';
 
-$route['parameter/account/rekening'] = 'bankaccount/rekening';
-$route['parameter/account/kelompok'] = 'bankaccount/kelompok';
-$route['parameter/account/buku_besar'] = 'bankaccount/buku_besar';
-$route['parameter/account/sub_buku_besar'] = 'bankaccount/sub_buku_besar';
+$route['rekening/jenis_rekening']           = 'rekening/jenis_rekening';
+$route['rekening/jenis_rekening/data']      = 'rekening/jenis_rekening_data';
+$route['rekening/kelompok_rekening']           = 'rekening/kelompok_rekening';
+$route['rekening/kelompok_rekening/data']      = 'rekening/kelompok_rekening_data';
+
+
+$route['rekening/buku_besar'] = 'rekening/buku_besar';
+$route['rekening/buku_besar_data'] = 'rekening/buku_besar_data';
+$route['rekening/filter_kelompok']      = 'rekening/filter_kelompok';
+
+$route['rekening/sub_buku_besar'] = 'rekening/sub_buku_besar';
+$route['rekening/sub_buku_besar_data'] = 'rekening/sub_buku_besar_data';
+$route['rekening/filter_buku_besar']      = 'rekening/filter_buku_besar';
 
 $route['regulasi/acuan/aturan'] = 'regulasi/aturan';
 $route['regulasi/penilaian/kesehatan'] = 'regulasi/penilaian';

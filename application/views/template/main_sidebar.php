@@ -111,16 +111,16 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 <div class="collapse" id="pagesExamples3">
                     <ul class="nav">
                         <li>
-                            <a href="<?php echo site_url('parameter/account/rekening');?>">Jenis Rekening</a>
+                            <a href="<?php echo site_url('rekening/jenis_rekening');?>">Jenis Rekening</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/account/kelompok');?>">Kelompok Rekening</a>
+                            <a href="<?php echo site_url('rekening/kelompok_rekening');?>">Kelompok Rekening</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/account/buku_besar');?>">Rekening Buku Besar</a>
+                            <a href="<?php echo site_url('rekening/buku_besar');?>">Rekening Buku Besar</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/account/sub_buku_besar');?>">Rekening Sub Buku Besar</a>
+                            <a href="<?php echo site_url('rekening/sub_buku_besar');?>">Rekening Sub Buku Besar</a>
                         </li>
 
                     </ul>
