@@ -1,45 +1,45 @@
 <?php $this->load->view('shared/css_content');?>
-<div class="row" id="bagian">
-<div class="col-md-12">
-<div class="card">
-<div class="card-header card-header-icon" data-background-color="red">
-    <i class="material-icons">assignment</i>
-</div>
-<div class="card-content">
-<h4 class="card-title">DAFTAR BAGIAN</h4>
-<div class="toolbar">
-    <!--        Here you can write extra buttons/actions for the toolbar              -->
-</div>
-<div class="material-datatables">
-<table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
-<thead>
-<tr>
-    <th>URUT</th>
-    <th>BAGIAN</th>
-    <th class="disabled-sorting">Actions</th>
-</tr>
-</thead>
-<tbody>
-</tbody>
-</table>
-</div>
-</div>
-<!-- end content-->
-</div>
-<!--  end card  -->
-</div>
-<!-- end col-md-12 -->
+<div class="row" id="regulasi">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header card-header-icon" data-background-color="red">
+                <i class="material-icons">assignment</i>
+            </div>
+            <div class="card-content">
+                <h4 class="card-title">ACUAN REGULASI</h4>
+                <div class="toolbar">
+                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                </div>
+                <div class="material-datatables">
+                    <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TEMA</th>
+                            <th>KETERANGAN</th>
+                            <th>NAMA FILE</th>
+                            <th class="disabled-sorting">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- end content-->
+        </div>
+        <!--  end card  -->
+    </div>
+    <!-- end col-md-12 -->
 </div>
 <?php
-$this->load->view('setting/bagian_add_modal');
-$this->load->view('setting/bagian_edit_modal');
 $this->load->view('shared/js_content');
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
         var reloadTable = function(){
             $.ajax({
-                url: "<?php echo my_url();?>/user/bagian/data",
+                url: "<?php echo my_url();?>/regulasi/acuan_data",
                 type: 'POST',
                 dataType:'json',
                 data: {},
@@ -63,22 +63,23 @@ $this->load->view('shared/js_content');
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
             "buttons": [ 'excel', 'pdf', 'print'],
-            "ajax": "<?php echo my_url();?>/user/bagian/data",
+            "ajax": "<?php echo my_url();?>/regulasi/acuan_data",
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
                         //console.log(row);
-                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" urut="'+row[0]+'" bagian="'+row[1]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" urut="'+row[0]+'" bagian="'+row[1]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" ide="'+row[0]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" ide="'+row[0]+'" ><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
-                    "targets": 2
+                    "targets": 4
                 }
             ]
         });
         initBar();
 
-        $("#bagian").on('click', '#add', function() {
-            $(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
-            $("#add-bagian-modal").modal("show");
+        /*
+        $("#regulasi").on('click', '#add', function() {
+            $(".modal-alert","#add-regulasi-modal").removeClass("alert-danger").addClass("hide").text("");
+            $("#add-regulasi-modal").modal("show");
             return false;
         });
 
@@ -94,7 +95,7 @@ $this->load->view('shared/js_content');
                 return false;
             }
             $.ajax({
-                url: "<?php echo my_url().'/user/bagian/add';?>",
+                url: "<?php //echo my_url().'/user/bagian/add';?>",
                 type: 'POST',
                 dataType:'json',
                 data: {
@@ -150,7 +151,7 @@ $this->load->view('shared/js_content');
                 return false;
             }
             $.ajax({
-                url: "<?php echo my_url().'/user/bagian/edit';?>",
+                url: "<?php //echo my_url().'/user/bagian/edit';?>",
                 type: 'POST',
                 dataType:'json',
                 data: {
@@ -192,7 +193,7 @@ $this->load->view('shared/js_content');
             console.log(urut);
             console.log(bagian);
             $.ajax({
-                url: "<?php echo my_url().'/user/bagian/delete';?>",
+                url: "<?php //echo my_url().'/user/bagian/delete';?>",
                 type: 'POST',
                 dataType:'json',
                 data: {
@@ -214,7 +215,7 @@ $this->load->view('shared/js_content');
                 }
             });
         });
-
+        */
 
     });
 </script>

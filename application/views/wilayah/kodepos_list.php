@@ -6,7 +6,7 @@
 <div class="row" id="kecamatan">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header card-header-icon" data-background-color="purple">
+            <div class="card-header card-header-icon" data-background-color="red">
                 <i class="material-icons">assignment</i>
             </div>
             <div class="card-content">
@@ -37,7 +37,7 @@
                                     <td><?php echo isset($row->LONGITUDE)?$row->LONGITUDE:'';?></td>
                                     <td><?php echo isset($row->LATTITUDE)?$row->LATTITUDE:'';?></td>
                                     <td class="text-right">
-                                        <button type="button" rel="tooltip" class="btn btn-xs btn-success btn-round">
+                                        <button type="button" rel="tooltip" class="btn btn-xs btn-primary btn-round">
                                             <i class="material-icons">edit</i>
                                         </button>
                                         <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
@@ -77,7 +77,7 @@
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += 'PILIH PROPINSI <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-propinsi">';
             <?php if(!empty($propinsi)){ foreach($propinsi as $row) { ?>
@@ -87,7 +87,7 @@
             actionbutton += '</div>';
 
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += 'PILIH KABUPATEN <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-kabupaten">';
             <?php if(empty($kabupaten)){ foreach($kabupaten as $row) { ?>
@@ -96,7 +96,7 @@
             actionbutton += '</ul>';
             actionbutton += '</div>';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += 'PILIH KECAMATAN <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-kecamatan">';
             <?php if(empty($kecamatan)){ foreach($kecamatan as $row) { ?>
@@ -105,7 +105,7 @@
             actionbutton += '</ul>';
             actionbutton += '</div>';
 
-            actionbutton += '<button type="button" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }

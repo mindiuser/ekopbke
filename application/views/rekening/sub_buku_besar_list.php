@@ -2,7 +2,7 @@
 <div class="row" id="sub_buku_besar">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="purple">
+<div class="card-header card-header-icon" data-background-color="red">
     <i class="material-icons">assignment</i>
 </div>
 <div class="card-content">
@@ -39,7 +39,7 @@ $this->load->view('shared/js_content');
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-jenis-label">JENIS REKENING </span> <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-jenis">';
             <?php if(!empty($jenis)){ foreach($jenis as $row) { ?>
@@ -48,18 +48,18 @@ $this->load->view('shared/js_content');
             actionbutton += '</ul>';
             actionbutton += '</div>';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-kelompok-label">KELOMPOK </span><span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-kelompok">';
             actionbutton += '</ul>';
             actionbutton += '</div>';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-buku-besar-label">BUKU BESAR </span><span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-buku-besar">';
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -91,7 +91,7 @@ $this->load->view('shared/js_content');
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-success" acc="'+row[0]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" acc="'+row[0]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" acc="'+row[0]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" acc="'+row[0]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
                     "targets": 3
                 }
@@ -117,7 +117,7 @@ $this->load->view('shared/js_content');
 
             $("#filter-jenis-label").text("JENIS REKENING : "+$(this).attr("label"));
             var tgt = $("#filter-jenis-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
         $('#filter-kelompok').on("click",'.select-kelompok',function(){
@@ -138,14 +138,14 @@ $this->load->view('shared/js_content');
 
             $("#filter-jenis-label").text("Kelompok : "+$(this).attr("label"));
             var tgt = $("#filter-kelompok-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
         $("#filter-buku-besar").on('click',".select-buku-besar",function () {
             reloadTable($(this).attr("id"));
             $("#filter-buku-besar-label").text("Buku Besar : "+$(this).attr("label"));
             var tgt = $("#filter-buku-besar-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
 

@@ -2,7 +2,7 @@
 <div class="row" id="kelompok_rekening">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header card-header-icon" data-background-color="purple">
+            <div class="card-header card-header-icon" data-background-color="red">
                 <i class="material-icons">assignment</i>
             </div>
             <div class="card-content">
@@ -39,7 +39,7 @@ $this->load->view('shared/js_content');
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-jenis-label">PILIH JENIS REKENING</span><span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-jenis">';
             <?php if(!empty($jenis)){ foreach($jenis as $row) { ?>
@@ -78,7 +78,7 @@ $this->load->view('shared/js_content');
 
             $("#filter-jenis-label").text("Jenis Rekening : "+$(this).attr("label"));
             var tgt = $("#filter-jenis-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
     });

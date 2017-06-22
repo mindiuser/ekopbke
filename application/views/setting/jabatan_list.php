@@ -2,7 +2,7 @@
 <div class="row" id="jabatan">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="purple">
+<div class="card-header card-header-icon" data-background-color="red">
     <i class="material-icons">assignment</i>
 </div>
 <div class="card-content">
@@ -61,7 +61,7 @@ $this->load->view('shared/js_content');
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-bagian-label">PILIH BAGIAN</span> <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-bagian">';
             <?php if(!empty($bagian)){ foreach($bagian as $row) { ?>
@@ -69,7 +69,7 @@ $this->load->view('shared/js_content');
             <?php }} ?>
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -82,7 +82,7 @@ $this->load->view('shared/js_content');
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-success" urut="'+row[0]+'" jabatan="'+row[1]+'" bagian="'+row[2]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" urut="'+row[0]+'" jabatan="'+row[1]+'" bagian="'+row[2]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" urut="'+row[0]+'" jabatan="'+row[1]+'" bagian="'+row[2]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" urut="'+row[0]+'" jabatan="'+row[1]+'" bagian="'+row[2]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
                     "targets": 2
                 }
@@ -94,7 +94,7 @@ $this->load->view('shared/js_content');
             reloadTable($(this).attr('label'));
             $("#filter-bagian-label").text("Bagian : "+$(this).attr("label")).attr("val",$(this).attr("label"));
             var tgt = $("#filter-bagian-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
         $("#jabatan").on('click', '#add', function() {

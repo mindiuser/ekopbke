@@ -1,4 +1,4 @@
-<div class="sidebar" data-active-color="rose" data-background-color="black" data-image="<?php echo base_url();?>public/assets/img/sidebar-1.jpg">
+<div class="sidebar" data-active-color="rose" data-background-color="#1580b9">
     <!--
 Tip 1: You can change the color of active element of the sidebar using: data-active-color="purple | blue | green | orange | red | rose"
 Tip 2: you can also add an image using data-image tag
@@ -6,12 +6,12 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
 -->
     <div class="logo">
         <a href="<?php echo base_url();?>" class="simple-text">
-            Creative Tim
+            BANK BKE
         </a>
     </div>
     <div class="logo logo-mini">
         <a href="<?php echo base_url();?>" class="simple-text">
-            Ct
+            BKE
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -70,7 +70,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             <li>
                 <a href="<?php echo site_url('setting/user/log');?>">
                     <i class="fa fa-database" aria-hidden="true"></i>
-                    <p>Setting</p>
+                    <p>Log Transaksi</p>
                 </a>
             </li>
             <li>
@@ -127,19 +127,19 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </div>
             </li>
             <li>
-                <a href="<?php echo site_url('regulasi/acuan/aturan');?>">
+                <a href="<?php echo site_url('regulasi/acuan');?>">
                     <i class="fa fa-gavel" aria-hidden="true"></i>
                     <p>Acuan Regulasi</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('regulasi/penilaian/kesehatan');?>">
+                <a href="<?php echo site_url('penilaian/kesehatan');?>">
                     <i class="fa fa-eyedropper" aria-hidden="true"></i>
                     <p>Penilaian Kesehatan</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('regulasi/predikat/kesehatan');?>">
+                <a href="<?php echo site_url('predikat/kesehatan');?>">
                     <i class="fa fa-thermometer-full" aria-hidden="true"></i>
                     <p>Predikat Kesehatan</p>
                 </a>

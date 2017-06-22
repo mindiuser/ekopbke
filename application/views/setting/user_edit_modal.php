@@ -130,7 +130,7 @@
             </div>
             <div class="modal-footer">
                 <div class="col col-md-12">
-                    <button type="button" id="user-edit-submit" class="btn btn-success btn-sm">Simpan</button>
+                    <button type="button" id="user-edit-submit" class="btn btn-primary btn-sm">Simpan</button>
                     <button type="button" id="user-edit-submit-cancel" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
                 </div>
             </div>

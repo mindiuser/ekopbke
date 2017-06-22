@@ -6,7 +6,7 @@
 <div class="row" id="kecamatan">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="purple">
+<div class="card-header card-header-icon" data-background-color="red">
     <i class="material-icons">assignment</i>
 </div>
 <div class="card-content">
@@ -49,7 +49,7 @@
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-propinsi-label">PILIH PROPINSI</span> <span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-propinsi">';
             <?php if(!empty($propinsi)){ foreach($propinsi as $row) { ?>
@@ -58,7 +58,7 @@
             actionbutton += '</ul>';
             actionbutton += '</div>';
             actionbutton += '<div class="btn-group">';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown">';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown">';
             actionbutton += '<span id="filter-kabupaten-label">PILIH KABUPATEN</span><span class="caret"></span></button>';
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-kabupaten">';
             <?php if(!empty($kabupaten)){ foreach($kabupaten as $row) { ?>
@@ -66,7 +66,7 @@
             <?php }} ?>
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -79,7 +79,7 @@
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                        return '<a href="javascript:void(0)" class="btn btn-xs btn-success"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                        return '<a href="javascript:void(0)" class="btn btn-xs btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
                     "targets": 3
                 }
@@ -106,7 +106,7 @@
 
             $("#filter-propinsi-label").text("Propinsi : "+$(this).attr("label"));
             var tgt = $("#filter-propinsi-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
         $('.select-kabupaten').each(function(){
@@ -137,7 +137,7 @@
 
             $("#filter-kabupaten-label").text("Kabupaten : "+$(this).attr("label"));
             var tgt = $("#filter-kabupaten-label").parent(".btn");
-            $(tgt).removeClass("btn-success").addClass("btn-warning");
+            $(tgt).removeClass("btn-primary").addClass("btn-warning");
         });
 
         $('.card .material-datatables label').addClass('form-group');

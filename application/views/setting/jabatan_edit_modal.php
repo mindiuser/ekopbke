@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="jabatan-edit-submit" class="btn btn-success btn-sm">Simpan</button>
+                <button type="button" id="jabatan-edit-submit" class="btn btn-primary btn-sm">Simpan</button>
                 <button type="button" id="jabatan-edit-cancel" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
             </div>
         </div>

@@ -68,9 +68,6 @@ $route['user/profile/add']              = 'setting/profile_add';;
 $route['user/profile/delete']    = 'setting/profile_delete';
 
 $route['user/log']                      = 'setting/log';
-$route['user/log/add']                  = 'setting/log/add';
-$route['user/log/detail/(:num)']        = 'setting/log_detail/$1';
-$route['user/log/delete/(:num)']        = 'setting/log_delete$1';
 
 $route['parameter/wilayah/propinsi']    = 'wilayah/propinsi';
 $route['parameter/wilayah/kabupaten']   = 'wilayah/kabupaten';
@@ -89,7 +86,6 @@ $route['rekening/jenis_rekening/data']      = 'rekening/jenis_rekening_data';
 $route['rekening/kelompok_rekening']           = 'rekening/kelompok_rekening';
 $route['rekening/kelompok_rekening/data']      = 'rekening/kelompok_rekening_data';
 
-
 $route['rekening/buku_besar'] = 'rekening/buku_besar';
 $route['rekening/buku_besar_data'] = 'rekening/buku_besar_data';
 $route['rekening/filter_kelompok']      = 'rekening/filter_kelompok';
@@ -98,9 +94,12 @@ $route['rekening/sub_buku_besar'] = 'rekening/sub_buku_besar';
 $route['rekening/sub_buku_besar_data'] = 'rekening/sub_buku_besar_data';
 $route['rekening/filter_buku_besar']      = 'rekening/filter_buku_besar';
 
-$route['regulasi/acuan/aturan'] = 'regulasi/aturan';
-$route['regulasi/penilaian/kesehatan'] = 'regulasi/penilaian';
-$route['regulasi/predikat/kesehatan'] = 'regulasi/predikat';
+$route['regulasi/acuan']        = 'regulasi/regulasi_acuan';
+$route['regulasi/acuan_data']   = 'regulasi/regulasi_acuan_data';
+
+
+$route['penilaian/kesehatan']   = 'penilaian/penilaian_kesehatan';
+$route['predikat/kesehatan']    = 'predikat/predikat_kesehatan';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

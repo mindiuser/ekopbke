@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="bagian-submit" class="btn btn-success btn-sm">Tambah</button>
+                <button type="button" id="bagian-submit" class="btn btn-primary btn-sm">Tambah</button>
                 <button type="button" id="bagian-submit-cancel" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
             </div>
         </div>

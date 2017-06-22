@@ -2,7 +2,7 @@
 <div class="row" id="jenis_rekening">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="purple">
+<div class="card-header card-header-icon" data-background-color="red">
     <i class="material-icons">assignment</i>
 </div>
 <div class="card-content">
@@ -52,7 +52,7 @@ $this->load->view('shared/js_content');
         }
         var initBar = function(){
             var actionbutton = '';
-            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-success" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }

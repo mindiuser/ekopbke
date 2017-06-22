@@ -6,7 +6,7 @@
 <div class="row">
 <div class="col-md-12">
 <div class="card">
-<div class="card-header card-header-icon" data-background-color="purple">
+<div class="card-header card-header-icon" data-background-color="red">
     <i class="material-icons">assignment</i>
 </div>
 <div class="card-content">
@@ -32,7 +32,7 @@ if(!empty($data)) {
             <td><?php echo isset($row->ID_PROP)?$row->ID_PROP:'';?></td>
             <td><?php echo isset($row->NAMA_PROPINSI)?$row->NAMA_PROPINSI:'';?></td>
             <td class="text-right">
-                <button type="button" rel="tooltip" class="btn btn-xs btn-success btn-round">
+                <button type="button" rel="tooltip" class="btn btn-xs btn-primary btn-round">
                     <i class="material-icons">edit</i>
                 </button>
                 <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
@@ -84,7 +84,7 @@ if(!empty($data)) {
 
         });
 
-        var actionbutton = '<a class="btn btn-sm btn-success" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
+        var actionbutton = '<a class="btn btn-sm btn-primary" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
         $(".dt-actionbutton").html(actionbutton);
 
         //var table = $('#datatables').DataTable();
