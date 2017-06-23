@@ -87,7 +87,7 @@
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
             "buttons": ['excel'],
-            "ajax": "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kelurahan",
+            "ajax": "<?php echo base_url();?>/wilayah/ajax_kelurahan",
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
@@ -143,7 +143,7 @@
 
         $("#filter-kecamatan").on('click',".select-kecamatan",function () {
             $.ajax({
-                url: "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kelurahan",
+                url: "<?php echo base_url();?>/wilayah/ajax_kelurahan",
                 type: 'POST',
                 dataType:'json',
                 data: {

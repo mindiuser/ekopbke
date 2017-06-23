@@ -79,19 +79,19 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 <div class="collapse" id="pagesExamples2">
                     <ul class="nav">
                         <li>
-                            <a href="<?php echo site_url('parameter/wilayah/propinsi');?>">Propinsi</a>
+                            <a href="<?php echo site_url('wilayah/propinsi');?>">Propinsi</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/wilayah/kabupaten');?>">Kabupaten</a>
+                            <a href="<?php echo site_url('wilayah/kabupaten');?>">Kabupaten</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/wilayah/kecamatan');?>">Kecamatan</a>
+                            <a href="<?php echo site_url('wilayah/kecamatan');?>">Kecamatan</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/wilayah/kelurahan');?>">Kelurahan</a>
+                            <a href="<?php echo site_url('wilayah/kelurahan');?>">Kelurahan</a>
                         </li>
                         <li>
-                            <a href="<?php echo site_url('parameter/wilayah/kodepos');?>">Kode pos</a>
+                            <a href="<?php echo site_url('wilayah/kodepos');?>">Kode pos</a>
                         </li>
                     </ul>
                 </div>

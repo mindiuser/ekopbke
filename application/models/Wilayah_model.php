@@ -15,15 +15,90 @@ class Wilayah_model extends CI_Model {
         return $q->result();
     }
 
+    function addPropinsi($id,$propinsi)
+    {
+        $sql_get = 'SELECT * FROM dt_propinsi WHERE ID_PROP = ? AND NAMA_PROPINSI = ?';
+        $q = $this->db->query($sql_get,array($id,$propinsi));
+        $dt = $q->result();
+        if(!empty($dt)){
+            return array(false,'Nomor ID dan Propsinsi sudah ada ');
+        }
+        $sql = "INSERT INTO dt_propinsi (ID_PROP,NAMA_PROPINSI) VALUES (?,?)";
+        $status = $this->db->query($sql, array($id,$propinsi));
+        if($status){
+            return array($status,'Data telah ditambahkan');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+    function deletePropinsi($id_prop,$propinsi)
+    {
+        $sql = "DELETE FROM dt_propinsi WHERE ID_PROP = ? AND NAMA_PROPINSI = ?";
+        return $this->db->query($sql,array($id_prop,$propinsi));
+    }
+
+    function editPropinsi($id,$propinsi,$id_old,$propinsi_old)
+    {
+        $sql = "UPDATE dt_propinsi SET ID_PROP = ?, NAMA_PROPINSI = ? WHERE ID_PROP = ? AND NAMA_PROPINSI = ?";
+        $status = $this->db->query($sql, array($id,$propinsi,$id_old,$propinsi_old));
+        if($status){
+            return array($status,'Data telah diedit');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
     function getKabupaten($propinsi='') {
         $sql = 'SELECT ID_PROP,ID_KAB, RES,NAMA_KABUPATEN,IBUKOTA
-            FROM dt_kabupaten ';
-        if($propinsi != '')
-            $sql .= 'WHERE ID_PROP = '.$propinsi.' ';
-        $sql .= 'ORDER BY NAMA_KABUPATEN ASC';
-        $q = $this->db->query($sql);
+            FROM dt_kabupaten  WHERE ID_PROP = ? ORDER BY NAMA_KABUPATEN ASC';
+            if($propinsi == ''){
+                $propinsi = '*';
+            }
+        $q = $this->db->query($sql,[$propinsi]);
         return $q->result();
     }
+
+    function addKabupaten($id_prop,$id_kab,$res,$kabupaten,$ibukota)
+    {
+        $sql = "INSERT INTO dt_kabupaten (ID_PROP,ID_KAB,RES,NAMA_KABUPATEN,IBUKOTA) VALUES (?,?,?,?,?)";
+        $status = $this->db->query($sql, array($id_prop,$id_kab,$res,$kabupaten,$ibukota));
+        if($status){
+            return array($status,'Data telah ditambahkan');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+    function deleteKabupaten($id_prop,$id_kab)
+    {
+        $sql = "DELETE FROM dt_kabupaten WHERE ID_PROP = ? AND ID_KAB = ?";
+        return $this->db->query($sql,array($id_prop,$id_kab));
+    }
+
+    function editKabupaten($id_prop,$id_kab,$res,$kabupaten,$ibukota)
+    {
+        $sql = "UPDATE dt_kabupaten SET RES = ? ,NAMA_KABUPATEN = ?,IBUKOTA = ? WHERE ID_KAB = ? AND ID_PROP = ?";
+        $status = $this->db->query($sql, array($res,$kabupaten,$ibukota,$id_kab,$id_prop));
+        if($status){
+            return array($status,'Data telah diupdate');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
+
+
+
+
+
 
     function getKecamatan($kabupaten='') {
         $sql = 'SELECT *

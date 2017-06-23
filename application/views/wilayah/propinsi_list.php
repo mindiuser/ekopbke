@@ -1,9 +1,5 @@
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/editor.dataTables.min.css" rel="stylesheet">
-
-<div class="row">
+<?php $this->load->view('shared/css_content');?>
+<div class="row" id="propinsi">
 <div class="col-md-12">
 <div class="card">
 <div class="card-content">
@@ -17,31 +13,10 @@
 <tr>
     <th>ID</th>
     <th>PROPINSI</th>
-    <th class="disabled-sorting text-right">Actions</th>
+    <th class="disabled-sorting">Actions</th>
 </tr>
 </thead>
 <tbody>
-<?php
-if(!empty($data)) {
-    foreach($data as $row){
-    ?>
-        <tr>
-            <td><?php echo isset($row->ID_PROP)?$row->ID_PROP:'';?></td>
-            <td><?php echo isset($row->NAMA_PROPINSI)?$row->NAMA_PROPINSI:'';?></td>
-            <td class="text-right">
-                <button type="button" rel="tooltip" class="btn btn-xs btn-primary btn-round">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button type="button" rel="tooltip" class="btn btn-xs btn-danger btn-round">
-                    <i class="material-icons">close</i>
-                </button>
-            </td>
-        </tr>
-
-<?php
-    }
-}
-?>
 </tbody>
 </table>
 </div>
@@ -53,59 +28,186 @@ if(!empty($data)) {
 <!-- end col-md-12 -->
 </div>
 
-
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
+<?php
+$this->load->view('wilayah/propinsi_add_modal');
+$this->load->view('wilayah/propinsi_edit_modal');
+$this->load->view('shared/js_content');
+?>
 <script type="text/javascript">
     $(document).ready(function() {
-        var table = $('#datatables').DataTable({
-            "pagingType": "full_numbers",
-            "lengthMenu": [
-                [10, 25, 50, -1],
-                [10, 25, 50, "All"]
-            ],
-            "responsive": true,
-            "language": {
-                search: "_INPUT_",
-                searchPlaceholder: "Search records"
-            },
-            "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": [ 'excel']
+        var reloadTable = function(){
+            $.ajax({
+                url: "<?php echo my_url();?>/wilayah/propinsi/data",
+                type: 'POST',
+                dataType:'json',
+                data: {},
+                success: function(newData) {
+                    var xtable = $('#datatables').DataTable();
+                    xtable.clear();
+                    xtable.rows.add(newData.data).draw();
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        }
+        var initBar = function(){
+            var actionbutton = '';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '';
+            $(".dt-actionbutton").html(actionbutton);
+        }
 
+        var clearFormModal = function(){
+            $("[name='id_prop']",$("#add-propinsi-modal")).val('');
+            $("[name='propinsi']",$("#add-propinsi-modal")).val('');
+            $(".modal-alert","#add-propinsi-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        var clearFormModalEdit = function($this){
+            $("[name='edit-id']",$("#edit-propinsi-modal")).val($($this).attr('id_prop'));
+            $("[name='edit-propinsi']",$("#edit-propinsi-modal")).val($($this).attr('propinsi'));
+            $("[name='edit-id-old']",$("#edit-propinsi-modal")).val($($this).attr('id_prop'));
+            $("[name='edit-propinsi-old']",$("#edit-propinsi-modal")).val($($this).attr('propinsi'));
+            $(".modal-alert","#edit-propinsi-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        var hideFormAddModal = function(){
+            $("[name='id_prop']",$("#add-propinsi-modal")).val('');
+            $("[name='propinsi']",$("#add-propinsi-modal")).val('');
+            $(".modal-alert","#add-propinsi-modal").removeClass("alert-warning").addClass("hide").text("");
+            $("#add-propinsi-modal").modal("hide");
+        }
+
+        var table = $('#datatables').DataTable({
+            "responsive": true,
+            "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
+            "buttons": [ 'excel', 'pdf', 'print'],
+            "ajax": "<?php echo my_url();?>/wilayah/propinsi/data",
+            "columnDefs":[
+                {
+                    "render": function ( data, type, row ) {
+                        //console.log(row);
+                        return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" id_prop="'+row[0]+'" propinsi="'+row[1]+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" id_prop="'+row[0]+'" propinsi="'+row[1]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                    },
+                    "targets": 2
+                }
+            ]
+        });
+        initBar();
+
+        $("#propinsi").on('click', '#add', function() {
+             clearFormModal();
+            $("#add-propinsi-modal").modal("show");
+            return false;
         });
 
-        var actionbutton = '<a class="btn btn-sm btn-primary" href="" id="add"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></a>';
-        $(".dt-actionbutton").html(actionbutton);
+        $("#add-propinsi-modal").on('click', '#propinsi-submit', function() {
+            var id = $("input[name='id_prop']","#add-propinsi-modal").val();
+            var propinsi = $("input[name='propinsi']","#add-propinsi-modal").val();
+            if(id.trim() == ''){
+                $(".modal-alert","#add-propinsi-modal").addClass("alert-danger").removeClass("hide").text("ID masih kosong");
+                return false;
+            }
+            if(propinsi.trim() == ''){
+                $(".modal-alert","#add-propinsi-modal").addClass("alert-danger").removeClass("hide").text("Propinsi masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/propinsi/add';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id_prop:id,propinsi:propinsi
+                },
+                success: function(data) {
+                    hideFormAddModal();
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
 
-        //var table = $('#datatables').DataTable();
+        table.on('click', '.delete', function(e) {
+            var id = $(this).attr('id_prop');
+            var propinsi = $(this).attr('propinsi');
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/propinsi/delete';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id_prop:id,propinsi:propinsi
+                },
+                success: function(status) {
+                    if(status == true){
+                        showAlerts('success','Data telah didelete');
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error','Silahkan ulangi lagi');
+                    }
+
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
+
 
         // Edit record
         table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+            clearFormModalEdit($(this));
+            $("#edit-propinsi-modal").modal("show");
+            return false;
         });
 
-        // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
+        $("#edit-propinsi-modal").on('click', '#propinsi-edit-submit', function() {
+            var id = $("input[name='edit-id']","#edit-propinsi-modal").val();
+            var propinsi = $("input[name='edit-propinsi']","#edit-propinsi-modal").val();
+            var id_old = $("input[name='edit-id-old']","#edit-propinsi-modal").val();
+            var propinsi_old = $("input[name='edit-propinsi-old']","#edit-propinsi-modal").val();
+            if(id.trim() == ''){
+                $(".modal-alert","#edit-propinsi-modal").addClass("alert-danger").removeClass("hide").text("Nomor ID masih kosong");
+                return false;
+            }
+            if(propinsi.trim() == ''){
+                $(".modal-alert","#edit-propinsi-modal").addClass("alert-danger").removeClass("hide").text("Nama propinsi masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/propinsi/edit';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id:id,propinsi:propinsi,id_old:id_old,propinsi_old:propinsi_old
+                },
+                success: function(data) {
+                    clearFormModalEdit();
+                    $("#edit-propinsi-modal").modal("hide");
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        reloadTable();
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
         });
 
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
-
-        $('.card .material-datatables label').addClass('form-group');
+        return false;
     });
 </script>

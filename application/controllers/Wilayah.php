@@ -15,19 +15,109 @@ class Wilayah extends CI_Controller
     public function propinsi()
     {
         $data = [];
-        $data['data'] = $this->wilayah_model->getPropinsi();
-       // print_r($data);die;
         $this->load->templated_view('wilayah/propinsi_list', $data);
     }
+
+    public function propinsi_data()
+    {
+        $dt = $this->wilayah_model->getPropinsi();
+        if(!empty($dt)){
+            foreach($dt as $row){
+                $array [] = array(
+                    $row->ID_PROP,
+                    $row->NAMA_PROPINSI,
+                    ''
+                );
+            }
+            $data = array('data'=>$array);
+        }
+        else {
+            $data=array('data'=>[]);
+        }
+        echo json_encode($data);
+    }
+
+    public function propinsi_add(){
+        $id_prop = trim($this->input->post('id_prop'));
+        $propinsi = trim($this->input->post('propinsi'));
+        list($status,$message) = $this->wilayah_model->addPropinsi($id_prop,$propinsi);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
+    public function propinsi_delete(){
+        $id = $this->input->post('id_prop');
+        $propinsi = $this->input->post('propinsi');
+        $status = $this->wilayah_model->deletePropinsi($id,$propinsi);
+        echo $status;
+    }
+
+    public function propinsi_edit(){
+        $id = trim($this->input->post('id'));
+        $propinsi = trim($this->input->post('propinsi'));
+        $id_old = trim($this->input->post('id_old'));
+        $propinsi_old = trim($this->input->post('propinsi_old'));
+        list($status,$message) = $this->wilayah_model->editPropinsi($id,$propinsi,$id_old,$propinsi_old);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
 
     public function kabupaten()
     {
         $data = [];
         $data['propinsi'] = $this->wilayah_model->getPropinsi();
-        $data['kabupaten'] = $this->wilayah_model->getKabupaten();
-
         $this->load->templated_view('wilayah/kabupaten_list', $data);
     }
+
+    public function kabupaten_data()
+    {
+        $propinsi = ($this->input->post('propinsi'))?$this->input->post('propinsi'):'';
+        $dt = $this->wilayah_model->getKabupaten($propinsi);
+        if(!empty($dt)){
+            foreach($dt as $row){
+                $array [] = array(
+                    $row->ID_KAB,
+                    $row->NAMA_KABUPATEN,
+                    $row->RES,
+                    $row->IBUKOTA,
+                    $row->ID_PROP,
+                );
+            }
+            $data = array('data'=>$array);
+        }
+        else {
+            $data=array('data'=>[]);
+        }
+        echo json_encode($data);
+    }
+
+    public function kabupaten_add(){
+        //id_prop:id_prop,id_kab:id_kab,res:res,kabupaten:kabupaten,ibukota:ibukota
+        $id_prop = trim($this->input->post('id_prop'));
+        $id_kab = trim($this->input->post('id_kab'));
+        $res = trim($this->input->post('res'));
+        $kabupaten = trim($this->input->post('kabupaten'));
+        $ibukota = trim($this->input->post('ibukota'));
+        list($status,$message) = $this->wilayah_model->addKabupaten($id_prop,$id_kab,$res,$kabupaten,$ibukota);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
+    public function kabupaten_delete(){
+        $id_prop = $this->input->post('id_prop');
+        $id_kab = $this->input->post('id_kab');
+        $status = $this->wilayah_model->deleteKabupaten($id_prop,$id_kab);
+        echo $status;
+    }
+
+    public function kabupaten_edit(){
+        $id_prop = trim($this->input->post('id_prop'));
+        $id_kab = trim($this->input->post('id_kab'));
+        $res = trim($this->input->post('res'));
+        $kabupaten = trim($this->input->post('kabupaten'));
+        $ibukota = trim($this->input->post('ibukota'));
+        list($status,$message) = $this->wilayah_model->editKabupaten($id_prop,$id_kab,$res,$kabupaten,$ibukota);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
+
 
     public function filter_kabupaten(){
         $propinsi = $this->input->post('propinsi');

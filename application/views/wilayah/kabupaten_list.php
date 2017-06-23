@@ -1,8 +1,4 @@
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/responsive.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/buttons.dataTables.min.css" rel="stylesheet">
-<link href="<?php echo base_url();?>public/assets/js/plugin/datatable/css/editor.dataTables.min.css" rel="stylesheet">
-
+<?php $this->load->view('shared/css_content');?>
 <div class="row" id="kabupaten">
 <div class="col-md-12">
 <div class="card mt-20">
@@ -33,19 +29,32 @@
 </div>
 <!-- end col-md-12 -->
 </div>
-
-
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.responsive.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/dataTables.buttons.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.html5.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.flash.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/buttons.print.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/pdfmake.min.js"></script>
-<script src="<?php echo base_url();?>public/assets/js/plugin/datatable/js/vfs_fonts.js"></script>
+<?php
+$this->load->view('wilayah/kabupaten_add_modal',['propinsi'=>$propinsi]);
+$this->load->view('wilayah/kabupaten_edit_modal',['propinsi'=>$propinsi]);
+$this->load->view('shared/js_content');
+?>
 <script type="text/javascript">
     $(document).ready(function() {
+        var reloadTable = function(propinsi){
+            $.ajax({
+                url: "<?php echo my_url();?>/wilayah/kabupaten/data",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    propinsi:propinsi
+                },
+                success: function(newData) {
+                    var xtable = $('#datatables').DataTable();
+                    xtable.clear();
+                    xtable.rows.add(newData.data).draw();
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        }
+
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
@@ -57,7 +66,7 @@
             <?php }} ?>
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -65,12 +74,12 @@
         var table = $('#datatables').DataTable({
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": ['excel'],
-            "ajax": "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kabupaten",
+            "buttons": [ 'excel', 'pdf', 'print'],
+            "ajax": "<?php echo base_url();?>/wilayah/kabupaten/data",
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                       return '<a href="javascript:void(0)" class="btn btn-xs btn-primary"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="btn btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>';
+                       return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" data-editvalue="'+row+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" id_kab="'+row[0]+'" id_prop="'+row[4]+'" class="delete btn btn-xs btn-danger"><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
                     className: "dt-right",
                     "targets": 4
@@ -78,52 +87,220 @@
             ]
         });
         initBar();
-        // Edit record
-        table.on('click', '.edit', function() {
-            $tr = $(this).closest('tr');
-
-            var data = table.row($tr).data();
-            alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-        });
-
-        // Delete a record
-        table.on('click', '.remove', function(e) {
-            $tr = $(this).closest('tr');
-            table.row($tr).remove().draw();
-            e.preventDefault();
-        });
-
-        //Like record
-        table.on('click', '.like', function() {
-            alert('You clicked on Like button');
-        });
 
         $("#filter-propinsi").on('click',".select-propinsi",function () {
-                $.ajax({
-                    url: "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kabupaten",
-                    type: 'POST',
-                    dataType:'json',
-                    data: {
-                        propinsi : $(this).attr('id')
-                    },
-                    success: function(newData) {
-                        var table = $('#datatables').DataTable();
-                        table.clear();
-                        table.rows.add(newData.data).draw();
-                    },
-                    error: function(xhr, textStatus, ThrownException){
-                        $('#main-alert').addClass('alert-danger').removeClass('alert-success hidden').text(textStatus);
-                    },
-                    completed: function(){
-                    }
-                });
+            var $that = $(this);
+            reloadTable($that.attr('id'));
 
             $("#filter-propinsi-label").text("Propinsi : "+$(this).attr("label"));
             var tgt = $("#filter-propinsi-label").parent(".btn");
             $(tgt).removeClass("btn-primary").addClass("btn-warning");
+            $("#filter-propinsi-label").attr("propinsi-filtered",$that.attr('id'));
+
+            $("option",$("#propinsi-add-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $("option",$("#propinsi-edit-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
         });
 
-        $('.card .material-datatables label').addClass('form-group');
+        var clearFormModalAdd = function(){
+            $("[name='id']",$("#add-kabupaten-modal")).val('');
+            $("[name='res']",$("#add-kabupaten-modal")).val('');
+            $("[name='kabupaten']",$("#add-kabupaten-modal")).val('');
+            $("[name='ibukota']",$("#add-kabupaten-modal")).val('');
+            $(".modal-alert","#add-kabupaten-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        $("#kabupaten").on('click', '#add', function() {
+            clearFormModalAdd();
+            $("#add-kabupaten-modal").modal("show");
+            return false;
+        });
+
+        var hideFormAddModal = function(){
+            $(["input"],$("#add-kabupaten-modal")).each(function(i,v){
+                $(this).val("");
+            });
+            $(".modal-alert","#add-kabupaten-modal").removeClass("alert-warning").addClass("hide").text("");
+            $("#add-kabupaten-modal").modal("hide");
+        }
+
+        $("#add-kabupaten-modal").on('click', '#kabupaten-submit', function() {
+            var id_prop = $("option:selected",$("#propinsi-add-form")).val();
+            var id_kab = $("[name='id']",$("#add-kabupaten-modal")).val();
+            var tg = $("[name='res']",$("#add-kabupaten-modal"));
+            var res = $("option:selected",$(tg)).val();
+            var kabupaten = $("[name='kabupaten']",$("#add-kabupaten-modal")).val();
+            var ibukota = $("[name='ibukota']",$("#add-kabupaten-modal")).val();
+
+            if(id_prop.trim() == ''){
+                $(".modal-alert","#add-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Propinsi masih kosong");
+                return false;
+            }
+            if(id_kab.trim() == ''){
+                $(".modal-alert","#add-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("ID masih kosong");
+                return false;
+            }
+            if(res.trim() == ''){
+                $(".modal-alert","#add-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Tipe masih kosong");
+                return false;
+            }
+            if(kabupaten.trim() == ''){
+                $(".modal-alert","#add-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Nama kabupaten masih kosong");
+                return false;
+            }
+            if(ibukota.trim() == ''){
+                $(".modal-alert","#add-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Ibukota masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/kabupaten/add';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id_prop:id_prop,id_kab:id_kab,res:res,kabupaten:kabupaten,ibukota:ibukota
+                },
+                success: function(data) {
+                    hideFormAddModal();
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        var propinsi = $("#filter-propinsi-label").attr("propinsi-filtered");
+                        reloadTable(propinsi);
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
+
+        table.on('click', '.delete', function(e) {
+            var id_kab = $(this).attr('id_kab');
+            var id_prop = $(this).attr('id_prop');
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/kabupaten/delete';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id_prop:id_prop,id_kab:id_kab
+                },
+                success: function(status) {
+                    if(status == true){
+                        showAlerts('success','Data telah didelete');
+                        var propinsi = $("#filter-propinsi-label").attr("propinsi-filtered");
+                        reloadTable(propinsi);
+                    }
+                    else {
+                        showAlerts('error','Silahkan ulangi lagi');
+                    }
+
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
+
+        var clearFormModalEdit = function(value){
+            $("[name='id']",$("#edit-kabupaten-modal")).val(value[0]);
+            var sel = $("[name='res']",$("#edit-kabupaten-modal"));
+            $("option",$(sel)).each(function(){
+                var rs = value[2].replace(/\.$/, "");
+                if($(this).val() == rs){
+                    $(this).attr("selected","selected");
+                }
+            });
+           // $("[name='res']",$("#edit-kabupaten-modal")).val(value[2]);
+            $("[name='kabupaten']",$("#edit-kabupaten-modal")).val(value[1]);
+            $("[name='ibukota']",$("#edit-kabupaten-modal")).val(value[3]);
+            $(".modal-alert","#edit-kabupaten-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        // Edit record
+        table.on('click', '.edit', function() {
+           var t = $(this).data('editvalue');
+            clearFormModalEdit(t.split(','));
+            $("#edit-kabupaten-modal").modal("show");
+            return false;
+        });
+
+        $("#edit-kabupaten-modal").on('click', '#kabupaten-edit-submit', function() {
+            var id_prop = $("option:selected",$("#propinsi-add-form")).val();
+            var id_kab = $("[name='id']",$("#edit-kabupaten-modal")).val();
+            var tg = $("[name='res']",$("#edit-kabupaten-modal"));
+            var res = $("option:selected",$(tg)).val();
+            var kabupaten = $("[name='kabupaten']",$("#edit-kabupaten-modal")).val();
+            var ibukota = $("[name='ibukota']",$("#edit-kabupaten-modal")).val();
+
+            if(id_prop.trim() == ''){
+                $(".modal-alert","#edit-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Propinsi masih kosong");
+                return false;
+            }
+            if(id_kab.trim() == ''){
+                $(".modal-alert","#edit-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("ID masih kosong");
+                return false;
+            }
+            if(res.trim() == ''){
+                $(".modal-alert","#edit-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Tipe masih kosong");
+                return false;
+            }
+            if(kabupaten.trim() == ''){
+                $(".modal-alert","#edit-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Nama kabupaten masih kosong");
+                return false;
+            }
+            if(ibukota.trim() == ''){
+                $(".modal-alert","#edit-kabupaten-modal").addClass("alert-danger").removeClass("hide").text("Ibukota masih kosong");
+                return false;
+            }
+            $.ajax({
+                url: "<?php echo my_url().'/wilayah/kabupaten/edit';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    id_prop:id_prop,id_kab:id_kab,res:res,kabupaten:kabupaten,ibukota:ibukota
+                },
+                success: function(data) {
+                    clearFormModalEdit();
+                    $("#edit-kabupaten-modal").modal("hide");
+                    if(data.status == true){
+                        showAlerts('success',data.message);
+                        var propinsi = $("#filter-propinsi-label").attr("propinsi-filtered");
+                        reloadTable(propinsi);
+                    }
+                    else {
+                        showAlerts('error',data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+        });
+
+        return false;
 
     });
 </script>

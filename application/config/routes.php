@@ -73,17 +73,27 @@ $route['user/upload_file_web']    = 'setting/upload_web';
 $route['user/upload_mobile']            = 'setting/upload_mobile';
 $route['user/upload_file_mobile']       = 'setting/upload_mobile';
 
-$route['parameter/wilayah/propinsi']    = 'wilayah/propinsi';
-$route['parameter/wilayah/kabupaten']   = 'wilayah/kabupaten';
-$route['parameter/wilayah/ajax_kabupaten'] = 'wilayah/ajax_kabupaten';
-$route['parameter/wilayah/ajax_kecamatan'] = 'wilayah/ajax_kecamatan';
-$route['parameter/wilayah/ajax_kelurahan'] = 'wilayah/ajax_kelurahan';
+$route['wilayah/propinsi']    = 'wilayah/propinsi';
+$route['wilayah/propinsi/data']    = 'wilayah/propinsi_data';
+$route['wilayah/propinsi/add']               = 'wilayah/propinsi_add';
+$route['wilayah/propinsi/edit']              = 'wilayah/propinsi_edit';
+$route['wilayah/propinsi/delete']            = 'wilayah/propinsi_delete';
 
-$route['parameter/wilayah/filter_kabupaten'] = 'wilayah/filter_kabupaten';
-$route['parameter/wilayah/kecamatan'] = 'wilayah/kecamatan';
-$route['parameter/wilayah/filter_kecamatan'] = 'wilayah/filter_kecamatan';
-$route['parameter/wilayah/kelurahan'] = 'wilayah/kelurahan';
-$route['parameter/wilayah/kodepos'] = 'wilayah/kodepos';
+$route['wilayah/kabupaten']   = 'wilayah/kabupaten';
+$route['wilayah/kabupaten/data']    = 'wilayah/kabupaten_data';
+$route['wilayah/kabupaten/add']               = 'wilayah/kabupaten_add';
+$route['wilayah/kabupaten/edit']              = 'wilayah/kabupaten_edit';
+$route['wilayah/kabupaten/delete']            = 'wilayah/kabupaten_delete';
+
+$route['wilayah/ajax_kabupaten'] = 'wilayah/ajax_kabupaten';
+$route['wilayah/ajax_kecamatan'] = 'wilayah/ajax_kecamatan';
+$route['wilayah/ajax_kelurahan'] = 'wilayah/ajax_kelurahan';
+
+$route['wilayah/filter_kabupaten'] = 'wilayah/filter_kabupaten';
+$route['wilayah/kecamatan'] = 'wilayah/kecamatan';
+$route['wilayah/filter_kecamatan'] = 'wilayah/filter_kecamatan';
+$route['wilayah/kelurahan'] = 'wilayah/kelurahan';
+$route['wilayah/kodepos'] = 'wilayah/kodepos';
 
 $route['rekening/jenis_rekening']           = 'rekening/jenis_rekening';
 $route['rekening/jenis_rekening/data']      = 'rekening/jenis_rekening_data';

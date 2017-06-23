@@ -72,7 +72,7 @@
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
             "buttons": ['excel'],
-            "ajax": "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kecamatan",
+            "ajax": "<?php echo base_url();?>/wilayah/ajax_kecamatan",
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
@@ -114,7 +114,7 @@
 
         $("#filter-kabupaten").on('click',".select-kabupaten",function () {
             $.ajax({
-                url: "<?php echo base_url();?>/index.php/parameter/wilayah/ajax_kecamatan",
+                url: "<?php echo base_url();?>/wilayah/ajax_kecamatan",
                 type: 'POST',
                 dataType:'json',
                 data: {
