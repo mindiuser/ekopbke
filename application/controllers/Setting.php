@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+include(dirname(__FILE__).'/Base.php');
 
-class Setting extends CI_Controller
+class Setting extends Base
 {
     public function __construct()
     {
@@ -167,6 +168,9 @@ class Setting extends CI_Controller
                     "setting","registrasi_mitra","master","approval","dashboard","regulasi","regional","cabang","status");
         $post = [];
         foreach($params as $key){
+            if($key == 'password')
+            $post[$key] = md5(trim($this->input->post($key)));
+                else
             $post[$key] = $this->input->post($key);
         }
         list($status,$message) = $this->setting_model->addUser($post);

@@ -12,19 +12,23 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
-                    Tania Andrew
+                    <?php
+                    if($this->session->has_userdata('logged_in') && $this->session->userdata('logged_in')){
+                        echo $this->session->userdata('name');
+                    }
+                    else {
+                        echo "-= unknown user =-";
+                    }
+                    ?>
                     <b class="caret"></b>
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
                         <li>
-                            <a href="#">My Profile</a>
+                            <a href="<?php echo site_url('user/myprofile');?>">My Profile</a>
                         </li>
                         <li>
-                            <a href="#">Edit Profile</a>
-                        </li>
-                        <li>
-                            <a href="#">Settings</a>
+                            <a href="<?php echo site_url('logout');?>">Log out</a>
                         </li>
                     </ul>
                 </div>

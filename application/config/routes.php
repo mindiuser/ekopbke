@@ -108,5 +108,11 @@ $route['regulasi/delete']  = 'regulasi/delete';
 $route['penilaian/kesehatan']   = 'penilaian/penilaian_kesehatan';
 $route['predikat/kesehatan']    = 'predikat/predikat_kesehatan';
 
+$route['login']    = 'auth/login';
+$route['login/auth']    = 'auth/do_login';
+$route['logout']    = 'auth/logout';
+$route['user/myprofile']   = 'auth/profile';
+
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

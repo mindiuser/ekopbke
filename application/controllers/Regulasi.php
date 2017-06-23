@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+include(dirname(__FILE__).'/Base.php');
 
-class Regulasi extends CI_Controller
+class Regulasi extends Base
 {
     public function __construct()
     {

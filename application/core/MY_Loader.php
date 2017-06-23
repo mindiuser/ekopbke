@@ -13,4 +13,9 @@ class MY_Loader extends CI_Loader {
 		return $this->view('template/index', $data_template, $return);
 	}
 
+    function public_templated_view($name, $data = array(), $return = FALSE) {
+        $data_template['content'] = $this->view($name, $data, TRUE);
+        return $this->view('template/public', $data_template, $return);
+    }
+
 }

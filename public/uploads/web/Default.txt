@@ -1,0 +1,181 @@
+Option Explicit
+
+Imports System
+Imports System.Collections
+Imports System.Collections.Specialized
+Imports System.Web
+Imports System.Web.UI
+Imports System.Web.UI.WebControls
+Imports System.Web.UI.HtmlControls
+Imports System.Web.Mail
+Imports System.Web.Security
+Imports System.Data
+Imports System.Data.SqlClient
+Imports OkiGolfUtils
+Imports DataLayer
+Imports Microsoft.VisualBasic
+
+Public Class Login : Inherits Page
+
+	Public UserID,Passwd as Textbox
+	Public LoginErr as Label
+	Public sField as String
+	
+	Sub Page_Load(Sender As Object, E As EventArgs)
+	
+		Dim ss as string 
+		
+		page.Session("AdminUserID")=""
+		page.Session("UserName")=""
+		page.Session("LastSignon")=""
+		page.Session("SQL")=""
+		page.Session("SearchArg")=""
+		page.Session("SortField")=""
+		page.Session("SortDesc")=""
+		page.Session("SearchField")=""
+		
+		If Not IsPostback then
+			UserID.Text=""
+			If Page.Request("ID")<>"" then
+				UserID.Text=Page.Request("ID")
+			Else
+				If Not (Page.Request.Cookies("MsgBd") Is Nothing) Then 
+					UserID.Text=Page.Request.Cookies("MsgBd")("UID")
+				End If
+			End If
+			If UserID.Text<>"" then
+				sField="Passwd"
+			Else
+				sField="UserID"
+			End If
+		Else
+			If UserID.Text<>"" then
+				sField="Passwd"
+			Else
+				sField="UserID"
+			End If
+		End If
+			
+	End Sub
+	
+	
+    Sub Login_Click(Sender As Object, E As EventArgs)
+	 
+		Dim db as New DBUtils
+		Dim pg as New PageUtils
+		Dim dr as SqlDataReader
+		Dim sql,ss,s,sPWD as String
+		Dim i,j as Integer
+				
+		' Check to see how many unsucessful attempts
+		sql="Select UserDisplay,Attempts From Users (nolock) Where "
+		sql+="UserID='" & Replace(Left(UserID.Text,20),"'","''") & "'"
+		dr=db.DBRead(sql)
+      	Do While dr.Read()
+			If dr("Attempts")>4 And dr("UserDisplay")=1 then
+				sql="Update Users Set UserDisplay=0 Where UserID='" & Replace(UserID.Text,"'","''") & "'"
+				db.DBUpdate(sql)
+				sql="Insert Into UserBreach (UserID,BreachIP,BreachBrowser) Values ("
+				sql=sql & "'" & Replace(UserID.Text,"'","''") & "',"
+				sql=sql & "'" & Page.Request.ServerVariables("REMOTE_ADDR") & "',"
+				sql=sql & "'" & Page.Request.ServerVariables("HTTP_USER_AGENT") & "')"
+				db.DBUpdate(sql)
+				dr.Close
+				db.DBClose()
+				Dim mail as New MailMessage
+				' Get mail server
+				sql="Select SMTPServer From Sites (nolock) Where SiteID=1"
+				dr=db.DBRead(sql)
+				If(dr.Read()) Then
+					SMTPMail.SMTPServer=Trim(dr("SMTPServer").ToString())
+				End If
+				dr.Close
+				db.DBClose()
+				Mail.From = "(Oki Golf) info@sedonamg.com"
+				Mail.To = "(Tim Turnpaugh) timt@sedonamg.com"
+				Mail.CC = "(Raphaela Hunter) raphaelah@sedonamg.com"
+				Mail.CC = "(Tim Cell) 2066056299@mobile.att.net"
+			  	Mail.Subject="Attempted Oki Golf Breach"
+				s=vbCrLf
+				s=s & "UserID:  " & UserID.Text & vbCrLf
+				s=s & "When:    " & Now() & vbCrLf
+				s=s & "Orig IP: " & Page.Request.ServerVariables("REMOTE_ADDR") & vbCrLf
+				s=s & "Browser: " & Page.Request.ServerVariables("HTTP_USER_AGENT")
+				
+				Mail.Body=s
+				Try
+					SMTPMail.Send(Mail)
+				Catch Exc As Exception
+				End Try
+				Mail=Nothing
+				db=Nothing
+				pg=Nothing
+				Exit Sub
+			End If
+			If dr("Attempts")<=4 then
+				' Update login attempts
+				sql="Update Users Set Attempts=Attempts+1 Where UserID='" & Replace(UserID.Text,"'","''") & "'"
+				db.DBUpdate(sql)
+			End If
+		Loop
+		dr.Close
+		db.DBClose()
+		
+		sPWD=Trim(Passwd.Text)
+		sPWD=FormsAuthentication.HashPasswordForStoringInConfigFile(sPWD,"SHA1")
+		sql="spGetUIDPWD '" & Replace(UserID.Text,"'","''") & "','" & Replace(sPWD,"'","''") & "'"
+		dr=db.DBRead(sql)
+      	Do While dr.Read()
+			' Check to see if password needs changing
+			If DateDiff("d",dr("PWDChange"),Now())>=30 then
+				dr.Close
+				db.DBClose()
+				db=Nothing
+				pg=Nothing
+				response.redirect("pwdupdate.aspx")
+			End If
+			
+			' Load up session variables
+			Page.Session("AdminUserID")=UserID.Text
+			Page.Session("FirstName")=dr("FirstName")
+			Page.Session("LastName")=dr("LastName")
+			If dr("LastSignOn").ToString="" then
+				Page.Session("LastSignon")="This is the first signon"
+			Else
+				Page.Session("LastSignon")=FormatDateTime(dr("LastSignOn"),1) & " at " & pg.TimeDisp(dr("LastSignOn"))
+			End If
+			dr.Close
+			db.DBClose()
+			
+			sql="Update Users Set Attempts=0,LastSignon='" & Now() & "' Where UserID='" & UserID.Text & "'"
+			db.DBUpdate(sql)
+	        
+			' Update the Cookie
+			ss=DateAdd("n",240,Now())
+			Page.Response.Cookies("OkiGolfAdmin")("UID")=UserID.Text
+			Page.Response.Cookies("OkiGolfAdmin")("EXP")=ss
+			Page.Response.Cookies("OkiGolfAdmin")("F")=Page.Session("FirstName")
+			Page.Response.Cookies("OkiGolfAdmin")("L")=Page.Session("LastName")
+			Page.Response.Cookies("OkiGolfAdmin")("S")=Page.Session("LastSignon")
+			Page.Response.Cookies("OkiGolfAdmin").Expires=DateTime.Parse(ss)
+			sql="Insert Into Visitors (UserID,VisitIP,VisitBrowser) Values ("
+			sql=sql & "'" & Replace(UserID.Text,"'","''") & "',"
+			sql=sql & "'" & Page.Request.ServerVariables("REMOTE_ADDR") & "',"
+			sql=sql & "'" & Page.Request.ServerVariables("HTTP_USER_AGENT") & "')"
+			db.DBUpdate(sql)
+			pg=Nothing
+			Response.redirect("adminsplash.aspx")
+		Loop
+		dr.Close
+		db.DBClose()
+		If UserID.Text<>"" And Passwd.Text<>"" then
+			LoginErr.Text="<br><br>(1) The User Name or Password is incorrect, or<br>(2) Access has been revoked."
+			LoginErr.Visible=True
+		End If
+		pg=Nothing
+		db=Nothing
+		
+    End Sub
+		
+End Class
+	

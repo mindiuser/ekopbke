@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+include(dirname(__FILE__).'/Base.php');
 
-class Rekening extends CI_Controller
+class Rekening extends Base
 {
     public function __construct()
     {

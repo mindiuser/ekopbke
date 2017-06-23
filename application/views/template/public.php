@@ -10,30 +10,88 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <?php $this->load->view('template/header');?>
+    <style type="text/css">
+        .form-signin
+        {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-signin .form-signin-heading, .form-signin .checkbox
+        {
+            margin-bottom: 10px;
+        }
+        .form-signin .checkbox
+        {
+            font-weight: normal;
+        }
+        .form-signin .form-control
+        {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .form-signin .form-control:focus
+        {
+            z-index: 2;
+        }
+        .form-signin input[type="text"]
+        {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .form-signin input[type="password"]
+        {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        .account-wall
+        {
+            margin-top: 100px;
+            padding: 40px 0px 20px 0px;
+            background-color: #f7f7f7;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+        .login-title
+        {
+            color: #555;
+            font-size: 18px;
+            font-weight: 400;
+            display: block;
+        }
+        .profile-img
+        {
+            width: 96px;
+            height: 96px;
+            margin: 0 auto 10px;
+            display: block;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+        .need-help
+        {
+            margin-top: 10px;
+        }
+        .new-account
+        {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
 <body>
-<div class="wrapper">
-<?php $this->load->view('template/main_sidebar');?>
-<div class="main-panel">
-<?php $this->load->view('template/main_menu_top');?>
-<div class="content">
-<div class="container-fluid">
-    <div id="main-alert" class="hide">
-        <?php if ($this->session->flashdata('flash_success')) { ?>
-            <div class="alert alert-success"> <?php echo $this->session->flashdata('flash_success') ?> </div>
-        <?php } ?>
-        <?php if ($this->session->flashdata('flash_error')) { ?>
-            <div class="alert alert-error"> <?php echo $this->session->flashdata('flash_error') ?> </div>
-        <?php } ?>
-        <div class="alert"></div>
-    </div>
 <?php echo isset($content)?$content:'';?>
-</div>
-</div>
-<?php //$this->load->view('template/main_footer');?>
-</div>
-</div>
 </body>
 
 <script src="<?php echo base_url();?>public/assets/js/material.min.js" type="text/javascript"></script>
