@@ -24,9 +24,10 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
+                        <?php /*
                         <li>
                             <a href="<?php echo site_url('user/myprofile');?>">My Profile</a>
-                        </li>
+                        </li>*/?>
                         <li>
                             <a href="<?php echo site_url('logout');?>">Log out</a>
                         </li>

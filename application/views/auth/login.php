@@ -8,6 +8,9 @@
                     <input type="password" name="password" class="form-control" placeholder="Password" required>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Sign in</button>
+                    <label class="checkbox pull-left">
+                       Username :  <b class="text-info">admin</b> , Password:  <b class="text-info">admin</b>
+                    </label>
                    <span class="clearfix"></span>
                 </form>
             </div>
