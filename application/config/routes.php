@@ -68,10 +68,7 @@ $route['user/profile/add']              = 'setting/profile_add';;
 $route['user/profile/delete']           = 'setting/profile_delete';
 
 $route['user/log']                      = 'setting/manage_log';
-$route['user/upload_web']               = 'setting/upload_web';
-$route['user/upload_file_web']    = 'setting/upload_web';
-$route['user/upload_mobile']            = 'setting/upload_mobile';
-$route['user/upload_file_mobile']       = 'setting/upload_mobile';
+
 
 $route['wilayah/propinsi']    = 'wilayah/propinsi';
 $route['wilayah/propinsi/data']    = 'wilayah/propinsi_data';
@@ -114,6 +111,17 @@ $route['regulasi/upload_file']  = 'regulasi/upload_file';
 $route['regulasi/add']  = 'regulasi/add';
 $route['regulasi/delete']  = 'regulasi/delete';
 
+$route['slide/web']        = 'slide/web';
+$route['slide/web_data']   = 'slide/web_data';
+$route['slide/web_upload_file']  = 'slide/web_upload_file';
+$route['slide/web_add']  = 'slide/web_add';
+$route['slide/web_delete']  = 'slide/web_delete';
+
+$route['slide/mobile']        = 'slide/mobile';
+$route['slide/mobile_data']   = 'slide/mobile_data';
+$route['slide/mobile_upload_file']  = 'slide/mobile_upload_file';
+$route['slide/mobile_add']  = 'slide/mobile_add';
+$route['slide/mobile_delete']  = 'slide/mobile_delete';
 
 $route['penilaian/kesehatan']   = 'penilaian/penilaian_kesehatan';
 $route['predikat/kesehatan']    = 'predikat/predikat_kesehatan';
