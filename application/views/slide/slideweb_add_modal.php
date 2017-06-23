@@ -1,8 +1,8 @@
-<div class="modal fade" id="add-slidemobile-modal" role="dialog" data-backdrop="static" data-keyboard="false">
+<div class="modal fade" id="add-slideweb-modal" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Tambahkan Slide Mobile</b>
+                <b><i class="fa fa-user mr-10"></i> Tambahkan Slide Web</b>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
@@ -32,8 +32,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="slidemobile-submit" class="btn btn-primary btn-sm">Tambah</button>
-                <button type="button" id="slidemobile-submit-cancel" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
+                <button type="button" id="slideweb-submit" class="btn btn-primary btn-sm">Tambah</button>
+                <button type="button" id="slideweb-submit-cancel" class="btn btn-danger btn-sm" data-dismiss="modal">Batal</button>
             </div>
         </div>
     </div>

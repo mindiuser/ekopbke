@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-content">
-                <h3 class="card-title"><i class="fa fa-gavel" aria-hidden="true"></i> SLIDE MOBILE</h3>
+                <h3 class="card-title"><i class="fa fa-cloud-upload" aria-hidden="true"></i> SLIDE MOBILE</h3>
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                 </div>
