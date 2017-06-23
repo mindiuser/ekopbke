@@ -13,7 +13,7 @@
 <tr>
     <th>URUT</th>
     <th>JABATAN</th>
-    <th class="disabled-sorting text-right">Actions</th>
+    <th class="disabled-sorting">Actions</th>
 </tr>
 </thead>
 <tbody>

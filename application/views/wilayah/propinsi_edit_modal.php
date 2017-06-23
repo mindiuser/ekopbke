@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="edit-id" class="form-control" maxlength="2" required disabled >
-                        <input type="hidden" name="edit-id-old" class="form-control">
+                        <input type="hidden" name="edit-id-old">
                     </div>
                 </div>
                 <div class="row small-list-margin">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="edit-propinsi" class="form-control" maxlength="50" required >
-                        <input type="hidden" name="edit-propinsi-old" class="form-control" >
+                        <input type="hidden" name="edit-propinsi-old" >
                     </div>
 
                 </div>

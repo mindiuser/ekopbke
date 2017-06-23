@@ -12,7 +12,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="edit-urut" class="form-control" maxlength="2" required >
-                        <input type="hidden" name="edit-urut-old" class="form-control">
+                        <input type="hidden" name="edit-urut-old" >
                     </div>
                 </div>
                 <div class="row small-list-margin">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="edit-bagian" class="form-control" maxlength="20" required >
-                        <input type="hidden" name="edit-bagian-old" class="form-control" >
+                        <input type="hidden" name="edit-bagian-old"  >
                     </div>
 
                 </div>
