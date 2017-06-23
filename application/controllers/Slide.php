@@ -101,24 +101,6 @@ class Slide extends Base
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function mobile()
     {
         $this->load->templated_view('slide/slidemobile_list');
@@ -205,18 +187,6 @@ class Slide extends Base
         }
         echo $status;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

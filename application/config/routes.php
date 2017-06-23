@@ -69,7 +69,6 @@ $route['user/profile/delete']           = 'setting/profile_delete';
 
 $route['user/log']                      = 'setting/manage_log';
 
-
 $route['wilayah/propinsi']    = 'wilayah/propinsi';
 $route['wilayah/propinsi/data']    = 'wilayah/propinsi_data';
 $route['wilayah/propinsi/add']               = 'wilayah/propinsi_add';
@@ -123,8 +122,20 @@ $route['slide/mobile_upload_file']  = 'slide/mobile_upload_file';
 $route['slide/mobile_add']  = 'slide/mobile_add';
 $route['slide/mobile_delete']  = 'slide/mobile_delete';
 
-$route['penilaian/kesehatan']   = 'penilaian/penilaian_kesehatan';
-$route['predikat/kesehatan']    = 'predikat/predikat_kesehatan';
+
+$route['kesehatan/penilaian']                   = 'penilaian/kesehatan';
+$route['kesehatan/penilaian/data']              = 'penilaian/kesehatan_data';
+$route['kesehatan/penilaian/add']               = 'penilaian/kesehatan_add';
+$route['kesehatan/penilaian/edit']              = 'penilaian/kesehatan_edit';
+$route['kesehatan/penilaian/delete']            = 'penilaian/kesehatan_delete';
+
+
+$route['kesehatan/predikat']    = 'predikat/kesehatan';
+$route['kesehatan/predikat/data']              = 'predikat/kesehatan_data';
+$route['kesehatan/predikat/add']               = 'predikat/kesehatan_add';
+$route['kesehatan/predikat/edit']              = 'predikat/kesehatan_edit';
+$route['kesehatan/predikat/delete']            = 'predikat/kesehatan_delete';
+
 
 $route['login']    = 'auth/login';
 $route['login/auth']    = 'auth/do_login';

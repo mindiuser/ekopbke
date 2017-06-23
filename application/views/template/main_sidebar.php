@@ -129,13 +129,13 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('penilaian/kesehatan');?>">
+                <a href="<?php echo site_url('kesehatan/penilaian');?>">
                     <i class="fa fa-eyedropper" aria-hidden="true"></i>
                     <p>Penilaian Kesehatan</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('predikat/kesehatan');?>">
+                <a href="<?php echo site_url('kesehatan/predikat');?>">
                     <i class="fa fa-thermometer-full" aria-hidden="true"></i>
                     <p>Predikat Kesehatan</p>
                 </a>

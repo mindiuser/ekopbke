@@ -152,7 +152,7 @@ $this->load->view('shared/js_content');
                     urut : urut, bagian:bagian, urut_old:urut_old, bagian_old:bagian_old
                 },
                 success: function(data) {
-                    console.log(data);
+                   // console.log(data);
                     $("[name='edit-urut']",$("#edit-bagian-modal")).val('');
                     $("[name='edit-bagian']",$("#edit-bagian-modal")).val('');
                     $("[name='edit-urut-old']",$("#edit-bagian-modal")).val('');
@@ -184,8 +184,6 @@ $this->load->view('shared/js_content');
         table.on('click', '.delete', function(e) {
             var urut = $(this).attr('urut');
             var bagian = $(this).attr('bagian');
-            console.log(urut);
-            console.log(bagian);
             $.ajax({
                 url: "<?php echo my_url().'/user/bagian/delete';?>",
                 type: 'POST',
@@ -194,7 +192,6 @@ $this->load->view('shared/js_content');
                     urut : urut, bagian:bagian
                 },
                 success: function(status) {
-                    console.log(status);
                     if(status == true){
                         showAlerts('success','Data telah didelete');
                         reloadTable();
