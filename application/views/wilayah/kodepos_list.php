@@ -133,7 +133,7 @@
 
         $('.select-propinsi').on("click",function(){
             $.ajax({
-                url: "<?php echo base_url();?>/index.php/parameter/wilayah/filter_kabupaten",
+                url: "<?php echo base_url();?>/index.php/wilayah/kabupaten/data",
                 type: 'POST',
                 dataType:'html',
                 data: {
