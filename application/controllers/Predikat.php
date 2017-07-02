@@ -11,6 +11,7 @@ class Predikat extends Base
         $this->load->helper('general');
         $this->load->library('session');
         $this->load->model('predikat_model');
+        $this->session->set_userdata('menu-active','menu-7');
     }
 
     public function kesehatan()

@@ -190,6 +190,34 @@ class Setting_model extends CI_Model {
         return $this->db->query($sql,array($uid));
     }
 
+    function getUserById($uid){
+            $sql = 'SELECT * FROM uid WHERE UID = ? ORDER BY NAMA ASC LIMIT 0,1';
+            $q = $this->db->query($sql,[$uid]);
+            return $q->result();
+
+    }
+
+    function editUser($post)
+    {
+        $parr =  array("nama","level","bagian","jabatan","administrator",
+            "setting","registrasi_mitra","master","approval","dashboard",
+            "regulasi","regional","cabang","status");
+        $rrr = 'NAMA = ?,LVL = ?,BAGIAN = ?,JABATAN = ?,ADMINISTRATOR = ?,SETTING = ?,MIF_REGISTRASI = ?,MIF = ?,MIF_APPROVAL = ?,MONITORING = ?,REGULASI = ?,IDREG = ?,IDCAB = ?,ST = ?';
+        $params = [];
+        foreach($parr as $key){
+            $params[] = $post[$key];
+        }
+        $params[] = $post['uid'];
+        $sql = "UPDATE uid SET ".$rrr." WHERE UID = ?";
+        $status = $this->db->query($sql,$params);
+        if($status){
+            return array($status,'Data telah diupdate');
+        }
+        else {
+            return array($status, $this->db->error());
+        }
+
+    }
 
     function getLogs() {
         $sql = 'SELECT TGL,UID,AKSI,APP_FORM,RESUME,IP_ADDRESS,COMP_NAME,TIME_STAMP FROM log ';

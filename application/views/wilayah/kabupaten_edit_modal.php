@@ -3,6 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <b><i class="fa fa-user mr-10"></i> Edit Kabupaten</b>
+                <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>

@@ -25,11 +25,26 @@
             $('.alert',$('#main-alert')).addClass('alert-info').removeClass('alert-danger').html(xmessage);
         }
         $('.alert',"#main-alert").fadeTo(2000, 500).slideUp(500, function(){
-            $('.alert',"#main-alert").slideUp(3500);
+            $('.alert',"#main-alert").slideUp(6000);
         });
     }
     function clearAlerts(){
         $('#main-alert').addClass('hide');
         $('.alert',$('#main-alert')).removeClass('alert-info').removeClass('alert-danger').addClass('alert-success').html('');
+    }
+    function showErrorModal(target,message){
+        $('.modal-alert',$(target)).removeClass('hide');
+        if(typeof message == 'object'){
+            message = (message.message)?message.message:' Data yang anda masukkan invalid';
+        }
+        var xmessage = '<button type="button" class="close" data-dismiss="alert">x</button><strong> Gagal!</strong> '+message;
+        $('.modal-alert',$(target)).addClass('alert-danger').removeClass('alert-success').html(xmessage);
+        $('.modal-alert',$(target)).fadeTo(2000, 500).slideUp(500, function(){
+            $('.alert',"#main-alert").slideUp(6000);
+        });
+    }
+    function clearErrorModal(target,message){
+        $('.modal-alert',$(target)).addClass('hide');
+        $('.modal-alert',$(target)).removeClass('alert-info').removeClass('alert-danger').addClass('alert-success').html('');
     }
 </script>

@@ -1526,7 +1526,7 @@ table.dataTable > tfoot > tr > th,
 table.dataTable > thead > tr > td,
 table.dataTable > tbody > tr > td,
 table.dataTable > tfoot > tr > td {
-  padding: 0px !important;
+  padding: 5px 10px !important;
   outline: 0;
 }
 table.dataTable > thead > tr > th {
@@ -1558,8 +1558,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
   top: 50%;
   margin-top: -9px;
   left: 4px;
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
   display: block;
   position: absolute;
   color: #4caf50;
@@ -5890,7 +5890,7 @@ h2.title {
   border-radius: 3px;
   position: relative;
   padding: 12px 30px;
-  margin: 10px 1px;
+  margin: 0px;
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
@@ -6735,6 +6735,7 @@ h2.title {
   padding: 5px 20px;
   font-size: 11px;
 }
+
 .btn.btn-xs, .btn-group-xs .btn,
 .navbar .navbar-nav > li > a.btn.btn-xs, .btn-group-xs
 .navbar .navbar-nav > li > a.btn {
@@ -9400,6 +9401,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
 }
 .modal .modal-header .close {
   color: #999999;
+    font-size: 20px;
 }
 .modal .modal-header .close:hover, .modal .modal-header .close:focus {
   opacity: 1;
@@ -11681,3 +11683,160 @@ button.dt-button, div.dt-button, a.dt-button {
     margin-bottom:20px
 }
 
+@media screen
+and (min-device-width:1200px)
+and (max-device-width:1600px)
+and (-webkit-min-device-pixel-ratio:1){
+    body {
+        font-size:12px;
+    }
+        .btn-new {
+        padding: 1px 20px !important;
+        font-size: 11px;
+        padding: 10px 1px;
+            margin-left:5px;
+    }
+        .btn-single-group {
+            margin-top:9px;
+        }
+
+    .btn.btn-xs, .btn-group-xs .btn,
+    .navbar .navbar-nav > li > a.btn.btn-xs, .btn-group-xs
+.navbar .navbar-nav > li > a.btn {
+        padding: 5px 5px;
+    }
+
+    .modal-lg {
+        width: 700px;
+    }
+
+    h3, .h3 {
+        font-size:1.5em;
+    }
+    .main-panel > .content {
+        margin-top: 40px;
+    }
+    .sidebar, .off-canvas-sidebar {
+        width:240px;
+    }
+    .sidebar .sidebar-wrapper,
+    .off-canvas-sidebar .sidebar-wrapper {
+        width: 240px;
+    }
+    .sidebar .nav p, .off-canvas-sidebar .nav p {
+        font-size:12px;
+        line-height:20px;
+    }
+    .sidebar .nav [data-toggle="collapse"] ~ div > ul > li > a, .off-canvas-sidebar .nav [data-toggle="collapse"] ~ div > ul > li > a {
+        padding-left:40px;
+    }
+    .sidebar .user .photo, .off-canvas-sidebar .user .photo {
+        width:60px;
+        height:60px;
+    }
+    .main-panel {
+        width: calc(100% - 240px);
+    }
+    .navbar {
+        padding: 0px;
+        min-height:30px;
+    }
+    .navbar .navbar-minimize {
+        padding: 0px;
+    }
+    .main-panel > .content {
+        padding:15px 10px;
+    }
+    .container-fluid {
+        padding:2px;
+    }
+    .navbar-brand img {
+        width:110px;
+        height:28px;
+    }
+    table.dataTable > thead > tr > th, table.dataTable > tbody > tr > th, table.dataTable > tfoot > tr > th,
+    table.dataTable > thead > tr > td, table.dataTable > tbody > tr > td, table.dataTable > tfoot > tr > td {
+        padding: 5px 10px !important;
+        vertical-align: middle;
+        font-size: 12px !important;
+    }
+
+    table.dataTable > thead > tr > th {
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: #555;
+        padding-top:5px !important;
+        padding-bottom: 5px !important;
+        padding-left:10px !important;
+        color:#FFF;
+        border-bottom: 5px solid #c0c0c0;
+    }
+
+    table.dataTable > tbody > tr > td > a.edit {
+        margin-right: 10px;
+    }
+    .form-group {
+        border: 0px solid #fff !important;
+    }
+    .form-control, .form-group .form-control {
+        border: thin solid #c0c0c0;
+        border-radius:3px;
+    }
+    .form-group-sm .form-control {
+        height: 25px;
+        padding: 1px 2px;
+        line-height: 1.5;
+        border: thin solid #c0c0c0;
+        border-radius:3px;
+    }
+    .form-group-sm select.form-control {
+        height: 25px;
+        line-height: 20px;
+    }
+    .form-group-sm textarea.form-control,
+    .form-group-sm select[multiple].form-control {
+        height: auto;
+    }
+    .form-group-sm .form-control-static {
+        height: 15px;
+        min-height: 31px;
+        padding: 4px 0;
+        line-height: 1.5;
+    }
+    .dt-bootstrap4 .form-inline .form-group {
+        vertical-align: top;
+    }
+    .dataTables_length, .dataTables_filter {
+        margin: 0px 10px 0px 0px !important;
+    }
+    button.dt-button, div.dt-button, a.dt-button {
+        padding:0.3em 1em !important;
+        margin-right:5px !important;
+    }
+    .btn-group>.btn:first-child {
+        margin-left:5px;
+    }
+    .btn-group, .btn-group-vertical {
+        margin: 10px 0px;
+    }
+
+
+}
+
+.form-control-extend {
+    height: 25px;
+    padding: 1px 2px;
+    line-height: 1.5;
+    border: thin solid #c0c0c0;
+    border-radius: 3px;
+    width:100%;
+}
+
+.nav-menu-top {
+    padding: 10px;
+}
+.menu-open {
+    color: #FFFFFF;
+    background-color: #f44336;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4);
+}

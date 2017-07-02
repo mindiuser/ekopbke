@@ -35,6 +35,8 @@ $this->load->view('shared/js_content');
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
+        var idModalAdd = "#add-propinsi-modal";
+        var idModalEdit = "#edit-propinsi-modal";
         var reloadTable = function(){
             $.ajax({
                 url: "<?php echo my_url();?>/wilayah/propinsi/data",
@@ -53,7 +55,7 @@ $this->load->view('shared/js_content');
         }
         var initBar = function(){
             var actionbutton = '';
-            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn-new btn-single-group btn btn-sm btn-primary" ><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -121,17 +123,19 @@ $this->load->view('shared/js_content');
                     id_prop:id,propinsi:propinsi
                 },
                 success: function(data) {
-                    hideFormAddModal();
                     if(data.status == true){
+                        hideFormAddModal();
                         showAlerts('success',data.message);
                         reloadTable();
                     }
                     else {
-                        showAlerts('error',data.message);
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalAdd,data.message);
                     }
                 },
                 error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalAdd,textStatus);
                 }
             });
         });
@@ -191,18 +195,20 @@ $this->load->view('shared/js_content');
                     id:id,propinsi:propinsi,id_old:id_old,propinsi_old:propinsi_old
                 },
                 success: function(data) {
-                    clearFormModalEdit();
-                    $("#edit-propinsi-modal").modal("hide");
                     if(data.status == true){
+                        clearFormModalEdit();
+                        $("#edit-propinsi-modal").modal("hide");
                         showAlerts('success',data.message);
                         reloadTable();
                     }
                     else {
-                        showAlerts('error',data.message);
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalEdit,data.message);
                     }
                 },
                 error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalEdit,textStatus);
                 }
             });
 

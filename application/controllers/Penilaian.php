@@ -11,6 +11,7 @@ class Penilaian extends Base
         $this->load->helper('general');
         $this->load->library('session');
         $this->load->model('penilaian_model');
+        $this->session->set_userdata('menu-active','menu-6');
     }
 
     public function kesehatan()

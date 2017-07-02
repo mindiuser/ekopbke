@@ -8,7 +8,7 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
     <div class="sidebar-wrapper">
         <div class="user">
             <div class="photo">
-                <img src="<?php echo base_url();?>public/assets/img/faces/avatar.jpg" />
+                <img src="<?php echo base_url();?>public/uploads/profile/<?php echo $this->session->userdata('uid');?>.jpg" />
             </div>
             <div class="info">
                 <a data-toggle="collapse" href="#collapseExample" class="collapsed">
@@ -24,12 +24,8 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </a>
                 <div class="collapse" id="collapseExample">
                     <ul class="nav">
-                        <?php /*
                         <li>
-                            <a href="<?php echo site_url('user/myprofile');?>">My Profile</a>
-                        </li>*/?>
-                        <li>
-                            <a href="<?php echo site_url('logout');?>">Log out</a>
+                            <a href="<?php echo site_url('user/update/photo');?>">Ganti Photo Profile</a>
                         </li>
                     </ul>
                 </div>
@@ -37,13 +33,13 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
         </div>
         <ul class="nav">
             <li>
-                <a data-toggle="collapse" href="#pagesExamples">
+                <a data-toggle="collapse" href="#pagesExamples" id="menu-1" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-1')?'menu-open':'';?>" <?php echo ($this->session->userdata('menu-active') == 'menu-1')?'aria-hidden="true"':'';?>>
                     <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                     <p>User Profile
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse" id="pagesExamples">
+                <div class="collapse <?php echo ($this->session->userdata('menu-active') == 'menu-1')?'in':'';?>" id="pagesExamples" <?php echo ($this->session->userdata('menu-active') == 'menu-1')?'aria-hidden="true"':'';?>>
                     <ul class="nav">
                         <li>
                             <a href="<?php echo site_url('user/bagian');?>">Daftar Bagian User</a>
@@ -64,19 +60,19 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </div>
             </li>
             <li>
-                <a href="<?php echo site_url('user/log');?>">
+                <a href="<?php echo site_url('user/log');?>" id="menu-2" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-2')?'menu-open':'';?>">
                     <i class="fa fa-database" aria-hidden="true"></i>
                     <p>Log Transaksi</p>
                 </a>
             </li>
             <li>
-                <a data-toggle="collapse" href="#pagesExamples2">
+                <a data-toggle="collapse" href="#pagesExamples2" id="menu-3" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-3')?'menu-open':'';?>" <?php echo ($this->session->userdata('menu-active') == 'menu-3')?'aria-hidden="true"':'';?>>
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                     <p>Wilayah
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse" id="pagesExamples2">
+                <div class="collapse <?php echo ($this->session->userdata('menu-active') == 'menu-3')?'in':'';?>" id="pagesExamples2" <?php echo ($this->session->userdata('menu-active') == 'menu-3')?'aria-hidden="true"':'';?>>
                     <ul class="nav">
                         <li>
                             <a href="<?php echo site_url('wilayah/propinsi');?>">Propinsi</a>
@@ -96,15 +92,14 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                     </ul>
                 </div>
             </li>
-
             <li>
-                <a data-toggle="collapse" href="#pagesExamples3">
+                <a data-toggle="collapse" href="#pagesExamples3" id="menu-4" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-4')?'menu-open':'';?>">
                     <i class="fa fa-book" aria-hidden="true"></i>
                     <p>Chart of Account
                         <b class="caret"></b>
                     </p>
                 </a>
-                <div class="collapse" id="pagesExamples3">
+                <div class="collapse <?php echo ($this->session->userdata('menu-active') == 'menu-4')?'in':'';?>" id="pagesExamples3" <?php echo ($this->session->userdata('menu-active') == 'menu-4')?'aria-hidden="true"':'';?>>
                     <ul class="nav">
                         <li>
                             <a href="<?php echo site_url('rekening/jenis_rekening');?>">Jenis Rekening</a>
@@ -123,19 +118,19 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                 </div>
             </li>
             <li>
-                <a href="<?php echo site_url('regulasi/acuan');?>">
+                <a href="<?php echo site_url('regulasi/acuan');?>" id="menu-5" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-5')?'menu-open':'';?>">
                     <i class="fa fa-gavel" aria-hidden="true"></i>
                     <p>Acuan Regulasi</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('kesehatan/penilaian');?>">
+                <a href="<?php echo site_url('kesehatan/penilaian');?>" id="menu-6" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-6')?'menu-open':'';?>">
                     <i class="fa fa-eyedropper" aria-hidden="true"></i>
                     <p>Penilaian Kesehatan</p>
                 </a>
             </li>
             <li>
-                <a href="<?php echo site_url('kesehatan/predikat');?>">
+                <a href="<?php echo site_url('kesehatan/predikat');?>" id="menu-7" class="side-menu <?php echo ($this->session->userdata('menu-active') == 'menu-7')?'menu-open':'';?>">
                     <i class="fa fa-thermometer-full" aria-hidden="true"></i>
                     <p>Predikat Kesehatan</p>
                 </a>

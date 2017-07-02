@@ -11,7 +11,7 @@
                     <div class="group-input">
                         <div class="label-extend">
                             UID</div>
-                        <input type="text" name="uid" class="form-control-extend" required>
+                        <input type="text" name="uid" class="form-control-extend" disabled required>
 
                     </div>
                     <div class="group-input">
@@ -23,13 +23,13 @@
                     <div class="group-input">
                         <div class="label-extend">
                             Password</div>
-                        <input type="password" name="password" class="form-control-extend" required>
+                        <input type="password" name="password" class="form-control-extend" disabled required>
 
                     </div>
                     <div class="group-input">
                         <div class="label-extend">
                             Level</div>
-                        <select class="form-control-extend" name="level">
+                        <select class="form-control-extend" id="level-edit-form" name="level">
                             <option value="">--Pilih Level---</option>
                             <?php if(!empty($level)){ foreach($level as $row){ ?>
                                 <option value="<?php echo $row->ID;?>"><?php echo $row->LEVEL;?></option>
@@ -39,7 +39,7 @@
                     <div class="group-input">
                         <div class="label-extend">
                             Bagian</div>
-                        <select class="form-control-extend" name="bagian">
+                        <select class="form-control-extend" id="bagian-edit-form" name="bagian">
                             <option value="">--Pilih Bagian---</option>
                             <?php if(!empty($bagian)){ foreach($bagian as $row){ ?>
                                 <option value="<?php echo $row->BAGIAN;?>"><?php echo $row->BAGIAN;?></option>
@@ -49,7 +49,7 @@
                     <div class="group-input">
                         <div class="label-extend">
                             Jabatan</div>
-                        <select class="form-control-extend" name="jabatan">
+                        <select class="form-control-extend" id="jabatan-edit-form" name="jabatan">
                             <option value="">--Pilih Jabatan---</option>
                             <?php if(!empty($jabatan)){ foreach($jabatan as $row){ ?>
                                 <option bagian="<?php echo $row->BAGIAN;?>" value="<?php echo $row->JABATAN;?>" class=""><?php echo $row->JABATAN;?></option>
@@ -59,8 +59,8 @@
                     <div class="group-input">
                         <div class="label-extend">
                             status</div>
-                        <input type="radio" name="status" value="1" class="form-control-extend" required> Enable
-                        <input type="radio" name="status" value="0" class="form-control-extend" required> Disable
+                        <input type="radio" name="status" value="1" required> Enable
+                        <input type="radio" name="status" value="0" required> Disable
                     </div>
 
                 </div>
@@ -107,7 +107,7 @@
                     <div class="group-input">
                         <div class="label-extend">
                             Regional</div>
-                        <select class="form-control-extend" name="regional">
+                        <select class="form-control-extend" id="regional-edit-form" name="regional">
                             <option value="">--Pilih Regional---</option>
                             <?php if(!empty($regional)){ foreach($regional as $row){ ?>
                                 <option value="<?php echo $row->IDREG;?>"><?php echo $row->NAMA_REGIONAL;?></option>
@@ -119,7 +119,7 @@
                     <div class="group-input">
                         <div class="label-extend">
                             Cabang</div>
-                        <select class="form-control-extend" name="cabang">
+                        <select class="form-control-extend" id="cabang-edit-form" name="cabang">
                             <option value="">--Pilih Cabang---</option>
                             <?php if(!empty($cabang)){ foreach($cabang as $row){ ?>
                                 <option value="<?php echo $row->IDCAB;?>"><?php echo $row->NAMA_CABANG;?></option>

@@ -11,6 +11,7 @@ class Regulasi extends Base
         $this->load->helper('general');
         $this->load->library('session');
         $this->load->model('regulasi_model');
+        $this->session->set_userdata('menu-active','menu-5');
     }
 
     public function regulasi_acuan()

@@ -64,8 +64,12 @@ $route['user/jabatan/delete']           = 'setting/jabatan_delete';
 
 $route['user/profile']                  = 'setting/profile';
 $route['user/profile/data']             = 'setting/profile_data';
-$route['user/profile/add']              = 'setting/profile_add';;
+$route['user/profile/add']              = 'setting/profile_add';
+$route['user/profile/detail']           = 'setting/profile_detail';
+$route['user/profile/edit']           = 'setting/profile_edit';
 $route['user/profile/delete']           = 'setting/profile_delete';
+$route['user/update/photo']           = 'setting/profile_photo';
+$route['user/upload/photo']           = 'setting/upload_photo';
 
 $route['user/log']                      = 'setting/manage_log';
 
@@ -81,28 +85,61 @@ $route['wilayah/kabupaten/add']               = 'wilayah/kabupaten_add';
 $route['wilayah/kabupaten/edit']              = 'wilayah/kabupaten_edit';
 $route['wilayah/kabupaten/delete']            = 'wilayah/kabupaten_delete';
 
+$route['wilayah/kecamatan']   = 'wilayah/kecamatan';
+$route['wilayah/kecamatan/data']    = 'wilayah/kecamatan_data';
+$route['wilayah/kecamatan/detail']    = 'wilayah/kecamatan_detail';
+$route['wilayah/kecamatan/add']               = 'wilayah/kecamatan_add';
+$route['wilayah/kecamatan/edit']              = 'wilayah/kecamatan_edit';
+$route['wilayah/kecamatan/delete']            = 'wilayah/kecamatan_delete';
+
 $route['wilayah/ajax_kabupaten'] = 'wilayah/ajax_kabupaten';
 $route['wilayah/ajax_kecamatan'] = 'wilayah/ajax_kecamatan';
 $route['wilayah/ajax_kelurahan'] = 'wilayah/ajax_kelurahan';
 
 $route['wilayah/filter_kabupaten'] = 'wilayah/filter_kabupaten';
-$route['wilayah/kecamatan'] = 'wilayah/kecamatan';
+$route['wilayah/filter_kabupaten_modal'] = 'wilayah/filter_kabupaten_modal';
 $route['wilayah/filter_kecamatan'] = 'wilayah/filter_kecamatan';
+$route['wilayah/filter_kecamatan_modal'] = 'wilayah/filter_kecamatan_modal';
+$route['wilayah/filter_kelurahan_modal'] = 'wilayah/filter_kelurahan_modal';
+
 $route['wilayah/kelurahan'] = 'wilayah/kelurahan';
+$route['wilayah/kelurahan/data']    = 'wilayah/kelurahan_data';
+$route['wilayah/kelurahan/detail']    = 'wilayah/kelurahan_detail';
+$route['wilayah/kelurahan/add']               = 'wilayah/kelurahan_add';
+$route['wilayah/kelurahan/edit']              = 'wilayah/kelurahan_edit';
+$route['wilayah/kelurahan/delete']            = 'wilayah/kelurahan_delete';
+
 $route['wilayah/kodepos'] = 'wilayah/kodepos';
+$route['wilayah/kodepos/data']    = 'wilayah/kodepos_data';
+$route['wilayah/kodepos/detail']    = 'wilayah/kodepos_detail';
+$route['wilayah/kodepos/add']               = 'wilayah/kodepos_add';
+$route['wilayah/kodepos/edit']              = 'wilayah/kodepos_edit';
+$route['wilayah/kodepos/delete']            = 'wilayah/kodepos_delete';
 
 $route['rekening/jenis_rekening']           = 'rekening/jenis_rekening';
 $route['rekening/jenis_rekening/data']      = 'rekening/jenis_rekening_data';
 $route['rekening/kelompok_rekening']           = 'rekening/kelompok_rekening';
 $route['rekening/kelompok_rekening/data']      = 'rekening/kelompok_rekening_data';
 
+$route['rekening/filter_kelompok']      = 'rekening/filter_kelompok';
+$route['rekening/filter_kelompok_modal']      = 'rekening/filter_kelompok_modal';
+$route['rekening/filter_buku_besar']      = 'rekening/filter_buku_besar';
+$route['rekening/filter_buku_besar_modal']      = 'rekening/filter_buku_besar_modal';
+
 $route['rekening/buku_besar'] = 'rekening/buku_besar';
 $route['rekening/buku_besar_data'] = 'rekening/buku_besar_data';
-$route['rekening/filter_kelompok']      = 'rekening/filter_kelompok';
+$route['rekening/buku_besar/detail']    = 'rekening/buku_besar_detail';
+$route['rekening/buku_besar/add']               = 'rekening/buku_besar_add';
+$route['rekening/buku_besar/edit']              = 'rekening/buku_besar_edit';
+$route['rekening/buku_besar/delete']            = 'rekening/buku_besar_delete';
 
 $route['rekening/sub_buku_besar'] = 'rekening/sub_buku_besar';
 $route['rekening/sub_buku_besar_data'] = 'rekening/sub_buku_besar_data';
-$route['rekening/filter_buku_besar']      = 'rekening/filter_buku_besar';
+$route['rekening/sub_buku_besar/detail']    = 'rekening/sub_buku_besar_detail';
+$route['rekening/sub_buku_besar/add']               = 'rekening/sub_buku_besar_add';
+$route['rekening/sub_buku_besar/edit']              = 'rekening/sub_buku_besar_edit';
+$route['rekening/sub_buku_besar/delete']            = 'rekening/sub_buku_besar_delete';
+
 
 $route['regulasi/acuan']        = 'regulasi/regulasi_acuan';
 $route['regulasi/acuan_data']   = 'regulasi/regulasi_acuan_data';

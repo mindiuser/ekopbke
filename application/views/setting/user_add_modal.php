@@ -59,8 +59,8 @@
                     <div class="group-input">
                         <div class="label-extend">
                             status</div>
-                        <input type="radio" name="status" value="1" class="form-control-extend" required> Enable
-                        <input type="radio" name="status" value="0" class="form-control-extend" required> Disable
+                        <input type="radio" name="status" value="1" required> Enable
+                        <input type="radio" name="status" value="0" required> Disable
                     </div>
 
                 </div>

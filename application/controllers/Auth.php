@@ -37,8 +37,10 @@ class Auth extends CI_Controller {
                 $this->session->set_userdata('name',$result[0]->NAMA);
                 $this->session->set_userdata('logged_in',TRUE);
                 $this->session->set_userdata('uid',$result[0]->UID);
+                $this->session->set_userdata('cif',$result[0]->CIF);
                 $this->session->set_userdata('jabatan',$result[0]->JABATAN);
                 $this->session->set_userdata('bagian',$result[0]->BAGIAN);
+                $this->session->set_userdata('menu-active','');
                 redirect('welcome');
             }
             else {

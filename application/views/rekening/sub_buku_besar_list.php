@@ -29,10 +29,15 @@
 <!-- end col-md-12 -->
 </div>
 <?php
+$this->load->view('rekening/subbukubesar_add_modal',['jenis'=>$jenis]);
+$this->load->view('rekening/subbukubesar_edit_modal',['jenis'=>$jenis]);
 $this->load->view('shared/js_content');
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
+        var idModalAdd = "#add-subbukubesar-modal";
+        var idModalEdit = "#edit-subbukubesar-modal";
+
         var initBar = function(){
             var actionbutton = '';
             actionbutton += '<div class="btn-group">';
@@ -56,7 +61,7 @@ $this->load->view('shared/js_content');
             actionbutton += '<ul class="dropdown-menu" role="menu" id="filter-buku-besar">';
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn-new btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -96,7 +101,8 @@ $this->load->view('shared/js_content');
         });
         initBar();
 
-        $('.select-jenis').on("click",function(){
+        $('#sub_buku_besar').on("click",".select-jenis",function(){
+            var $that = $(this);
             $.ajax({
                 url: "<?php echo my_url();?>/rekening/filter_kelompok",
                 type: 'POST',
@@ -112,12 +118,54 @@ $this->load->view('shared/js_content');
                 }
             });
 
-            $("#filter-jenis-label").text("JENIS REKENING : "+$(this).attr("label"));
+            $("#filter-jenis-label").text("JENIS : "+$(this).attr("label"));
             var tgt = $("#filter-jenis-label").parent(".btn");
             $(tgt).removeClass("btn-primary").addClass("btn-warning");
+            $("#filter-jenis-label").attr("jenis-filtered",$(this).attr('id'));
+            reloadTable(0);
+
+            $("option",$("#jenis-add-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $("option",$("#jenis-edit-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $.ajax({
+                url: "<?php echo my_url();?>rekening/filter_kelompok_modal",
+                type: 'POST',
+                dataType:'html',
+                data: {
+                    jenis_rekening : $(this).attr('id')
+                },
+                success: function(options) {
+                    $("#kelompok-add-form",$('#add-subbukubesar-modal')).html(options);
+                    $("#kelompok-edit-form",$('#edit-subbukubesar-modal')).html(options);
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
         });
 
         $('#filter-kelompok').on("click",'.select-kelompok',function(){
+            var $that = $(this);
             $.ajax({
                 url: "<?php echo my_url();?>/rekening/filter_buku_besar",
                 type: 'POST',
@@ -133,18 +181,347 @@ $this->load->view('shared/js_content');
                 }
             });
 
-            $("#filter-jenis-label").text("Kelompok : "+$(this).attr("label"));
+            $.ajax({
+                url: "<?php echo my_url();?>rekening/filter_buku_besar_modal",
+                type: 'POST',
+                dataType:'html',
+                data: {
+                    kelompok : $(this).attr('id')
+                },
+                success: function(options) {
+                    $("#bukubesar-add-form",$('#add-subbukubesar-modal')).html(options);
+                    $("#bukubesar-edit-form",$('#edit-subbukubesar-modal')).html(options);
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+            $("#filter-kelompok-label").text("Kelompok : "+$that.attr("label"));
             var tgt = $("#filter-kelompok-label").parent(".btn");
             $(tgt).removeClass("btn-primary").addClass("btn-warning");
+            $("#filter-kelompok-label").attr("kelompok-filtered",$(this).attr('id'));
+            reloadTable(0);
+            $("option",$("#kelompok-add-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $("option",$("#kelompok-edit-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
         });
 
-        $("#filter-buku-besar").on('click',".select-buku-besar",function () {
+        $("#filter-buku-besar").on('click',".select-bukubesar",function () {
+            var $that = $(this);
             reloadTable($(this).attr("id"));
             $("#filter-buku-besar-label").text("Buku Besar : "+$(this).attr("label"));
             var tgt = $("#filter-buku-besar-label").parent(".btn");
             $(tgt).removeClass("btn-primary").addClass("btn-warning");
+            $("#filter-buku-besar-label").attr("buku-besar-filtered",$(this).attr('id'));
+            $("option",$("#bukubesar-add-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $("option",$("#bukubesar-edit-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
         });
 
+        $('#add-subbukubesar-modal').on("change","#jenis-add-form",function(){
+            var jenis = $("option:selected",$(this)).val();
+            $.ajax({
+                url: "<?php echo my_url();?>rekening/filter_kelompok_modal",
+                type: 'POST',
+                dataType:'html',
+                data: {
+                    jenis_rekening : jenis
+                },
+                success: function(options) {
+                    $("#kelompok-add-form",$('#add-subbukubesar-modal')).html(options);
+                    $("#kelompok-edit-form",$('#edit-subbukubesar-modal')).html(options);
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+        });
+
+        $('#add-subbukubesar-modal').on("change","#kelompok-add-form",function(){
+            var kelompok = $("option:selected",$(this)).val();
+            $.ajax({
+                url: "<?php echo my_url();?>rekening/filter_buku_besar_modal",
+                type: 'POST',
+                dataType:'html',
+                data: {
+                    kelompok : kelompok
+                },
+                success: function(options) {
+                    $("#bukubesar-add-form",$('#add-subbukubesar-modal')).html(options);
+                    $("#bukubesar-edit-form",$('#edit-subbukubesar-modal')).html(options);
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+        });
+
+        /*************************
+         * Add New Record
+         **********************/
+        var clearFormModalAdd = function(){
+            $("input",$("#add-subbukubesar-modal")).each(function(){
+                $(this).val("");
+            });
+            $("textarea",$("#add-subbukubesar-modal")).each(function(){
+                $(this).text("");
+            });
+            $(".modal-alert","#add-subbukubesar-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        $("#sub_buku_besar").on('click', '#add', function() {
+            clearFormModalAdd();
+            $("#add-subbukubesar-modal").modal("show");
+            return false;
+        });
+
+        var hideFormAddModal = function(){
+            $(["input"],$("#add-subbukubesar-modal")).each(function(i,v){
+                $(this).val("");
+            });
+            $(".modal-alert","#add-subbukubesar-modal").removeClass("alert-warning").addClass("hide").text("");
+            $("#add-subbukubesar-modal").modal("hide");
+        }
+
+        var hideFormEditModal = function(){
+            $(["input"],$("#edit-subbukubesar-modal")).each(function(i,v){
+                $(this).val("");
+            });
+            $(".modal-alert","#edit-subbukubesar-modal").removeClass("alert-warning").addClass("hide").text("");
+            $("#edit-subbukubesar-modal").modal("hide");
+        }
+
+        $("#add-subbukubesar-modal").on('click', '#subbukubesar-submit', function() {
+            var jenis = $("option:selected",$("#jenis-add-form")).val();
+            var kelompok = $("option:selected",$("#kelompok-add-form")).val();
+            var bukubesar = $("option:selected",$("#bukubesar-add-form")).val();
+            var acc = $("[name='id']",$("#add-subbukubesar-modal")).val();
+            var keterangan = $("[name='keterangan']",$("#add-subbukubesar-modal")).val();
+            var golongan = $("option:selected",$("#golongan-add-form")).val();
+            var ku = $("option:selected",$("#ku-add-form")).val();
+
+            if(jenis.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Jenis masih kosong");
+                return false;
+            }
+            if(kelompok.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Kelompok masih kosong");
+                return false;
+            }
+            if(bukubesar.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Buku Besar masih kosong");
+                return false;
+            }
+            if(acc.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("ACC masih kosong");
+                return false;
+            }
+            if(keterangan.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Keterangan masih kosong");
+                return false;
+            }
+            if(golongan.trim() == ''){
+                $(".modal-alert","#add-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Golongan masih kosong");
+                return false;
+            }
+
+            $.ajax({
+                url: "<?php echo my_url().'rekening/sub_buku_besar/add';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    jenis:jenis,kelompok:kelompok,bukubesar:bukubesar,acc:acc,keterangan:keterangan,golongan:golongan,ku:ku
+                },
+                success: function(data) {
+                    if(data.status == true){
+                        hideFormAddModal();
+                        showAlerts('success',data.message);
+                        var accbb = $("#filter-buku-besar-label").attr("buku-besar-filtered");
+                        reloadTable(accbb);
+                    }
+                    else {
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalAdd,data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalAdd,textStatus);
+                }
+            });
+        });
+
+        table.on('click', '.delete', function(e) {
+            var acc = $(this).attr('acc');
+            $.ajax({
+                url: "<?php echo my_url().'/rekening/sub_buku_besar/delete';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    acc:acc
+                },
+                success: function(status) {
+                    if(status == true){
+                        showAlerts('success','Data telah didelete');
+                        var accbb = $("#filter-buku-besar-label").attr("buku-besar-filtered");
+                        reloadTable(accbb);
+                    }
+                    else {
+                        showAlerts('error','Silahkan ulangi lagi');
+                    }
+
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+        });
+
+
+        //---------------
+        var clearFormModalEdit = function(acc){
+            $.ajax({
+                url: "<?php echo my_url().'/rekening/sub_buku_besar/detail';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    acc:acc
+                },
+                success: function(dt) {
+                    var data = dt.data[0];
+                    var jenis = $("[name='jenis']",$("#edit-subbukubesar-modal"));
+                    var option = "<option selected='selected' value='"+data.accjenis+"' >"+data.jenis+"</option>";
+                    $(jenis).html(option);
+                    var kelompok = $("[name='kelompok']",$("#edit-subbukubesar-modal"));
+                    var option = "<option selected='selected' value='"+data.acckel+"' >"+data.kel+"</option>";
+                    $(kelompok).html(option);
+                    var bb = $("[name='bukubesar']",$("#edit-subbukubesar-modal"));
+                    var option = "<option selected='selected' value='"+data.accbb+"' >"+data.bb+"</option>";
+                    $(bb).html(option);
+                    $("[name='id']",$("#edit-subbukubesar-modal")).val(data.acc);
+                    $("[name='keterangan']",$("#edit-subbukubesar-modal")).val(data.keterangan);
+                    $("[name='golongan']",$("#edit-subbukubesar-modal")).val(data.golongan);
+                    $("[name='ku']",$("#edit-subbukubesar-modal")).val(data.ku);
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    showAlerts('error',textStatus);
+                }
+            });
+
+            $(".modal-alert","#edit-bukubesar-modal").removeClass("alert-warning").addClass("hide").text("");
+        }
+
+        // Edit record
+        table.on('click', '.edit', function() {
+            var acc = $(this).attr('acc');
+            clearFormModalEdit(acc);
+            $("#edit-subbukubesar-modal").modal("show");
+            return false;
+        });
+
+        $("#edit-subbukubesar-modal").on('click', '#subbukubesar-edit-submit', function() {
+            var jenis = $("option:selected",$("#jenis-edit-form")).val();
+            var kelompok = $("option:selected",$("#kelompok-edit-form")).val();
+            var bukubesar = $("option:selected",$("#bukubesar-edit-form")).val();
+            var acc = $("[name='id']",$("#edit-subbukubesar-modal")).val();
+            var keterangan = $("[name='keterangan']",$("#edit-subbukubesar-modal")).val();
+            var golongan = $("option:selected",$("#golongan-edit-form")).val();
+            var ku = $("option:selected",$("#ku-edit-form")).val();
+
+            if(jenis.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Jenis masih kosong");
+                return false;
+            }
+            if(kelompok.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Kelompok masih kosong");
+                return false;
+            }
+            if(bukubesar.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Buku Besar masih kosong");
+                return false;
+            }
+            if(acc.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("ACC masih kosong");
+                return false;
+            }
+            if(keterangan.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Keterangan masih kosong");
+                return false;
+            }
+            if(golongan.trim() == ''){
+                $(".modal-alert","#edit-subbukubesar-modal").addClass("alert-danger").removeClass("hide").text("Golongan masih kosong");
+                return false;
+            }
+
+            $.ajax({
+                url: "<?php echo my_url().'rekening/sub_buku_besar/edit';?>",
+                type: 'POST',
+                dataType:'json',
+                data: {
+                    jenis:jenis,kelompok:kelompok,bukubesar:bukubesar,acc:acc,keterangan:keterangan,golongan:golongan,ku:ku
+                },
+                success: function(data) {
+                    if(data.status == true){
+                        hideFormEditModal();
+                        showAlerts('success',data.message);
+                        var accbb = $("#filter-buku-besar-label").attr("buku-besar-filtered");
+                        reloadTable(accbb);
+                    }
+                    else {
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalEdit,data.message);
+                    }
+                },
+                error: function(xhr, textStatus, ThrownException){
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalEdit,textStatus);
+                }
+            });
+
+            return false;
+        });
 
 
     });

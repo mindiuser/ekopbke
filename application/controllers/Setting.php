@@ -11,6 +11,7 @@ class Setting extends Base
         $this->load->helper('general');
         $this->load->library('session');
         $this->load->model('setting_model');
+        $this->session->set_userdata('menu-active','menu-1');
     }
 
     public function bagian()
@@ -183,9 +184,43 @@ class Setting extends Base
         echo $status;
     }
 
+    public function profile_detail()
+    {
+        $params = explode(',','UID,NAMA,PASSWORD,LVL,BAGIAN,JABATAN,ADMINISTRATOR,SETTING,MIF_REGISTRASI,MIF,MIF_APPROVAL,MONITORING,REGULASI,IDREG,IDCAB,ST');
+        $array = [];
+        $uid = $this->input->post('uid');
+        if($uid){
+            $dt = $this->setting_model->getUserById($uid);
+            if(!empty($dt)){
+                foreach($params as $key){
+                    $array[$key] = isset($dt[0]->{$key})?$dt[0]->{$key}:'';
+                }
+            }
+            $data = array('data'=>$array);
+        }
+        else {
+            $data=array('data'=>[]);
+        }
+        echo json_encode($data);
+    }
+
+    public function profile_edit(){
+        $params =  array("uid","nama","level","bagian","jabatan","administrator",
+            "setting","registrasi_mitra","master","approval","dashboard","regulasi","regional","cabang","status");
+        $post = [];
+        foreach($params as $key){
+            if($key == 'password')
+                $post[$key] = md5(trim($this->input->post($key)));
+            else
+                $post[$key] = $this->input->post($key);
+        }
+        list($status,$message) = $this->setting_model->editUser($post);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+    }
 
     public function manage_log()
     {
+        $this->session->set_userdata('menu-active','menu-2');
         $data = [];
         $data['users'] = $this->setting_model->getUsersForDdl();
         $data['data'] = $this->setting_model->getLogs();
@@ -267,6 +302,47 @@ class Setting extends Base
         }
         else {
         $this->load->templated_view('setting/upload_mobile');
+        }
+    }
+
+
+    public function profile_photo(){
+        $this->load->templated_view('setting/upload_photo');
+    }
+
+    public function upload_photo(){
+        if(isset($_FILES['file'])){
+            $config['upload_path'] = 'public/uploads/profile';
+            $config['allowed_types'] = 'jpg';
+            $config['max_filename'] = '255';
+            $config['encrypt_name'] = FALSE;
+            $config['max_size'] = '3024'; //3 MB
+            $config['overwrite']= TRUE;
+            $config['file_name'] = $this->session->userdata('uid');
+            $msg = '';
+            if (isset($_FILES['file']['name'])) {
+                if (0 < $_FILES['file']['error']) {
+                    $msg = 'Error during file upload' . $_FILES['file']['error'];
+                } else {
+                    $this->load->library('upload', $config);
+                    if (!$this->upload->do_upload('file')) {
+                        $msg = $this->upload->display_errors();
+                    } else {
+                        $msg = '';
+                    }
+                }
+            } else {
+                $msg = 'Please choose a file';
+            }
+            if($msg == ''){
+                echo json_encode(['status'=>true,'message'=>"Sukses"]);
+            }
+            else {
+                echo json_encode(['status'=>false,'message'=>$msg]);
+            }
+        }
+        else {
+            echo json_encode(['status'=>false,'message'=>'Gagal']);
         }
     }
 

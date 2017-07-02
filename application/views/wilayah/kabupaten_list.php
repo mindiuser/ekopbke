@@ -36,6 +36,8 @@ $this->load->view('shared/js_content');
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
+        var idModalAdd = "#add-kabupaten-modal";
+        var idModalEdit = "#edit-kabupaten-modal";
         var reloadTable = function(propinsi){
             $.ajax({
                 url: "<?php echo my_url();?>/wilayah/kabupaten/data",
@@ -66,7 +68,7 @@ $this->load->view('shared/js_content');
             <?php }} ?>
             actionbutton += '</ul>';
             actionbutton += '</div>';
-            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn-new btn btn-sm btn-primary" style="margin-left:3px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }
@@ -180,18 +182,20 @@ $this->load->view('shared/js_content');
                     id_prop:id_prop,id_kab:id_kab,res:res,kabupaten:kabupaten,ibukota:ibukota
                 },
                 success: function(data) {
-                    hideFormAddModal();
                     if(data.status == true){
+                        hideFormAddModal();
                         showAlerts('success',data.message);
                         var propinsi = $("#filter-propinsi-label").attr("propinsi-filtered");
                         reloadTable(propinsi);
                     }
                     else {
-                        showAlerts('error',data.message);
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalAdd,data.message);
                     }
                 },
                 error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalAdd,textStatus);
                 }
             });
         });
@@ -282,19 +286,20 @@ $this->load->view('shared/js_content');
                     id_prop:id_prop,id_kab:id_kab,res:res,kabupaten:kabupaten,ibukota:ibukota
                 },
                 success: function(data) {
-                    clearFormModalEdit();
-                    $("#edit-kabupaten-modal").modal("hide");
                     if(data.status == true){
+                        $("#edit-kabupaten-modal").modal("hide");
                         showAlerts('success',data.message);
                         var propinsi = $("#filter-propinsi-label").attr("propinsi-filtered");
                         reloadTable(propinsi);
                     }
                     else {
-                        showAlerts('error',data.message);
+                        //showAlerts('error',data.message);
+                        showErrorModal(idModalEdit,data.message);
                     }
                 },
                 error: function(xhr, textStatus, ThrownException){
-                    showAlerts('error',textStatus);
+                    //showAlerts('error',textStatus);
+                    showErrorModal(idModalEdit,textStatus);
                 }
             });
 

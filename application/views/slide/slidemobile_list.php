@@ -53,7 +53,7 @@ $this->load->view('shared/js_content');
         }
         var initBar = function(){
             var actionbutton = '';
-            actionbutton += '<button type="button" id="add" class="btn btn-sm btn-primary" style="margin-left:5px"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
+            actionbutton += '<button type="button" id="add" class="btn-new btn-single-group btn btn-sm btn-primary"><i class="fa fa-plus"></i><span style="padding-left:5px">Baru</span></button>';
             actionbutton += '';
             $(".dt-actionbutton").html(actionbutton);
         }

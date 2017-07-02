@@ -75,15 +75,15 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '101.50.1.227',
+	'hostname' => 'localhost',
     'port' => 3306,
-	'username' => 'dev2017',
-	'password' => 'dev2017',
+	'username' => 'root', //dev2017
+	'password' => '', //dev2017
 	'database' => 'ekoperasi_cloud',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
-	'db_debug' => (ENVIRONMENT !== 'production'),
+	'db_debug' => FALSE,//(ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
 	'cachedir' => '',
 	'char_set' => 'utf8',
@@ -98,15 +98,15 @@ $db['default'] = array(
 
 $db['kesehatan'] = array(
     'dsn'	=> '',
-    'hostname' => '101.50.1.227',
+    'hostname' => 'localhost',
     'port' => 3306,
-    'username' => 'dev2017',
-    'password' => 'dev2017',
+    'username' => 'root', //dev2017
+    'password' => '', //dev2017
     'database' => 'ekoperasi_kesehatan',
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE,
-    'db_debug' => (ENVIRONMENT !== 'production'),
+    'db_debug' => FALSE,//(ENVIRONMENT !== 'production'),
     'cache_on' => FALSE,
     'cachedir' => '',
     'char_set' => 'utf8',
