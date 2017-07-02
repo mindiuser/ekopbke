@@ -11691,7 +11691,7 @@ and (-webkit-min-device-pixel-ratio:1){
         font-size:12px;
     }
         .btn-new {
-        padding: 1px 20px !important;
+        padding: 5px 20px !important;
         font-size: 11px;
         padding: 10px 1px;
             margin-left:5px;
