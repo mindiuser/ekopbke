@@ -181,5 +181,5 @@ $route['user/profile/change_password']           = 'auth/update_password';
 $route['user/profile/save_new_password']           = 'auth/do_update_password';
 
 
-$route['404_override'] = '';
+$route['404_override'] = 'mypage/my404';
 $route['translate_uri_dashes'] = FALSE;
