@@ -2,14 +2,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Edit Buku Besar</b>
+                <b><i class="fa fa-book mr-10"></i> Edit Rekening Buku Besar</b>
                 <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC JENIS
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        JENIS REKENING
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="jenis-edit-form" name="jenis" class="form-control" disabled required>
@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC KELOMPOK
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        KELOMPOK REKENING
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="kelompok-edit-form" name="kelompok" class="form-control" disabled required>
@@ -31,24 +31,24 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC BUKU BESAR
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        KODE BUKU BESAR
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="id" class="form-control" maxlength="6" required>
+                        <input type="text" name="id" class="form-control" maxlength="6" disabled required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        Nama Buku Besar
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        NAMA BUKU BESAR
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="bukubesar" class="form-control" maxlength="200" required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        Kategori
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        KATEGORI
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="kategori-edit-form" name="kategori" class="form-control" required>
@@ -58,8 +58,8 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        Golongan
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        GOLONGAN
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="golongan-edit-form" name="golongan" class="form-control" required>
@@ -69,8 +69,8 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        Resiko
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        RESIKO
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="number" name="resiko" class="form-control" maxlength="11" required>

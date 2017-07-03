@@ -2,14 +2,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Tambahkan Sub Buku Besar</b>
+                <b><i class="fa fa-book mr-10"></i> Tambahkan Rekening Sub Buku Besar</b>
                 <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC JENIS
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        JENIS REKENING
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="jenis-add-form" name="jenis" class="form-control" required>
@@ -21,8 +21,8 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC KELOMPOK
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        KELOMPOK REKENING
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="kelompok-add-form" name="kelompok" class="form-control" required>
@@ -31,8 +31,8 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC BUKU BESAR
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        BUKU BESAR
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="bukubesar-add-form" name="bukubesar" class="form-control" required>
@@ -41,24 +41,24 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        ACC
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        KODE SUB BUKU BESAR
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="id" class="form-control" maxlength="7" required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        KETERANGAN
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        SUB BUKU BESAR
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="keterangan" class="form-control" maxlength="200" required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        Golongan
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        GOLONGAN
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="golongan-add-form" name="golongan" class="form-control" required>
@@ -67,12 +67,12 @@
                         </select>
                     </div>
                 </div>
-                <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                <div class="row small-list-margin hide">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         KU
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <select id="ku-add-form" name="ku" class="form-control" required>
+                        <select id="ku-add-form" name="ku" class="form-control">
                             <option value="">Pilih KU</option>
                             <option value="00">00</option>
                         </select>

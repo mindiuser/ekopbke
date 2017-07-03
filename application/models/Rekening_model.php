@@ -98,8 +98,8 @@ class Rekening_model extends CI_Model {
 
     function editBukubesar($kel,$accbb,$bb,$kat,$gol,$res)
     {
-        $sql = "UPDATE accountbb SET ACCBB=?,BUKUBESAR=?,KATEGORI=?,GOLONGAN=?,RESIKO=? WHERE ACCKEL = ? AND CIF = ?";
-        $status = $this->db->query($sql, array($accbb,$bb,$kat,$gol,$res,$kel,$this->CIF));
+        $sql = "UPDATE accountbb SET BUKUBESAR=?,KATEGORI=?,GOLONGAN=?,RESIKO=? WHERE ACCBB=? AND ACCKEL = ? AND CIF = ?";
+        $status = $this->db->query($sql, array($bb,$kat,$gol,$res,$accbb,$kel,$this->CIF));
         if($status){
             return array($status,'Data telah diupdate');
         }
