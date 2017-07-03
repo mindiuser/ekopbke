@@ -11843,4 +11843,6 @@ and (-webkit-min-device-pixel-ratio:1){
 .logout-icon {
     margin-right: 5px;
 }
-
+.label-input {
+    padding-top: 15px !important;
+}

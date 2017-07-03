@@ -13,10 +13,10 @@
                         <tr>
                             <th>NO</th>
                             <th>PREDIKAT</th>
-                            <th>MIN</th>
-                            <th>RASIO MIN</th>
-                            <th>MAKS</th>
-                            <th>RASIO MAKS</th>
+                            <th>NILAI MIN</th>
+                            <th>RASIO</th>
+                            <th>NILAI MAKS</th>
+                            <th>RASIO</th>
                             <th class="disabled-sorting">Actions</th>
                         </tr>
                         </thead>

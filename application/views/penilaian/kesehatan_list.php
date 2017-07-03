@@ -3,7 +3,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-content">
-                <h3 class="card-title"><i class="fa fa-eyedropper" aria-hidden="true"></i> ASPEK PENILAIAN KESEHATAN</h3>
+                <h3 class="card-title"><i class="fa fa-eyedropper" aria-hidden="true"></i> KATEGORI PENILAIAN KESEHATAN</h3>
                 <div class="toolbar">
                     <!--        Here you can write extra buttons/actions for the toolbar              -->
                 </div>
@@ -12,7 +12,7 @@
                         <thead>
                         <tr>
                             <th>KODE</th>
-                            <th>ASPEK</th>
+                            <th>KATEGORI PENILAIAN</th>
                             <th>BOBOT</th>
                             <th class="disabled-sorting">Actions</th>
                         </tr>

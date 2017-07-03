@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Tambahkan Regulasi</b>
+                <b><i class="fa fa-gavel mr-10"></i> Tambahkan Regulasi</b>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Tema
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Keterangan
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -23,11 +23,11 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         File
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="file" id="file" name="file"  maxlength="50" required>
+                        <input type="file" id="file" name="file"  maxlength="50" required style="margin-top:15px !important;">
                     </div>
                 </div>
             </div>
