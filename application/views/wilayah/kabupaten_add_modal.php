@@ -24,7 +24,7 @@
                         ID KAB
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="id" class="form-control" maxlength="4" required>
+                        <input type="text" name="id" class="form-control" maxlength="6" required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
