@@ -24,7 +24,7 @@
             var xmessage = '<button type="button" class="close" data-dismiss="alert">x</button><strong>Info!</strong> '+message;
             $('.alert',$('#main-alert')).addClass('alert-info').removeClass('alert-danger').html(xmessage);
         }
-        $('.alert',"#main-alert").fadeTo(2000, 500).slideUp(500, function(){
+        $('.alert',"#main-alert").fadeTo(6000, 500).slideUp(500, function(){
             $('.alert',"#main-alert").slideUp(6000);
         });
     }
@@ -39,7 +39,7 @@
         }
         var xmessage = '<button type="button" class="close" data-dismiss="alert">x</button><strong> Gagal!</strong> '+message;
         $('.modal-alert',$(target)).addClass('alert-danger').removeClass('alert-success').html(xmessage);
-        $('.modal-alert',$(target)).fadeTo(2000, 500).slideUp(500, function(){
+        $('.modal-alert',$(target)).fadeTo(6000, 500).slideUp(500, function(){
             $('.alert',"#main-alert").slideUp(6000);
         });
     }

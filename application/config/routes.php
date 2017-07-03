@@ -177,7 +177,8 @@ $route['kesehatan/predikat/delete']            = 'predikat/kesehatan_delete';
 $route['login']    = 'auth/login';
 $route['login/auth']    = 'auth/do_login';
 $route['logout']    = 'auth/logout';
-$route['user/myprofile']   = 'auth/profile';
+$route['user/profile/change_password']           = 'auth/update_password';
+$route['user/profile/save_new_password']           = 'auth/do_update_password';
 
 
 $route['404_override'] = '';

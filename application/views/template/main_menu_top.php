@@ -18,8 +18,8 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
                 <div class="nav-menu-top">
-                    <a href="<?php echo site_url('logout');?>" class="btn btn-primary btn-xs">
-                        <i class="fa fa-lock"></i> Logout
+                    <a href="<?php echo site_url('logout');?>" class="btn btn-danger btn-sm">
+                        <i class="fa fa-lock logout-icon"></i> Logout
                     </a>
                 </div>
             </ul>

@@ -45,7 +45,7 @@
                         showAlerts('success',response.message);
                         setTimeout(function(){
                             window.location.reload(1);
-                        }, 5000);
+                        }, 500);
                     }
                     else {
                         showAlerts('error',response.message);

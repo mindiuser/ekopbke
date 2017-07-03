@@ -27,6 +27,9 @@ Tip 3: you can change the color of the sidebar with data-background-color="white
                         <li>
                             <a href="<?php echo site_url('user/update/photo');?>">Ganti Photo Profile</a>
                         </li>
+                        <li>
+                            <a href="<?php echo site_url('user/profile/change_password');?>">Ganti Password</a>
+                        </li>
                     </ul>
                 </div>
             </div>

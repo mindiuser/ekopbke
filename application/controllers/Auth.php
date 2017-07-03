@@ -57,5 +57,19 @@ class Auth extends CI_Controller {
         redirect('/login/');
     }
 
+    function update_password(){
+        $this->load->templated_view('auth/change_password');
+    }
+
+    function do_update_password()
+    {
+        $username = $this->session->userdata('name');
+        $pwd_current = $this->input->post('lama');
+        $pwd_new = $this->input->post('baru');
+        list($status,$message) = $this->auth_model->updatePassword($username,$pwd_current,$pwd_new);
+        echo json_encode(array('status'=>$status,'message'=>$message));
+
+    }
+
 
 }
