@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Edit Kabupaten</b>
+                <b><i class="fa fa-map-marker mr-10"></i> Edit Kabupaten</b>
                 <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
@@ -20,15 +20,15 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
-                        IDKAB
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
+                        ID KAB
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="id" class="form-control" maxlength="6" required disabled>
+                        <input type="text" name="id" class="form-control" maxlength="4" required disabled>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Kota / Kab
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Nama Kabupaten
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Ibu Kota
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">

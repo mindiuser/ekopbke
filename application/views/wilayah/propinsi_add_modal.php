@@ -2,13 +2,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Tambahkan Propinsi</b>
+                <b><i class="fa fa-map-marker mr-10"></i> Tambahkan Propinsi</b>
                 <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         ID
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Propinsi
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">

@@ -247,10 +247,10 @@ class Wilayah_model extends CI_Model {
         return $q->result();
     }
 
-    function editKodepos($kodepos_old,$kodepos)
+    function editKodepos($kodepos_old,$kodepos,$kelurahan)
     {
-        $sql = "UPDATE dt_kodepos SET ID_KODE = ? WHERE ID_KODE = ?";
-        $status = $this->db->query($sql, array($kodepos,$kodepos_old));
+        $sql = "UPDATE dt_kodepos SET ID_KODE = ? WHERE ID_KODE = ? AND LOWER(NAMA_KELURAHAN) = LOWER(?)";
+        $status = $this->db->query($sql, array($kodepos,$kodepos_old,$kelurahan));
         if($status){
             return array($status,'Data telah diupdate');
         }

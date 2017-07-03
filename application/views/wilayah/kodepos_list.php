@@ -98,6 +98,11 @@ $this->load->view('shared/js_content');
             "ajax": "<?php echo base_url();?>/wilayah/kodepos/data",
             "columnDefs":[
                 {
+                    "targets": [ 0 ],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
                     "render": function ( data, type, row ) {
                         return '<a href="javascript:void(0)" class="edit btn btn-xs btn-primary" data-editvalue="'+row+'"><i class="fa fa-pencil" aria-hidden="true"></i></a><a href="javascript:void(0)" class="delete btn btn-xs btn-danger" id_kode="'+row[2]+'"><i class="fa fa-times" aria-hidden="true"></i></a>';
                     },
@@ -541,7 +546,7 @@ $this->load->view('shared/js_content');
                 type: 'POST',
                 dataType:'json',
                 data: {
-                    kodepos_old:kodepos_old,kodepos:kodepos
+                    kodepos_old:kodepos_old,kodepos:kodepos,kelurahan:kelurahan
                 },
                 success: function(data) {
                     if(data.status == true){

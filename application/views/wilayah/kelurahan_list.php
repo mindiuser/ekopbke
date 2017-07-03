@@ -332,11 +332,11 @@ $this->load->view('shared/js_content');
         }
 
         var hideFormEditModal = function(){
-            $(["input"],$("#edit-kecamatan-modal")).each(function(i,v){
+            $(["input"],$("#edit-kelurahan-modal")).each(function(i,v){
                 $(this).val("");
             });
-            $(".modal-alert","#edit-kecamatan-modal").removeClass("alert-warning").addClass("hide").text("");
-            $("#edit-kecamatan-modal").modal("hide");
+            $(".modal-alert","#edit-kelurahan-modal").removeClass("alert-warning").addClass("hide").text("");
+            $("#edit-kelurahan-modal").modal("hide");
         }
 
         $("#add-kelurahan-modal").on('click', '#kelurahan-submit', function() {
@@ -503,7 +503,7 @@ $this->load->view('shared/js_content');
                 },
                 success: function(data) {
                     if(data.status == true){
-                        hideFormAddModal();
+                        hideFormEditModal();
                         showAlerts('success',data.message);
                         var kecamatan = $("#filter-kecamatan-label").attr("kecamatan-filtered");
                         reloadTable(kecamatan);

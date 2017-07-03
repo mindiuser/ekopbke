@@ -463,7 +463,8 @@ class Wilayah extends Base
     public function kodepos_edit(){
         $kodepos_old = trim($this->input->post('kodepos_old'));
         $kodepos = trim($this->input->post('kodepos'));
-        list($status,$message) = $this->wilayah_model->editKodepos($kodepos_old,$kodepos);
+        $kelurahan = trim($this->input->post('kelurahan'));
+        list($status,$message) = $this->wilayah_model->editKodepos($kodepos_old,$kodepos,$kelurahan);
         echo json_encode(array('status'=>$status,'message'=>$message));
     }
 

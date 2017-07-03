@@ -2,13 +2,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <b><i class="fa fa-user mr-10"></i> Edit Kecamatan</b>
+                <b><i class="fa fa-map-marker mr-10"></i> Edit Kecamatan</b>
                 <button type="button" class="close" title="close"><span aria-hidden="true" data-dismiss="modal">&times;</span><span class="hide">Close</span></button>
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Kabupaten
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -18,23 +18,23 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         ID KEC
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="id" class="form-control" maxlength="6" disabled required>
+                        <input type="text" name="id" class="form-control" maxlength="10" disabled required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Nama Kecamatan
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <input type="text" name="kecamatan" class="form-control" maxlength="200" required>
                     </div>
                 </div>
-                <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                <div class="row small-list-margin hide">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Kode Pos
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="row small-list-margin">
-                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-bold label-input">
                         Keterangan
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
