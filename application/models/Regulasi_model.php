@@ -19,7 +19,7 @@ class Regulasi_model extends CI_Model {
         $sql = 'SELECT *
             FROM dt_regulasi
             WHERE IDE = ?
-            ORDER BY TEMA ASC';
+            LIMIT 0,1';
         $q = $this->db->query($sql,array($ide));
         return $q->result();
     }

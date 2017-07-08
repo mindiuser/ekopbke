@@ -89,9 +89,9 @@ class Regulasi extends Base
     public function delete(){
         $ide = $this->input->post('ide');
         $data = $this->regulasi_model->getRegulasiByIde($ide);
+        $filename = $data[0]->NAMA_FILE;
         $status = $this->regulasi_model->deleteRegulasi($ide);
         if($status){
-            $filename = $data[0]->NAMA_FILE;
             $path = APPPATH.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."public".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR."regulasi".DIRECTORY_SEPARATOR.$filename;
             if(file_exists($path)){
                 unlink($path);
