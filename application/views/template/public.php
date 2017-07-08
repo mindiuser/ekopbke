@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="<?php echo base_url();?>public/assets/img/apple-icon.png" />
     <link rel="icon" type="image/png" href="<?php echo base_url();?>public/assets/img/favicon.png" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Material Dashboard Pro by Creative Tim</title>
+    <title>BANK BKE - Sejahtera Bersama Kami</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
     <?php $this->load->view('template/header');?>
@@ -89,6 +89,22 @@
         {
             display: block;
             margin-top: 10px;
+        }
+        @media screen
+        and (min-device-width:1200px)
+        and (max-device-width:1600px)
+        and (-webkit-min-device-pixel-ratio:1){
+            body {
+                font-size:12px;
+                background: radial-gradient(ellipse at center,  #026fff 1%,#1c2b5a 100%);
+            }
+            .col-md-4 {
+                width: 31%;
+            }
+            .account-wall
+            {
+                padding: 30px 0px 20px 0px;
+            }
         }
     </style>
 </head>

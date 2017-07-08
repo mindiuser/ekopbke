@@ -101,4 +101,11 @@ class Regulasi extends Base
         echo $status;
     }
 
+    function view_file() {
+        $data = [];
+        $data['url'] = $this->input->get('myurl');
+        $data['file'] = $this->input->get('filename');
+        $this->load->view('regulasi/view_file',$data);
+    }
+
 }

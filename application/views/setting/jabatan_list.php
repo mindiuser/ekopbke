@@ -88,15 +88,43 @@ $this->load->view('shared/js_content');
         initBar();
 
         $("#filter-bagian").on('click',".select-bagian",function () {
+            var $that = $(this);
             reloadTable($(this).attr('label'));
-            $("#filter-bagian-label").text("Bagian : "+$(this).attr("label")).attr("val",$(this).attr("label"));
+
+            $("#filter-bagian-label").text("Bagian : "+$(this).attr("label")).attr("val",$(this).attr('label'));
             var tgt = $("#filter-bagian-label").parent(".btn");
             $(tgt).removeClass("btn-primary").addClass("btn-warning");
+            $("#filter-bagian-label").attr("bagian-filtered",$that.attr('id'));
+
+            $("option",$("#bagian-add-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+            $("option",$("#bagian-edit-form")).each(function(){
+                if($(this).val() == $that.attr('id')){
+                    $(this).attr("selected","selected");
+                    $(this).prop('disabled',false);
+                }
+                else {
+                    $(this).removeAttr("selected");
+                    $(this).prop('disabled',true);
+                }
+            });
+
+
         });
 
         $("#jabatan").on('click', '#add', function() {
             $(".modal-alert","#add-jabatan-modal").removeClass("alert-danger").addClass("hide").text("");
-            var select = $("select[name='bagian']","#add-jabatan-modal");
+            /*var select = $("select[name='bagian']","#add-jabatan-modal");
             $("option",$(select)).each(function(){
                 if($(this).val() == currentBagian()){
                     $(this).attr("selected","selected");
@@ -107,24 +135,23 @@ $this->load->view('shared/js_content');
                 else {
                     $(this).removeAttr("selected");
                 }
-            });
+            });*/
             $("#add-jabatan-modal").modal("show");
             return false;
         });
 
         $("#add-jabatan-modal").on('click', '#jabatan-submit', function() {
-            var select = $("select[name='bagian']","#add-jabatan-modal");
-            var bagian = $("option:selected",$(select)).val();
+            var bagian = $("option:selected",$("#bagian-add-form")).attr('label');
             var urut = $("input[name='urut']","#add-jabatan-modal").val();
             var jabatan = $("input[name='jabatan']","#add-jabatan-modal").val();
             if(bagian.trim() == ''){
-                $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
+                $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Bagian belum dipilih");
                 return false;
             }
-            if(urut.trim() == ''){
+           /* if(urut.trim() == ''){
                 $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
                 return false;
-            }
+            }*/
             if(jabatan.trim() == ''){
                 $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nama jabatan masih kosong");
                 return false;
@@ -137,7 +164,7 @@ $this->load->view('shared/js_content');
                     urut : urut, bagian:bagian,jabatan:jabatan
                 },
                 success: function(data) {
-                    $("[name='urut']",$("#add-jabatan-modal")).val('');
+                    /*$("[name='urut']",$("#add-jabatan-modal")).val('');*/
                     $("[name='jabatan']",$("#add-jabatan-modal")).val('');
                     $(".modal-alert","#add-jabatan-modal").removeClass("alert-warning").addClass("hide").text("");
                     $("#add-jabatan-modal").modal("hide");
@@ -156,7 +183,7 @@ $this->load->view('shared/js_content');
         });
 
         $("#add-jabatan-modal").on('click', '#jabatan-submit-cancel', function(){
-            $(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
+            //$(".modal-alert","#add-bagian-modal").removeClass("alert-danger").addClass("hide").text("");
             $("[name='urut']",$("#add-jabatan-modal")).val('');
             $("[name='jabatan']",$("#add-jabatan-modal")).val('');
             $("#add-jabatan-modal").modal("hide");
@@ -165,16 +192,6 @@ $this->load->view('shared/js_content');
 
         // Edit record
         table.on('click', '.edit', function() {
-            var select = $("select[name='bagian']","#add-jabatan-modal");
-            $("option",$(select)).each(function(){
-                if($(this).val() == $(this).attr('bagian')){
-                    $(this).attr("selected","selected");
-                }
-                else {
-                    $(this).addClass("hide");
-                }
-            });
-            $("[name='bagian']",$("#edit-jabatan-modal")).val($(this).attr('bagian'));
             $("[name='edit-urut']",$("#edit-jabatan-modal")).val($(this).attr('urut'));
             $("[name='edit-jabatan']",$("#edit-jabatan-modal")).val($(this).attr('jabatan'));
             $("[name='edit-urut-old']",$("#edit-jabatan-modal")).val($(this).attr('urut'));
@@ -184,20 +201,19 @@ $this->load->view('shared/js_content');
         });
 
         $("#edit-jabatan-modal").on('click', '#jabatan-edit-submit', function() {
-            var select = $("select[name='bagian']","#edit-jabatan-modal");
-            var bagian = $("option:selected",$(select)).val();
+            var bagian = $("option:selected",$("#bagian-edit-form")).attr('label');
             var urut = $("input[name='edit-urut']","#edit-jabatan-modal").val();
             var jabatan = $("input[name='edit-jabatan']","#edit-jabatan-modal").val();
             var urut_old = $("input[name='edit-urut-old']","#edit-jabatan-modal").val();
             var jabatan_old = $("input[name='edit-jabatan-old']","#edit-jabatan-modal").val();
             if(bagian.trim() == ''){
-                $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
+                $(".modal-alert","#add-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Bagian masih kosong");
                 return false;
             }
-            if(urut.trim() == ''){
+           /* if(urut.trim() == ''){
                 $(".modal-alert","#edit-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
                 return false;
-            }
+            }*/
             if(jabatan.trim() == ''){
                 $(".modal-alert","#edit-jabatan-modal").addClass("alert-danger").removeClass("hide").text("Nama jabatan masih kosong");
                 return false;
@@ -210,7 +226,7 @@ $this->load->view('shared/js_content');
                     bagian:bagian, urut :urut, jabatan:jabatan, urut_old:urut_old, jabatan_old:jabatan_old
                 },
                 success: function(data) {
-                    console.log(data);
+                    //console.log(data);
                     $("[name='edit-urut']",$("#edit-jabatan-modal")).val('');
                     $("[name='edit-jabatan']",$("#edit-jabatan-modal")).val('');
                     $("[name='edit-urut-old']",$("#edit-jabatan-modal")).val('');

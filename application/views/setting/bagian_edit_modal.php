@@ -6,12 +6,12 @@
             </div>
             <div class="modal-body">
                 <div class="modal-alert alert hide"></div>
-                <div class="row small-list-margin">
+                <div class="row small-list-margin hide">
                     <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
                         Nomor Urut
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="edit-urut" class="form-control" maxlength="2" required >
+                        <input type="text" name="edit-urut" class="form-control" maxlength="2" value="0" required >
                         <input type="hidden" name="edit-urut-old" >
                     </div>
                 </div>

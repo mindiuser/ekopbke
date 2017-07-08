@@ -144,6 +144,7 @@ $route['rekening/sub_buku_besar/delete']            = 'rekening/sub_buku_besar_d
 $route['regulasi/acuan']        = 'regulasi/regulasi_acuan';
 $route['regulasi/acuan_data']   = 'regulasi/regulasi_acuan_data';
 $route['regulasi/upload_file']  = 'regulasi/upload_file';
+$route['regulasi/view_file']  = 'regulasi/view_file';
 $route['regulasi/add']  = 'regulasi/add';
 $route['regulasi/delete']  = 'regulasi/delete';
 

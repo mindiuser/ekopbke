@@ -17,14 +17,25 @@ class Setting_model extends CI_Model {
 
     function addBagian($urut,$name)
     {
-        $sql_get = 'SELECT * FROM dt_uid_bagian WHERE URUT = ? ';
-        $q = $this->db->query($sql_get,array($urut));
+        $sql_get = 'SELECT URUT FROM dt_uid_bagian ORDER BY URUT DESC';
+        $q = $this->db->query($sql_get);
         $dt = $q->result();
+        $newid = 0;
         if(!empty($dt)){
-           return array(false,'Nomor urut tidak boleh sama ');
+            $arr = [];
+            foreach($dt as $row){
+                $arr[] = (int) $row->URUT;
+            }
+            $newid = max($arr)+1;
+        }
+        if($newid == 0){
+            $sql_getone = 'SELECT URUT FROM dt_uid_bagian ORDER BY URUT DESC LIMIT 0,1';
+            $qt = $this->db->query($sql_getone);
+            $dt = $qt->result();
+            $newid = (int) $dt->URUT+1;
         }
         $sql = "INSERT INTO dt_uid_bagian (URUT,BAGIAN) VALUES (?,?)";
-        $status = $this->db->query($sql, array($urut,$name));
+        $status = $this->db->query($sql, array($newid,$name));
         if($status){
             return array($status,'Data telah ditambahkan');
         }
@@ -36,15 +47,10 @@ class Setting_model extends CI_Model {
 
     function editBagian($urut,$bagian,$urut_old,$bagian_old)
     {
-        $sql_del = "DELETE FROM dt_uid_bagian WHERE URUT = ? AND BAGIAN = ?";
-        $status_del = $this->db->query($sql_del,array($urut_old,$bagian_old));
-        if(!$status_del){
-            return array(false,'Data tidak ditemukan');
-        }
-        $sql = "INSERT INTO dt_uid_bagian (URUT,BAGIAN) VALUES (?,?)";
-        $status = $this->db->query($sql, array($urut,$bagian));
+        $sql = "UPDATE dt_uid_bagian SET BAGIAN = ? WHERE URUT = ?";
+        $status = $this->db->query($sql,array($bagian,$urut_old));
         if($status){
-            return array($status,'Data telah diedit');
+            return array($status,'Data telah diupdate');
         }
         else {
             return array($status, $this->db->error());
@@ -70,14 +76,26 @@ class Setting_model extends CI_Model {
 
     function addJabatan($bagian,$urut,$jabatan)
     {
-        $sql_get = 'SELECT * FROM dt_uid_jabatan WHERE BAGIAN = ? AND URUT = ? ';
-        $q = $this->db->query($sql_get,array($bagian,$urut));
+        $sql_get = 'SELECT URUT FROM dt_uid_jabatan ORDER BY URUT DESC';
+        $q = $this->db->query($sql_get);
         $dt = $q->result();
+        $newid = 0;
         if(!empty($dt)){
-            return array(false,'Nomor urut sudah terpakai ');
+            $arr = [];
+            foreach($dt as $row){
+                $arr[] = (int) $row->URUT;
+            }
+            $newid = max($arr)+1;
         }
+        if($newid == 0){
+            $sql_getone = 'SELECT URUT FROM dt_uid_jabatan ORDER BY URUT DESC LIMIT 0,1';
+            $qt = $this->db->query($sql_getone);
+            $dt = $qt->result();
+            $newid = (int) $dt->URUT+1;
+        }
+
         $sql = "INSERT INTO dt_uid_jabatan (URUT,JABATAN,BAGIAN) VALUES (?,?,?)";
-        $status = $this->db->query($sql, array($urut,$jabatan,$bagian));
+        $status = $this->db->query($sql, array($newid,$jabatan,$bagian));
         if($status){
             return array($status,'Data telah ditambahkan');
         }
@@ -89,14 +107,8 @@ class Setting_model extends CI_Model {
 
     function editJabatan($bagian,$urut,$jabatan,$urut_old,$jabatan_old)
     {
-        $sql_sel = "SELECT * FROM dt_uid_jabatan WHERE URUT = ? AND BAGIAN = ? AND JABATAN = ?";
-        $status_sel = $this->db->query($sql_sel,array($urut_old,$bagian,$jabatan_old));
-        $dt = $status_sel->result();
-        if(empty($dt)){
-            return array(false,'Data tidak ditemukan');
-        }
-        $sql = "UPDATE dt_uid_jabatan SET URUT = ?, JABATAN = ? WHERE URUT = ? AND BAGIAN = ? AND JABATAN = ?";
-        $status = $this->db->query($sql, array($urut,$jabatan,$urut_old,$bagian,$jabatan_old));
+        $sql = "UPDATE dt_uid_jabatan SET JABATAN = ? WHERE URUT = ? AND BAGIAN = ?";
+        $status = $this->db->query($sql, array($jabatan,$urut_old,$bagian));
         if($status){
             return array($status,'Data telah diedit');
         }

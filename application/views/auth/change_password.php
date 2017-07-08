@@ -96,6 +96,13 @@
 
             return false;
         });
+
+        $("#password").on("click","#ubah-cancel",function(){
+            var tgt = $("#password").find("input");
+            $(tgt).each(function(){
+                $(this).val('');
+            });
+        });
         return false;
     });
 </script>

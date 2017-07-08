@@ -78,12 +78,12 @@ $this->load->view('shared/js_content');
         });
 
         $("#add-bagian-modal").on('click', '#bagian-submit', function() {
-            var urut = $("input[name='urut']","#add-bagian-modal").val();
+           // var urut = $("input[name='urut']","#add-bagian-modal").val();
             var bagian = $("input[name='bagian']","#add-bagian-modal").val();
-            if(urut.trim() == ''){
+            /*if(urut.trim() == ''){
                 $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nomor urut masih kosong");
                 return false;
-            }
+            }*/
             if(bagian.trim() == ''){
                 $(".modal-alert","#add-bagian-modal").addClass("alert-danger").removeClass("hide").text("Nama bagian masih kosong");
                 return false;
@@ -93,10 +93,10 @@ $this->load->view('shared/js_content');
                 type: 'POST',
                 dataType:'json',
                 data: {
-                    urut : urut, bagian:bagian
+                    bagian:bagian
                 },
                 success: function(data) {
-                    $("[name='urut']",$("#add-bagian-modal")).val('');
+                    //$("[name='urut']",$("#add-bagian-modal")).val();
                     $("[name='bagian']",$("#add-bagian-modal")).val('');
                     $(".modal-alert","#add-bagian-modal").removeClass("alert-warning").addClass("hide").text("");
                     $("#add-bagian-modal").modal("hide");

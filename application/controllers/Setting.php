@@ -40,7 +40,7 @@ class Setting extends Base
     }
 
     public function bagian_add(){
-        $urut = trim($this->input->post('urut'));
+        $urut = 0;// trim($this->input->post('urut'));
         $bagian = trim($this->input->post('bagian'));
         list($status,$message) = $this->setting_model->addBagian($urut,$bagian);
         echo json_encode(array('status'=>$status,'message'=>$message));
@@ -98,7 +98,7 @@ class Setting extends Base
 
     public function jabatan_add(){
         $bagian = trim($this->input->post('bagian'));
-        $urut = trim($this->input->post('urut'));
+        $urut = 0;//trim($this->input->post('urut'));
         $jabatan = trim($this->input->post('jabatan'));
         list($status,$message) = $this->setting_model->addJabatan($bagian,$urut,$jabatan);
         echo json_encode(array('status'=>$status,'message'=>$message));
@@ -106,7 +106,7 @@ class Setting extends Base
 
     public function jabatan_edit(){
         $bagian = trim($this->input->post('bagian'));
-        $urut = trim($this->input->post('urut'));
+        $urut = 0;//trim($this->input->post('urut'));
         $jabatan = trim($this->input->post('jabatan'));
         $urut_old = trim($this->input->post('urut_old'));
         $jabatan_old = trim($this->input->post('jabatan_old'));

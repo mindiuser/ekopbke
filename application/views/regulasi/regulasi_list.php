@@ -75,7 +75,7 @@ $this->load->view('shared/js_content');
             "columnDefs":[
                 {
                     "render": function ( data, type, row ) {
-                        return '<a target="_blank" href="<?php echo my_url().'public/uploads/regulasi/';?>'+row[3]+'" ide="'+row[0]+'">'+row[3]+'</a>';
+                        return '<a target="_blank" href="<?php echo my_url();?>regulasi/view_file?filename='+row[3]+'&myurl=<?php echo my_url().'public/uploads/regulasi/';?>'+row[3]+'" ide="'+row[0]+'">'+row[3]+'</a>';
                     },
                     "targets": 3
                 },

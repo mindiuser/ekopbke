@@ -11,20 +11,20 @@
                         Bagian
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <select name="bagian" class="form-control" required>
+                        <select id="bagian-add-form" name="bagian" class="form-control" required>
                             <option value="">-- PILIH BAGIAN --</option>
                             <?php if(!empty($bagian)){ foreach($bagian as $row) { ?>
-                                <option value="<?php echo $row->BAGIAN;?>"><?php echo $row->BAGIAN;?></option>
+                                <option value="<?php echo $row->URUT;?>" label="<?php echo $row->BAGIAN;?>"><?php echo $row->BAGIAN;?></option>
                             <?php }}?>
                         </select>
                     </div>
                 </div>
-                <div class="row small-list-margin">
+                <div class="row small-list-margin hide">
                     <div class="col-lg-3 col-md-3 col-sm-3 text-bold">
                         Nomor Urut
                     </div>
                     <div class="col-lg-9 col-md-9 col-sm-9">
-                        <input type="text" name="urut" class="form-control" maxlength="2" required>
+                        <input type="text" name="urut" class="form-control" maxlength="2" value="0" required>
                     </div>
                 </div>
                 <div class="row small-list-margin">
