@@ -63,7 +63,8 @@
                     <div class="col-lg-9 col-md-9 col-sm-9">
                         <select id="golongan-add-form" name="golongan" class="form-control" required>
                             <option value="">Pilih Golongan</option>
-                            <option value="SYSTEM">System</option>
+                            <option value="SYSTEM">SYSTEM</option>
+                            <option value="USER">USER</option>
                         </select>
                     </div>
                 </div>
