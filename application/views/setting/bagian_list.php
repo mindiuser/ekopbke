@@ -57,7 +57,7 @@ $this->load->view('shared/js_content');
         var table = $('#datatables').DataTable({
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": [ 'excel', 'pdf', 'print'],
+            "buttons": dtBtn,
             "ajax": "<?php echo my_url();?>/user/bagian/data",
             "columnDefs":[
                 {
@@ -96,7 +96,7 @@ $this->load->view('shared/js_content');
                     bagian:bagian
                 },
                 success: function(data) {
-                    //$("[name='urut']",$("#add-bagian-modal")).val();
+                    $("[name='urut']",$("#add-bagian-modal")).val();
                     $("[name='bagian']",$("#add-bagian-modal")).val('');
                     $(".modal-alert","#add-bagian-modal").removeClass("alert-warning").addClass("hide").text("");
                     $("#add-bagian-modal").modal("hide");

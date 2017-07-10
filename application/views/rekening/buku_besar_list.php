@@ -82,7 +82,7 @@ $this->load->view('shared/js_content');
         var table = $('#datatables').DataTable({
             "responsive": true,
             "dom": "<'dt-actionbutton'><'dt-actionbulk'>flr<'dt-advance-search'>B<'dt-alert col-md-12 no-padding'>tip",
-            "buttons": [ 'excel', 'pdf', 'print'],
+            "buttons": dtBtn,
             "ajax": "<?php echo my_url();?>/rekening/buku_besar_data",
             "columnDefs":[
                 {

@@ -47,4 +47,9 @@
         $('.modal-alert',$(target)).addClass('hide');
         $('.modal-alert',$(target)).removeClass('alert-info').removeClass('alert-danger').addClass('alert-success').html('');
     }
+    var dtBtn = [
+        { "extend": 'excel', "text":'EXCEL',"className": 'btn btn-default btn-sm' },
+        { "extend": 'pdf', "text":'PDF',"className": 'btn btn-default btn-sm' },
+        { "extend": 'print', "text":'PRINT',"className": 'btn btn-default btn-sm' }
+    ];
 </script>
