@@ -6792,7 +6792,7 @@ h2.title {
 .btn-group,
 .btn-group-vertical {
   position: relative;
-  margin: 10px 1px;
+  /*margin: 10px 1px;*/
 }
 .btn-group.open > .dropdown-toggle.btn, .btn-group.open > .dropdown-toggle.btn.btn-default,
 .btn-group-vertical.open > .dropdown-toggle.btn,
@@ -11594,7 +11594,7 @@ footer .btn {
 }
 .dt-actionbutton, .dt-actionbulk{
     float: left;
-    margin: -9px 2px 20px 0px;
+    margin: 0px 2px 20px 0px;
 }
 .dataTables_length, .dataTables_filter{
     float: right;
@@ -11697,7 +11697,7 @@ and (-webkit-min-device-pixel-ratio:1){
             margin-left:5px;
     }
         .btn-single-group {
-            margin-top:9px;
+            margin-top:17px;
         }
 
     .btn.btn-xs, .btn-group-xs .btn,
@@ -11817,7 +11817,7 @@ and (-webkit-min-device-pixel-ratio:1){
         margin-left:5px;
     }
     .btn-group, .btn-group-vertical {
-        margin: 10px 0px;
+        margin: 18px 0px;
     }
 
 
